@@ -16,7 +16,9 @@ public class MovePhysics : MonoBehaviour
 
     private Transform _transform;
 
-    private const float ScaleMovement = 0.25f;
+    private const float ScaleMovement = 0.7f;
+
+    private const float ScaleJump = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class MovePhysics : MonoBehaviour
         _userRot = _transform.rotation.eulerAngles;
         _userRot += new Vector3(0, _rotationInput, 0);
         _transform.rotation = Quaternion.Euler(_userRot);
-        _rigidbody.velocity += _transform.forward * _playerInput * ScaleMovement;
+        _rigidbody.position += _transform.forward * _playerInput * ScaleMovement;
 
         if (_userJumped)
         {
