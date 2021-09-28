@@ -8,7 +8,7 @@ public class OxygenMeter : MonoBehaviour
     [SerializeField] private Image uiFill;
     [SerializeField] private Text oxygenPercentage;
 
-    private float time = 10f;
+    private float time = 100f;
     // Start is called before the first frame update
     void Start()
     {
