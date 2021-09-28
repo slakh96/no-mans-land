@@ -9,6 +9,11 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
+    [SerializeField] private float playerAcceleration = 100f;
+    [SerializeField] private float playerSpeed = 45f;
+
+    private float detectedSpeed = 100f;
+
     //Patroling
     public Vector3 walkPoint;
     private bool walkPointSet;
@@ -20,12 +25,14 @@ public class EnemyAI : MonoBehaviour
     
     // States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    private bool playerInSightRange, playerInAttackRange;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        agent.acceleration = playerAcceleration;
+        agent.speed = playerSpeed;
     }
 
     private void Update()
@@ -67,7 +74,7 @@ public class EnemyAI : MonoBehaviour
             transform.position.x + randomX, 
             transform.position.y, 
             transform.position.z + randomZ);
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, whatIsGround))
         {
             walkPointSet = true;
         }
@@ -76,6 +83,7 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        agent.speed = detectedSpeed;
     }
 
     private void AttackPlayer()
