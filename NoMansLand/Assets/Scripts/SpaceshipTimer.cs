@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class destroyObject : MonoBehaviour
+public class SpaceshipTimer : MonoBehaviour
 {
     private float time = 10f;
     // Start is called before the first frame update

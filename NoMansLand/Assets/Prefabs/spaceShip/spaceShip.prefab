@@ -1,12 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!54 &1677848634
+--- !u!54 &2376993902247409663
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8403138692328622394}
+  m_GameObject: {fileID: 1931560384965869795}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -16,19 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!114 &2316708285026474631
+--- !u!114 &61465678377196866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8403138692328622394}
+  m_GameObject: {fileID: 1931560384965869795}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fefdeb1ea1810a94e863aaffdf208808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &8672978298296054891
+--- !u!1001 &1589540038718700978
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -53,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 450
+      value: 640.57465
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -135
+      value: 404.2011
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 375
+      value: 329.29034
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -93,12 +93,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
       propertyPath: m_Name
-      value: spaceShip_002 Variant
+      value: spaceShip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
---- !u!1 &8403138692328622394 stripped
+--- !u!1 &1931560384965869795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ddbf29a61aae907428c988141b5eb6e4, type: 3}
-  m_PrefabInstance: {fileID: 8672978298296054891}
+  m_PrefabInstance: {fileID: 1589540038718700978}
   m_PrefabAsset: {fileID: 0}
