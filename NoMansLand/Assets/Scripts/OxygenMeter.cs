@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class OxygenMeter : MonoBehaviour
 {
+    public GameObject player;
     [SerializeField] private Image uiFill;
     [SerializeField] private Text oxygenPercentage;
 
@@ -21,6 +22,10 @@ public class OxygenMeter : MonoBehaviour
         {
             time -= Time.deltaTime;
             uiFill.fillAmount = Mathf.InverseLerp(0, 100f, time);
+        }
+        else
+        {
+            Destroy(player);
         }
         oxygenPercentage.text = Mathf.Round(time) + "%";
     }
