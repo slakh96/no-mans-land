@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class PatrolEnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer, whatIsObstruction;
+    public LayerMask whatIsGround, whatIsPlayer;
 
     private float playerAcceleration = 100f;
     private float playerSpeed = 45f;
@@ -15,22 +15,19 @@ public class EnemyAI : MonoBehaviour
     private float detectedSpeed = 100f;
 
     //Patroling
+    public GameObject patrolObject;
+    private Transform[] patrolPoints;
+    private int patrolIndex = 0;
     private Vector3 walkPoint;
     private bool walkPointSet;
-    public float walkPointRange;
     
-    // Attacking
+    //Attacking
     public float timeBetweenAttacks;
     private bool alreadyAttacked;
     
     // States
     public float sightRange, attackRange;
     private bool playerInSightRange, playerInAttackRange;
-    
-    // Sight angle
-    public float angle = 35f;
-    public bool hasSeenPlayer;
-    
 
     private void Awake()
     {
@@ -38,45 +35,13 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
-        hasSeenPlayer = false;
-    }
-
-    private bool CheckPlayerInSightRange()
-    {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
-        if (rangeChecks.Length != 0)
-        {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.position, directionToTarget) < angle / 2)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, player.position);
-
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, whatIsObstruction))
-                    return true;
-                else
-                    return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else if (hasSeenPlayer)
-        {
-            return false;
-        }
-        else
-        {
-            return false;
-        }
+        patrolPoints = patrolObject.transform.GetComponentsInChildren<Transform>();
     }
 
     private void Update()
     {
         // check for sight and attack range
-        playerInSightRange = CheckPlayerInSightRange();
-        hasSeenPlayer = playerInSightRange;
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
@@ -90,31 +55,31 @@ public class EnemyAI : MonoBehaviour
         {
             SearchWalkPoint();
         }
-        
+
         if (walkPointSet)
         {
-            transform.LookAt(walkPoint);
             agent.SetDestination(walkPoint);
         }
-        
+
         Vector3 horizontalDistance = new Vector3(walkPoint.x, transform.position.y, walkPoint.z);
         Vector3 distanceToWalkPoint = transform.position - horizontalDistance;
         if (distanceToWalkPoint.magnitude < 5f)
         {
-            agent.speed = playerSpeed;
             walkPointSet = false;
+            agent.speed = playerSpeed;
+            patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
         }
     }
 
     private void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float newX = patrolPoints[patrolIndex].position.x;
+        float newZ = patrolPoints[patrolIndex].position.z;
 
         walkPoint = new Vector3(
-            transform.position.x + randomX, 
+            newX, 
             transform.position.y, 
-            transform.position.z + randomZ);
+            newZ);
         if (Physics.Raycast(walkPoint, -transform.up, whatIsGround))
         {
             walkPointSet = true;
@@ -123,7 +88,6 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        transform.LookAt(player);
         agent.SetDestination(player.position);
         agent.speed = detectedSpeed;
     }
