@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     
     // States
     public float sightRange, attackRange;
-    private bool playerInSightRange, playerInAttackRange;
+    private bool playerInAttackRange;
     
     // Sight angle
     public float angle = 35f;
@@ -75,12 +75,11 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         // check for sight and attack range
-        playerInSightRange = CheckPlayerInSightRange();
-        hasSeenPlayer = playerInSightRange;
+        hasSeenPlayer = CheckPlayerInSightRange();
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patrol();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (!hasSeenPlayer && !playerInAttackRange) Patrol();
+        if (hasSeenPlayer && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange) AttackPlayer();
     }
 
