@@ -47,4 +47,12 @@ public class MovePhysics : MonoBehaviour
             _userJumped = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision) 
+    {
+        if(collision.collider.tag == "Alien") 
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
