@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipTimer : MonoBehaviour
+public class DisableIsKinematic : MonoBehaviour
 {
-    private float time = 180f;
+	public GameObject cube;
+	public float time;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +15,10 @@ public class SpaceshipTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time <= 0f)
+		if (time <= 0f)
         {
-            Destroy(gameObject);
+        	Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
+        	cubeRigidbody.isKinematic = false;
         }
         time -= Time.deltaTime;
     }
