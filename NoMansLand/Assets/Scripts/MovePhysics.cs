@@ -13,7 +13,6 @@ public class MovePhysics : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-
     private Transform _transform;
 
     private const float ScaleMovement = 0.7f;
@@ -32,6 +31,14 @@ public class MovePhysics : MonoBehaviour
         _playerInput = Input.GetAxis("Vertical");
         _rotationInput = Input.GetAxis("Horizontal");
         _userJumped = Input.GetButton("Jump");
+    }
+
+    void OnCollisionEnter(Collision collision) 
+    {
+        if (collision.collider.tag == "Alien") 
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void FixedUpdate()
