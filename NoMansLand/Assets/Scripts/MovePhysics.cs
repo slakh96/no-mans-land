@@ -33,12 +33,16 @@ public class MovePhysics : MonoBehaviour
         _userJumped = Input.GetButton("Jump");
     }
 
-    void OnCollisionEnter(Collision collision) 
+    void OnCollisionEnter(Collision other) 
     {
-        if (collision.collider.tag == "Alien") 
+        if (other.collider.tag == "Alien") 
         {
             Destroy(this.gameObject);
         }
+        if (other.collider.tag == "Collectible")
+        {
+            Destroy(other.gameObject);
+        } 
     }
 
     private void FixedUpdate()
