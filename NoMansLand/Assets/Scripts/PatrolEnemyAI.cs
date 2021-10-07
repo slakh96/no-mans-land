@@ -7,7 +7,7 @@ public class PatrolEnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask whatIsGround, whatIsPlayer, whatIsObstruction;
 
     private float playerAcceleration = 100f;
     private float playerSpeed = 45f;
@@ -28,6 +28,10 @@ public class PatrolEnemyAI : MonoBehaviour
     // States
     public float sightRange, attackRange;
     private bool playerInSightRange, playerInAttackRange;
+    
+    // FOV
+    public float angle = 65f;
+    public bool hasSeenPlayer;
 
     private void Awake()
     {
@@ -40,13 +44,44 @@ public class PatrolEnemyAI : MonoBehaviour
 
     private void Update()
     {
-        // check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInSightRange = CheckPlayerInSightRange();
+        hasSeenPlayer = playerInSightRange;
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange) AttackPlayer();
+    }
+    
+    private bool CheckPlayerInSightRange()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            if (Vector3.Angle(transform.position, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, player.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, whatIsObstruction))
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (hasSeenPlayer)
+        {
+            return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void Patrol()

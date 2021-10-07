@@ -4,13 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 [CustomEditor(typeof(EnemyAI))]
-public class FieldOfViewEditor : Editor
+public class AlienFOV : Editor
 {
     private void OnSceneGUI()
     {
         EnemyAI fov = (EnemyAI) target;
         Handles.color = Color.white;
         Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.sightRange);
+        Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.attackRange);
 
         Vector3 viewAngle01 = DirectionFromAngle(fov.transform.eulerAngles.y, -fov.angle / 2);
         Vector3 viewAngle02 = DirectionFromAngle(fov.transform.eulerAngles.y, fov.angle / 2);
