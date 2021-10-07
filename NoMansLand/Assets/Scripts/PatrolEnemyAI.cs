@@ -24,14 +24,17 @@ public class PatrolEnemyAI : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     private bool alreadyAttacked;
-    
-    // States
-    public float sightRange, attackRange;
-    private bool playerInSightRange, playerInAttackRange;
-    
+
     // FOV
-    public float angle = 65f;
     public bool hasSeenPlayer;
+    public float sightRange;
+    public float angle;
+    public float attackRange = 50f;
+    private bool playerInSightRange, playerInAttackRange;
+    private float patrolAngle = 65f;
+    private float alertAngle = 360f;
+    private float patrolSightRange = 200f;
+    private float alertSightRange = 300f;
 
     private void Awake()
     {
@@ -40,6 +43,8 @@ public class PatrolEnemyAI : MonoBehaviour
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
         patrolPoints = patrolObject.transform.GetComponentsInChildren<Transform>();
+        angle = patrolAngle;
+        sightRange = patrolSightRange;
     }
 
     private void Update()
@@ -102,6 +107,8 @@ public class PatrolEnemyAI : MonoBehaviour
         {
             walkPointSet = false;
             agent.speed = playerSpeed;
+            angle = patrolAngle;
+            sightRange = patrolSightRange;
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
         }
     }
@@ -123,6 +130,8 @@ public class PatrolEnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
+        angle = alertAngle;
+        sightRange = alertSightRange;
         agent.SetDestination(player.position);
         agent.speed = detectedSpeed;
     }

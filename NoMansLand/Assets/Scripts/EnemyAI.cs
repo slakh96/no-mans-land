@@ -24,9 +24,14 @@ public class EnemyAI : MonoBehaviour
     private bool alreadyAttacked;
     
     // States
-    public float sightRange, attackRange;
+    public float sightRange;
+    public float angle;
+    public float attackRange = 50f;
     private bool playerInSightRange, playerInAttackRange;
-    public float angle = 35f;
+    private float patrolAngle = 35f;
+    private float alertAngle = 360f;
+    private float patrolSightRange = 150f;
+    private float alertSightRange = 250f;
     public bool hasSeenPlayer;
 
     private void Awake()
@@ -35,6 +40,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
+        sightRange = patrolSightRange;
     }
 
     private void Update()
@@ -65,6 +71,8 @@ public class EnemyAI : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 5f)
         {
             agent.speed = playerSpeed;
+            angle = patrolAngle;
+            sightRange = patrolSightRange;
             walkPointSet = false;
         }
     }
@@ -116,6 +124,8 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
+        angle = alertAngle;
+        sightRange = alertSightRange;
         agent.SetDestination(player.position);
         agent.speed = detectedSpeed;
     }
