@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceshipTimer : MonoBehaviour
 {
-    private float time = 180f;
+    private float time = 180000f;
     // Start is called before the first frame update
     void Start()
     {
