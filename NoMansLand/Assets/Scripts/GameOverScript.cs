@@ -8,6 +8,5 @@ public class GameOverScript : MonoBehaviour
     public void Setup() 
     {
         gameObject.SetActive(true);
-        //pointsText.text = score.ToString() + " POINTS";
     }
 }
