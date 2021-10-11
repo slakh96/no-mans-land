@@ -5,7 +5,6 @@ using DefaultNamespace;
 
 public class DisableIsKinematic : MonoBehaviour
 {
-	public GameObject obj;
 	public float baseTime;
 	private float elapsedTime;
 
@@ -20,14 +19,12 @@ public class DisableIsKinematic : MonoBehaviour
     {
 	    elapsedTime = 0;
 	    adjustedBaseTime = baseTimeMultiplier * baseTime;
-	    Debug.Log(obj.name);
-	    Debug.Log((object) obj.name.Equals("polySurface6"));
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (elapsedTime > adjustedBaseTime + SpaceshipTimekeeping.BonusTime)
+		if (elapsedTime > SpaceshipTimekeeping.GetCrumbleTime(gameObject.name))
         {
         	Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
         	cubeRigidbody.isKinematic = false;
