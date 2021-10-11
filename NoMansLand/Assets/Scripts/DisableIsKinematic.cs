@@ -20,8 +20,8 @@ public class DisableIsKinematic : MonoBehaviour
     {
 	    elapsedTime = 0;
 	    adjustedBaseTime = baseTimeMultiplier * baseTime;
-	    Debug.Log(obj.name); 
-	    Debug.Log((object)obj.name.Equals("polySurface6")); 
+	    Debug.Log(obj.name);
+	    Debug.Log((object) obj.name.Equals("polySurface6"));
     }
 
     // Update is called once per frame
