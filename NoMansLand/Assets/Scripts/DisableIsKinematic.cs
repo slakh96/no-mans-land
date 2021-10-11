@@ -5,20 +5,12 @@ using DefaultNamespace;
 
 public class DisableIsKinematic : MonoBehaviour
 {
-	public float baseTime;
 	private float elapsedTime;
-
-	// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 53s.
-	// E.g. timeMultiplier == 1.0 => 1 * 53s until spaceship finishes crumbling.
-	// timeMultiplier == 5.0 => 5 * 53s = 265s = 4min25s until it finishes crumbling. 
-	private float baseTimeMultiplier = 5.0f;
-
-	private float adjustedBaseTime;
+	
     // Start is called before the first frame update
     void Start()
     {
 	    elapsedTime = 0;
-	    adjustedBaseTime = baseTimeMultiplier * baseTime;
     }
 
     // Update is called once per frame

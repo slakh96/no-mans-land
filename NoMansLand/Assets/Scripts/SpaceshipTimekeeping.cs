@@ -4,9 +4,9 @@ namespace DefaultNamespace
 {
     public static class SpaceshipTimekeeping
     {
-		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 53s.
-		// E.g. timeMultiplier == 1.0 => 1 * 53s until spaceship finishes crumbling.
-		// timeMultiplier == 5.0 => 5 * 53s = 265s = 4min25s until it finishes crumbling. 
+		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 54s.
+		// E.g. timeMultiplier == 1.0 => 1 * 54s until spaceship finishes crumbling.
+		// timeMultiplier == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
 		static float crumbleTimeMultiplier = 5.0f;
 
 		// A dictionary containing the order of parts to fall off
