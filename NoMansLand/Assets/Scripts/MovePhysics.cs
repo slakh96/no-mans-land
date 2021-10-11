@@ -10,7 +10,6 @@ public class MovePhysics : MonoBehaviour
     private float _rotationInput;
     private Vector3 _userRot;
     private bool _userJumped;
-    private GameObject collectibleHoldSlot;
 
     private Rigidbody _rigidbody;
 
@@ -24,7 +23,6 @@ public class MovePhysics : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _transform = GetComponent<Transform>();
-        collectibleHoldSlot = GameObject.Find("CollectibleHolder");
     }
 
     // Update is called once per frame
@@ -41,11 +39,6 @@ public class MovePhysics : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (other.collider.tag == "Collectible")
-        {
-            other.gameObject.transform.parent = collectibleHoldSlot.transform;
-            other.gameObject.transform.parent.localPosition = Vector3.zero;
-        } 
     }
 
     private void FixedUpdate()
