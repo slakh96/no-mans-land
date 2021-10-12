@@ -37,7 +37,6 @@ public class HandleObject : MonoBehaviour
                 Vector3.Distance(child.gameObject.transform.position, spaceship.transform.position) <= DISTANCE_LIMIT)
             {
                 SpaceshipTimekeeping.AddBonusTime(TIME_BONUS);
-                Debug.Log("Added time bonus");
                 Destroy(child, DESTROY_DELAY);
             }
         }
