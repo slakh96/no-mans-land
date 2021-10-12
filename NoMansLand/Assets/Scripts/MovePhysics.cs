@@ -39,10 +39,6 @@ public class MovePhysics : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (other.collider.tag == "Collectible")
-        {
-            Destroy(other.gameObject);
-        } 
     }
 
     private void FixedUpdate()
