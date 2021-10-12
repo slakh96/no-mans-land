@@ -11,6 +11,8 @@ public class MovePhysics : MonoBehaviour
     private Vector3 _userRot;
     private bool _userJumped;
 
+    private float JUMP_STRENGTH = 3;
+
     private Rigidbody _rigidbody;
 
     private Transform _transform;
@@ -50,7 +52,7 @@ public class MovePhysics : MonoBehaviour
 
         if (_userJumped)
         {
-            _rigidbody.AddForce(Vector3.up, ForceMode.VelocityChange);
+            _rigidbody.AddForce(Vector3.up * JUMP_STRENGTH, ForceMode.VelocityChange);
             _userJumped = false;
         }
     }
