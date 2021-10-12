@@ -7,7 +7,7 @@ public class PatrolEnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask whatIsGround, whatIsPlayer, whatIsObstruction;
 
     private float playerAcceleration = 100f;
     private float playerSpeed = 45f;
@@ -24,10 +24,17 @@ public class PatrolEnemyAI : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     private bool alreadyAttacked;
-    
-    // States
-    public float sightRange, attackRange;
+
+    // FOV
+    public bool hasSeenPlayer;
+    public float sightRange;
+    public float angle;
+    public float attackRange = 50f;
     private bool playerInSightRange, playerInAttackRange;
+    private float patrolAngle = 65f;
+    private float alertAngle = 360f;
+    private float patrolSightRange = 200f;
+    private float alertSightRange = 300f;
 
     private void Awake()
     {
@@ -36,17 +43,50 @@ public class PatrolEnemyAI : MonoBehaviour
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
         patrolPoints = patrolObject.transform.GetComponentsInChildren<Transform>();
+        angle = patrolAngle;
+        sightRange = patrolSightRange;
     }
 
     private void Update()
     {
-        // check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInSightRange = CheckPlayerInSightRange();
+        hasSeenPlayer = playerInSightRange;
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (hasSeenPlayer) ChasePlayer();
         if (playerInAttackRange) AttackPlayer();
+    }
+    
+    private bool CheckPlayerInSightRange()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            Vector3 facingDirection = (walkPoint - transform.position).normalized;
+            if (Vector3.Angle(facingDirection, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, player.position);
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, whatIsObstruction))
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (hasSeenPlayer)
+        {
+            return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void Patrol()
@@ -67,6 +107,8 @@ public class PatrolEnemyAI : MonoBehaviour
         {
             walkPointSet = false;
             agent.speed = playerSpeed;
+            angle = patrolAngle;
+            sightRange = patrolSightRange;
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
         }
     }
@@ -88,6 +130,8 @@ public class PatrolEnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
+        angle = alertAngle;
+        sightRange = alertSightRange;
         agent.SetDestination(player.position);
         agent.speed = detectedSpeed;
     }
