@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Collectible
   - Alien
+  - Spaceship
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - WhatIsGround
   - Water
   - UI
-  - 
-  - 
-  - 
+  - WhatIsGround
+  - WhatIsPlayer
+  - WhatIsObstruction
   - 
   - 
   - 
