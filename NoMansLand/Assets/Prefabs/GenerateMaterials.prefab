@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5349095023571576911
+--- !u!1 &2392667189852821271
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4481687367800706296}
-  - component: {fileID: 5781027690784425055}
+  - component: {fileID: 2392667189852821265}
+  - component: {fileID: 2392667189852821264}
   m_Layer: 0
-  m_Name: GenerateCollectibles
+  m_Name: GenerateMaterials
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4481687367800706296
+--- !u!4 &2392667189852821265
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5349095023571576911}
+  m_GameObject: {fileID: 2392667189852821271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 652.7168, y: 12.670589, z: 835.5703}
+  m_LocalPosition: {x: 640.87054, y: 694.9772, z: 978.0715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5781027690784425055
+--- !u!114 &2392667189852821264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5349095023571576911}
+  m_GameObject: {fileID: 2392667189852821271}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f8b1c277ee64782a8eb97d79f2097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectiblePrefab: {fileID: 1673698198399288185, guid: 281ec441cba094cf2a3f9b6dd26ac9d3, type: 3}
-  xPos: 0
-  zPos: 0
+  CollectiblePrefab: {fileID: 8121162034570843088, guid: 351bff06de6f5424cbb92ef1b4410dae, type: 3}
+  terrain: {fileID: 7933708387519748148, guid: a69540c79b0c4480ab9c09047e1c1692, type: 3}
+  terrainXPos: 0
+  terrainYPos: 0
+  terrainZPos: 0
+  terrainXLength: 900
+  terrainZLength: 988
+  itemXPos: 0
+  itemZPos: 0
   collectibleCount: 0
