@@ -2,13 +2,17 @@
 using UnityEngine;
 namespace DefaultNamespace
 {
-    public static class SpaceshipTimekeeping
+    public static class SpaceshipManager
     {
 		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 54s.
 		// E.g. timeMultiplier == 1.0 => 1 * 54s until spaceship finishes crumbling.
 		// timeMultiplier == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
 		static float crumbleTimeMultiplier = 5.0f;
+
+		// A listing of all the parts that have dropped off the ship so far
+		static List<string> droppedParts = new List<string>();
 		
+		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
 				{"engine_frt_geo", new SpaceshipPart(1)},
@@ -79,7 +83,7 @@ namespace DefaultNamespace
 			}
 			return spaceshipParts[name].GetTimeToCrumble() * crumbleTimeMultiplier + bonusTime;
         }
-
+		// Gets the spaceship part with name name, or returns null
 		public static SpaceshipPart GetSpaceshipPart(string name) {
 			if (!spaceshipParts.ContainsKey(name))
 			{
@@ -92,6 +96,25 @@ namespace DefaultNamespace
 		public static void AddBonusTime(float additionalTime)
 		{
 			bonusTime += additionalTime;
+		}
+		// RecordDropPartFromShip adds the dropped part to the list
+		public static void RecordDropPartFromShip(string partName) {
+			droppedParts.Add(partName);
+			Debug.Log(partName);
+		}
+		// RecordAddPartToShip records that a part was added to the ship and returns the name 
+		public static string RecordAddPartToShip() {
+			if (droppedParts.Count < 1){
+				Debug.Log("ERROR AddPartToShip: No parts are off the ship, game should be over");
+				return "";
+			}
+			string output = droppedParts[droppedParts.Count - 1];
+			droppedParts.RemoveAt(droppedParts.Count - 1);
+			return output;
+		}
+		// IsDropped returns whether or not the part has already been dropped
+		public static bool IsDropped(string partName) {
+			return droppedParts.Contains(partName);
 		}
     }
 }

@@ -36,7 +36,7 @@ public class HandleObject : MonoBehaviour
             if (spaceship != null && 
                 Vector3.Distance(child.gameObject.transform.position, spaceship.transform.position) <= DISTANCE_LIMIT)
             {
-                SpaceshipTimekeeping.AddBonusTime(TIME_BONUS);
+                SpaceshipManager.AddBonusTime(TIME_BONUS);
                 Destroy(child, DESTROY_DELAY);
             }
         }

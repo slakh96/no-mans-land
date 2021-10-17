@@ -20,7 +20,7 @@ public class DisableIsKinematic : MonoBehaviour
     {
 	    if (spaceshipPartObj.transform.childCount == 0)
 	    { 
-		   SpaceshipPart s = SpaceshipTimekeeping.GetSpaceshipPart(spaceshipPartObj.name);
+		   SpaceshipPart s = SpaceshipManager.GetSpaceshipPart(spaceshipPartObj.name);
 		   if (s == null)
 		   {
 			   Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
@@ -39,10 +39,11 @@ public class DisableIsKinematic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (elapsedTime > SpaceshipTimekeeping.GetCrumbleTime(gameObject.name))
+		if (elapsedTime > SpaceshipManager.GetCrumbleTime(gameObject.name) && !SpaceshipManager.IsDropped(gameObject.name))
         {
         	Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
         	cubeRigidbody.isKinematic = false;
+            SpaceshipManager.RecordDropPartFromShip(gameObject.name);
         }
 		elapsedTime += Time.deltaTime;
 		
@@ -50,7 +51,7 @@ public class DisableIsKinematic : MonoBehaviour
 		if (elapsedTime > 7)
 		{
 			//GameObject first_piece = GameObject.Find("engine_frt_geo");
-			//SpaceshipTimekeeping.GetSpaceshipPart("engine_frt_geo").ReturnPieceToShip(first_piece);
+			//SpaceshipManager.GetSpaceshipPart("engine_frt_geo").ReturnPieceToShip(first_piece);
 		}
     }
 }
