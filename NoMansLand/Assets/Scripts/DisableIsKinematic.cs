@@ -11,7 +11,7 @@ public class DisableIsKinematic : MonoBehaviour
     void Start()
     {
 	    elapsedTime = 0;
-	    GameObject spaceship = GameObject.Find("spaceShip 1 2 1");
+	    GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
 	    SpaceshipManager.SetOriginalPartData(spaceship);
     }
 
