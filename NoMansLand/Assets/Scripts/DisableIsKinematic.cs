@@ -17,18 +17,27 @@ public class DisableIsKinematic : MonoBehaviour
 	    Debug.Log("End=========================================");
     }
 
-    void handleGameObjects(GameObject spaceshipPart)
+    void handleGameObjects(GameObject spaceshipPartObj)
     {
-	    if (spaceshipPart.transform.childCount == 0)
+	    if (spaceshipPartObj.transform.childCount == 0)
 	    {
-		    Debug.Log(spaceshipPart.name);
-		    return;
+		   // Debug.Log(spaceshipPart.name);
+		   SpaceshipPart s = SpaceshipTimekeeping.GetSpaceshipPart(spaceshipPartObj.name);
+		   if (s == null)
+		   {
+			   Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
+			   return;
+		   }
+
+		   s.SetOriginalRelativePosition(spaceshipPartObj.transform.localPosition);
+		   s.SetOriginalRotation(spaceshipPartObj.transform.eulerAngles);
+		   return;
 	    }
-	    for (int i = 0; i < spaceshipPart.transform.childCount; i++)
+	    for (int i = 0; i < spaceshipPartObj.transform.childCount; i++)
 	    {
 		    //Debug.Log(spaceshipPart.transform.GetChild(i).gameObject.name);
 		    //Debug.Log(i);
-		    handleGameObjects(spaceshipPart.transform.GetChild(i).gameObject);
+		    handleGameObjects(spaceshipPartObj.transform.GetChild(i).gameObject);
 	    }
 	    //Debug.Log(i);
     }
@@ -53,9 +62,10 @@ public class DisableIsKinematic : MonoBehaviour
 		if (elapsedTime > 7)
 		{
 			GameObject first_piece = GameObject.Find("engine_frt_geo");
-			first_piece.transform.localPosition = new Vector3(-0.05929808f, 0.02065961f, -0.0006725601f);
-			first_piece.transform.eulerAngles = new Vector3(0, 0, 0);
-			first_piece.GetComponent<Rigidbody>().isKinematic = true;
+			SpaceshipTimekeeping.GetSpaceshipPart("engine_frt_geo").ReturnPieceToShip(first_piece);
+			// first_piece.transform.localPosition = new Vector3(-0.05929808f, 0.02065961f, -0.0006725601f);
+			// first_piece.transform.eulerAngles = new Vector3(0, 0, 0);
+			// first_piece.GetComponent<Rigidbody>().isKinematic = true;
 			// Debug.Log("===================================");
 		}
     }

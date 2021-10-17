@@ -18,6 +18,16 @@ namespace DefaultNamespace
             return originalRelativePosition;
         }
 
+		public void SetOriginalRelativePosition(Vector3 opos)
+		{
+			originalRelativePosition = opos;
+		}
+
+		public void SetOriginalRotation(Vector3 orot)
+		{
+			originalRotation = orot;
+		}
+
         public Vector3 GetOriginalRotation()
         {
             return originalRotation;
@@ -32,5 +42,11 @@ namespace DefaultNamespace
         {
             timeToCrumble = t;
         }
+
+		public void ReturnPieceToShip(GameObject g) {
+			g.transform.localPosition = originalRelativePosition;
+			g.transform.eulerAngles = originalRotation;
+			g.GetComponent<Rigidbody>().isKinematic = true;
+		}
     }
 }

@@ -79,6 +79,15 @@ namespace DefaultNamespace
 			}
 			return spaceshipParts[name].GetTimeToCrumble() * crumbleTimeMultiplier + bonusTime;
         }
+
+		public static SpaceshipPart GetSpaceshipPart(string name) {
+			if (!spaceshipParts.ContainsKey(name))
+			{
+				Debug.Log("GetCrumbleTime: part with name " + name + " not found in dictionary");
+				return null;
+			}
+			return spaceshipParts[name];
+		}
 		// Adds additional time to wait before the next part falls off of the spaceship
 		public static void AddBonusTime(float additionalTime)
 		{
