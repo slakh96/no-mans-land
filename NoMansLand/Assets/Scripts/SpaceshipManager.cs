@@ -97,12 +97,20 @@ namespace DefaultNamespace
 		{
 			bonusTime += additionalTime;
 		}
-		// RecordDropPartFromShip adds the dropped part to the list
+		// RecordDropPartFromShip adds the dropped part to the list and makes it drop
 		public static void RecordDropPartFromShip(string partName) {
 			droppedParts.Add(partName);
 			Debug.Log(partName);
+			GameObject part = GameObject.Find(partName);
+			if (part == null)
+			{
+				Debug.Log("ERROR RecordDropPartFromShip: Part not found! " + partName);
+				return;
+			}
+			part.GetComponent<Rigidbody>().isKinematic = false;
 		}
-		// RecordAddPartToShip records that a part was added to the ship and returns the name 
+		// RecordAddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
+		// automatically selects the most recently dropped part to add back to the ship
 		public static string RecordAddPartToShip() {
 			if (droppedParts.Count < 1){
 				Debug.Log("ERROR AddPartToShip: No parts are off the ship, game should be over");
@@ -110,6 +118,8 @@ namespace DefaultNamespace
 			}
 			string output = droppedParts[droppedParts.Count - 1];
 			droppedParts.RemoveAt(droppedParts.Count - 1);
+			GameObject part = GameObject.Find(output);
+			SpaceshipManager.GetSpaceshipPart(output).ReturnPieceToShip(part);
 			return output;
 		}
 		// IsDropped returns whether or not the part has already been dropped

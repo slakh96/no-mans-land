@@ -41,8 +41,8 @@ public class DisableIsKinematic : MonoBehaviour
     {
 		if (elapsedTime > SpaceshipManager.GetCrumbleTime(gameObject.name) && !SpaceshipManager.IsDropped(gameObject.name))
         {
-        	Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
-        	cubeRigidbody.isKinematic = false;
+        	//Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
+        	//cubeRigidbody.isKinematic = false;
             SpaceshipManager.RecordDropPartFromShip(gameObject.name);
         }
 		elapsedTime += Time.deltaTime;
