@@ -78,7 +78,7 @@ namespace DefaultNamespace
         {
         	if (!spaceshipParts.ContainsKey(name))
 			{
-				Debug.Log("GetCrumbleTime: part with name " + name + " not found in dictionary");
+				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
 				return 0;
 			}
 			return spaceshipParts[name].GetTimeToCrumble() * crumbleTimeMultiplier + bonusTime;
@@ -87,7 +87,7 @@ namespace DefaultNamespace
 		public static SpaceshipPart GetSpaceshipPart(string name) {
 			if (!spaceshipParts.ContainsKey(name))
 			{
-				Debug.Log("GetCrumbleTime: part with name " + name + " not found in dictionary");
+				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
 				return null;
 			}
 			return spaceshipParts[name];
@@ -97,8 +97,8 @@ namespace DefaultNamespace
 		{
 			bonusTime += additionalTime;
 		}
-		// RecordDropPartFromShip adds the dropped part to the list and makes it drop
-		public static void RecordDropPartFromShip(string partName) {
+		// DropPartFromShip adds the dropped part to the list and makes it drop
+		public static void DropPartFromShip(string partName) {
 			droppedParts.Add(partName);
 			Debug.Log(partName);
 			GameObject part = GameObject.Find(partName);
@@ -109,22 +109,44 @@ namespace DefaultNamespace
 			}
 			part.GetComponent<Rigidbody>().isKinematic = false;
 		}
-		// RecordAddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
+		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
 		// automatically selects the most recently dropped part to add back to the ship
-		public static string RecordAddPartToShip() {
+		public static string AddPartToShip() {
 			if (droppedParts.Count < 1){
 				Debug.Log("ERROR AddPartToShip: No parts are off the ship, game should be over");
 				return "";
 			}
-			string output = droppedParts[droppedParts.Count - 1];
+			string partName = droppedParts[droppedParts.Count - 1];
 			droppedParts.RemoveAt(droppedParts.Count - 1);
-			GameObject part = GameObject.Find(output);
-			SpaceshipManager.GetSpaceshipPart(output).ReturnPieceToShip(part);
-			return output;
+			GameObject part = GameObject.Find(partName);
+			SpaceshipManager.GetSpaceshipPart(partName).ReturnPieceToShip(part);
+			return partName;
 		}
 		// IsDropped returns whether or not the part has already been dropped
 		public static bool IsDropped(string partName) {
 			return droppedParts.Contains(partName);
 		}
+		
+    	// A recursive function to set the original positions and rotations of the spacship parts.
+		// Must be called at the start of the game
+    	public static void SetOriginalPartData(GameObject spaceshipPartObj)
+    	{
+	    	if (spaceshipPartObj.transform.childCount == 0)
+	    	{ 
+		   		SpaceshipPart s = GetSpaceshipPart(spaceshipPartObj.name);
+		   		if (s == null)
+		   		{
+			   		Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
+			   		return;
+		   		}
+		   		s.SetOriginalRelativePosition(spaceshipPartObj.transform.localPosition);
+		   		s.SetOriginalRotation(spaceshipPartObj.transform.eulerAngles);
+		   		return;
+	    	}
+	    	for (int i = 0; i < spaceshipPartObj.transform.childCount; i++)
+	    	{
+		    	SetOriginalPartData(spaceshipPartObj.transform.GetChild(i).gameObject);
+	    	}
+    	}
     }
 }
