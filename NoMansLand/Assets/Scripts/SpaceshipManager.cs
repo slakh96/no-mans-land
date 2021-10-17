@@ -12,10 +12,16 @@ namespace DefaultNamespace
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
 		
+		// The crumble time to set the next added part of the ship to
+		static int nextCrumbleTime = 55;
+		
+		// A boolean showing if the game is won
+		static bool gameWon = false;
+		
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(1)},
+				{"engine_frt_geo", new SpaceshipPart(0)},
                 {"engine_lft_geo", new SpaceshipPart(2)},
                 {"engine_rt_geo", new SpaceshipPart(3)},
                 {"mEngine_lft", new SpaceshipPart(4)},
@@ -120,6 +126,13 @@ namespace DefaultNamespace
 			droppedParts.RemoveAt(droppedParts.Count - 1);
 			GameObject part = GameObject.Find(partName);
 			SpaceshipManager.GetSpaceshipPart(partName).ReturnPieceToShip(part);
+			SpaceshipManager.GetSpaceshipPart(partName).SetTimeToCrumble(nextCrumbleTime);
+			nextCrumbleTime = nextCrumbleTime + 1;
+			
+			// Check if the game has been won, has the player added the final part
+			if(droppedParts.Count == 0) {
+				gameWon = true;
+			}
 			return partName;
 		}
 		// IsDropped returns whether or not the part has already been dropped
@@ -148,5 +161,15 @@ namespace DefaultNamespace
 		    	SetOriginalPartData(spaceshipPartObj.transform.GetChild(i).gameObject);
 	    	}
     	}
+		// Returns whether all the parts are on the spaceship, thus the game is won
+		public static bool SpaceshipComplete() 
+		{
+			return gameWon;
+		}
+		// Returns whether all the parts have fallen off the spaceship, thus the game is lost
+		public static bool SpaceshipDestroyed()
+		{
+			return droppedParts.Count == spaceshipParts.Count;
+		}
     }
 }
