@@ -109,7 +109,6 @@ namespace DefaultNamespace
 		// DropPartFromShip adds the dropped part to the list and makes it drop
 		public static void DropPartFromShip(string partName) {
 			droppedParts.Add(partName);
-			Debug.Log(partName);
 			GameObject part = GameObject.Find(partName);
 			if (part == null)
 			{
