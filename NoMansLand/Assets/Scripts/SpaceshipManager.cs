@@ -5,9 +5,9 @@ namespace DefaultNamespace
     public static class SpaceshipManager
     {
 		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 54s.
-		// E.g. timeMultiplier == 1.0 => 1 * 54s until spaceship finishes crumbling.
-		// timeMultiplier == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		static float crumbleTimeMultiplier = 5.0f;
+		// E.g. CRUMBLE_TIME_MULTIPLIER == 1.0 => 1 * 54s until spaceship finishes crumbling.
+		// CRUMBLE_TIME_MULTIPLIER == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
+		static float CRUMBLE_TIME_MULTIPLIER = 5.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -17,6 +17,9 @@ namespace DefaultNamespace
 		
 		// A boolean showing if the game is won
 		static bool gameWon = false;
+		
+		// Time bonus earned when the player deposits a material
+    	static float TIME_BONUS = 30;
 		
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
@@ -87,7 +90,7 @@ namespace DefaultNamespace
 				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
 				return 0;
 			}
-			return spaceshipParts[name].GetTimeToCrumble() * crumbleTimeMultiplier + bonusTime;
+			return spaceshipParts[name].GetTimeToCrumble() * CRUMBLE_TIME_MULTIPLIER + bonusTime;
         }
 		// Gets the spaceship part with name name, or returns null
 		public static SpaceshipPart GetSpaceshipPart(string name) {
@@ -99,9 +102,9 @@ namespace DefaultNamespace
 			return spaceshipParts[name];
 		}
 		// Adds additional time to wait before the next part falls off of the spaceship
-		public static void AddBonusTime(float additionalTime)
+		public static void addBonusTime()
 		{
-			bonusTime += additionalTime;
+			bonusTime += TIME_BONUS;
 		}
 		// DropPartFromShip adds the dropped part to the list and makes it drop
 		public static void DropPartFromShip(string partName) {
@@ -133,6 +136,7 @@ namespace DefaultNamespace
 			if(droppedParts.Count == 0) {
 				gameWon = true;
 			}
+			addBonusTime();
 			return partName;
 		}
 		// IsDropped returns whether or not the part has already been dropped

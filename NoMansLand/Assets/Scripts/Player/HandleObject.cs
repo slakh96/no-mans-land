@@ -11,8 +11,6 @@ public class HandleObject : MonoBehaviour
     private GameObject spaceship;
     // How close the player needs to be before he can deposit the material successfully
     private float DISTANCE_LIMIT = 50;
-    // Time bonus earned when the player deposits a material
-    private float TIME_BONUS = 30;
     // Time to wait before the material is destroyed
     private float DESTROY_DELAY = 1.0f;
 
@@ -36,7 +34,6 @@ public class HandleObject : MonoBehaviour
             if (spaceship != null && 
                 Vector3.Distance(child.gameObject.transform.position, spaceship.transform.position) <= DISTANCE_LIMIT)
             {
-                SpaceshipManager.AddBonusTime(TIME_BONUS);
                 SpaceshipManager.AddPartToShip();
                 Destroy(child, DESTROY_DELAY);
             }
