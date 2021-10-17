@@ -8,7 +8,11 @@ namespace DefaultNamespace
 		// E.g. timeMultiplier == 1.0 => 1 * 54s until spaceship finishes crumbling.
 		// timeMultiplier == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
 		static float crumbleTimeMultiplier = 5.0f;
-
+		
+		static Dictionary<string, SpaceshipPart> baseCrumbleTimesTemp =  
+            new Dictionary<string, SpaceshipPart>(){
+};
+		
 		// A dictionary containing the order of parts to fall off
 		static Dictionary<string, int> baseCrumbleTimes =  
             new Dictionary<string, int>(){
