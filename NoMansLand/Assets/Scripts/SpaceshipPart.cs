@@ -3,7 +3,6 @@ namespace DefaultNamespace
 {
     public class SpaceshipPart
     {
-        //private string name;
         private float timeToCrumble;
         private Vector3 originalRelativePosition;
         private Vector3 originalRotation;
