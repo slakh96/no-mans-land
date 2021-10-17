@@ -62,6 +62,8 @@ public class PlayerInteractions : MonoBehaviour
             collectibleObjTransform.localPosition = Vector3.zero;
             Rigidbody collectibleRB = currentCollectible.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = true;
+            
+            FindObjectOfType<AudioManager>().Play("Pickup1");
             canGrab = false;
         }
         else if (collectibleHoldSlot.transform.childCount > 0)
