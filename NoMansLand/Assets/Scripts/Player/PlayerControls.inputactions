@@ -6,7 +6,7 @@
             "id": "1aa15b3f-47d1-49a7-946f-ce77bab1c93d",
             "actions": [
                 {
-                    "name": "Grow",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "7c28c890-3960-41ee-81fe-6b4897300d2d",
                     "expectedControlType": "Button",
@@ -28,6 +28,14 @@
                     "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "HandleObject",
+                    "type": "Button",
+                    "id": "1dfb9716-87a0-4536-84e6-ccb13b552ebe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -38,7 +46,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grow",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,6 +69,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "508b7bb6-6aaa-4eae-a934-09119c1f17ea",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HandleObject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
