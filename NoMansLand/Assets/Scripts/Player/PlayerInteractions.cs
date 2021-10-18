@@ -21,6 +21,7 @@ public class PlayerInteractions : MonoBehaviour
     private float DISTANCE_LIMIT = 50;
     // Time to wait before the material is destroyed
     private float DESTROY_DELAY = 1.0f;
+    public GameObject goscreen;
     
 
     private void Awake()
@@ -118,6 +119,11 @@ public class PlayerInteractions : MonoBehaviour
         {
             withinRange = true;
             currentCollectible = other.gameObject;
+        }
+        if (other.collider.tag == "Alien") 
+        {
+            Destroy(this.gameObject);
+            goscreen.SetActive(true);
         }
     }
 
