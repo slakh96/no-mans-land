@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,9 @@ public class OxygenMeter : MonoBehaviour
     public GameObject player;
     [SerializeField] private Image uiFill;
     [SerializeField] private Text oxygenPercentage;
+    private bool isPlaying;
 
-    private float time = 100f;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public float time = 100f;
 
     // Update is called once per frame
     void Update()
@@ -22,11 +20,35 @@ public class OxygenMeter : MonoBehaviour
         {
             time -= Time.deltaTime;
             uiFill.fillAmount = Mathf.InverseLerp(0, 100f, time);
+            
+            // Interval and timing changes based on how long the Oxygen Meter is. 
+            if (time <= 50f && time > 30f && !isPlaying)
+            {
+                StartCoroutine (playSound("Breathing1", 20));
+            }
+            if (time <= 30f && time > 20f && !isPlaying)
+            {
+                StartCoroutine (playSound("Breathing2", 10));
+            }
+            if (time <= 20f && !isPlaying)
+            {
+                StartCoroutine (playSound("Breathing3", 20));
+            }
         }
         else
         {
             Destroy(player);
         }
         oxygenPercentage.text = Mathf.Round(time) + "%";
+    }
+    
+    IEnumerator playSound(string name, int interval)
+    {
+        isPlaying = true;
+        Sound s = FindObjectOfType<AudioManager>().Find(name);
+        s.source.Play();
+        yield return new WaitForSeconds (interval);
+        s.source.Stop();
+        isPlaying = false;
     }
 }
