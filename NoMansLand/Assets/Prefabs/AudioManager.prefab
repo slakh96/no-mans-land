@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3187137973699944476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3187137973699944450}
+  - component: {fileID: 3187137973699944451}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3187137973699944450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187137973699944476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3187137973699944451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187137973699944476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f170af7fa855c4bc687226fbd1a8ac89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Pickup1
+    clip: {fileID: 8300000, guid: bd54c868de03b49c18dc4cfb7ec0200c, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 749c0c2efce244278b094a1dcffe6c8d, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 1
+    source: {fileID: 0}
+  - name: Breathing1
+    clip: {fileID: 8300000, guid: cf3bbaffda8ec43e69a611a0a32ff52e, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: Breathing2
+    clip: {fileID: 8300000, guid: f52593dfe6f89444ea44dd1516903360, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: Breathing3
+    clip: {fileID: 8300000, guid: 707b7107246034fa985d0f38f229c5fd, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: Drop1
+    clip: {fileID: 8300000, guid: 3b17bb0c232f846daa7c379d70d7173f, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}

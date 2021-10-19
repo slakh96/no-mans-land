@@ -68,6 +68,8 @@ public class PlayerInteractions : MonoBehaviour
             collectibleObjTransform.localPosition = Vector3.zero;
             Rigidbody collectibleRB = currentCollectible.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = true;
+            // Randomize later
+            FindObjectOfType<AudioManager>().Play("Pickup1");
             canGrab = false;
         }
         else if (collectibleHoldSlot.transform.childCount > 0)
@@ -77,6 +79,8 @@ public class PlayerInteractions : MonoBehaviour
             Rigidbody collectibleRB = child.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = false;
             collectibleRB.AddForce(child.transform.forward * 20, ForceMode.Impulse);
+            // Randomize later
+            FindObjectOfType<AudioManager>().Play("Drop1");
             GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
             // Check if the player was close enough to the spaceship to deposit the material
             if (spaceship != null && 
