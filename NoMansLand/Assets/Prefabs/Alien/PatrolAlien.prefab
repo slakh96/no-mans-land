@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4916518560068743774
+--- !u!1 &2999631279259565123
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4916518560068743748}
-  - component: {fileID: 4916518560068743749}
-  - component: {fileID: 4916518560068743746}
-  - component: {fileID: 4916518560068743747}
-  - component: {fileID: 4916518560068743745}
-  - component: {fileID: 4916518560068743744}
+  - component: {fileID: 2549924552548254119}
+  - component: {fileID: 8720729674883424936}
+  - component: {fileID: 8056353782885645811}
+  - component: {fileID: 1045909464327279943}
+  - component: {fileID: 5253328114110940316}
+  - component: {fileID: 3656064165560078721}
   m_Layer: 0
   m_Name: PatrolAlien
-  m_TagString: Untagged
+  m_TagString: Alien
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4916518560068743748
+--- !u!4 &2549924552548254119
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1323.5071, y: 789.8, z: 1002.46124}
+  m_LocalPosition: {x: 542.3434, y: 15.409809, z: 744.7146}
   m_LocalScale: {x: 15.409809, y: 15.409809, z: 15.409809}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4916518560068743749
+--- !u!33 &8720729674883424936
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4916518560068743746
+--- !u!23 &8056353782885645811
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4916518560068743747
+--- !u!136 &1045909464327279943
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -98,13 +98,13 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &4916518560068743745
+--- !u!195 &5253328114110940316
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -120,19 +120,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4916518560068743744
+--- !u!114 &3656064165560078721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916518560068743774}
+  m_GameObject: {fileID: 2999631279259565123}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc260f5bb218b422280776d8062d96db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 4916518560068743745}
+  agent: {fileID: 5253328114110940316}
   player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
@@ -140,10 +140,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  playerAcceleration: 100
-  playerSpeed: 45
+  whatIsObstruction:
+    serializedVersion: 2
+    m_Bits: 0
   patrolObject: {fileID: 0}
-  patrolIndex: 0
   timeBetweenAttacks: 5
+  hasSeenPlayer: 0
   sightRange: 125
+  angle: 0
   attackRange: 50

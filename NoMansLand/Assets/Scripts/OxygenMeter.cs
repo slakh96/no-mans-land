@@ -9,6 +9,7 @@ public class OxygenMeter : MonoBehaviour
     public GameObject player;
     [SerializeField] private Image uiFill;
     [SerializeField] private Text oxygenPercentage;
+    public GameObject goscreen; 
     private bool isPlaying;
 
     public float time = 100f;
@@ -38,6 +39,8 @@ public class OxygenMeter : MonoBehaviour
         else
         {
             Destroy(player);
+            goscreen.SetActive(true);
+            this.gameObject.SetActive(false);
         }
         oxygenPercentage.text = Mathf.Round(time) + "%";
     }
