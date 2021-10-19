@@ -11,16 +11,26 @@ public class DisableIsKinematic : MonoBehaviour
     void Start()
     {
 	    elapsedTime = 0;
+	    GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
+	    SpaceshipManager.SetOriginalPartData(spaceship);
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (elapsedTime > SpaceshipTimekeeping.GetCrumbleTime(gameObject.name))
+		if (elapsedTime >= SpaceshipManager.GetCrumbleTime(gameObject.name) && !SpaceshipManager.IsDropped(gameObject.name))
         {
-        	Rigidbody cubeRigidbody = GetComponent<Rigidbody>();
-        	cubeRigidbody.isKinematic = false;
+	        SpaceshipManager.DropPartFromShip(gameObject.name);
         }
+
+		if (SpaceshipManager.SpaceshipComplete())
+		{
+			Debug.Log("GAME OVER PLAYER WINS ========================================================");
+		}
+		else if (SpaceshipManager.SpaceshipDestroyed())
+		{
+			Debug.Log("GAME OVER PLAYER LOST ========================================================");
+		}
 		elapsedTime += Time.deltaTime;
     }
 }
