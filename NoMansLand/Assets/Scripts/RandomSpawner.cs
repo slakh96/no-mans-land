@@ -29,17 +29,7 @@ public class RandomSpawner : MonoBehaviour
 
     IEnumerator CollectibleDrop()
     {
-		//Debug.Log("Before loading in spaceship");
-		//yield return new WaitForSeconds(1.5f);
-        //GameObject spaceship = Instantiate(Resources.Load("spaceShip1211", typeof(GameObject))) as GameObject;
 		GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
-		//Vector3 pos = spaceship.transform.position;
-		//pos.x = 12;
-		//spaceship.transform.position = pos;
-		//Debug.Log("After loading in spaceship");
-		//yield return new WaitForSeconds(1.5f);
-		
-		//GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
         getAllSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipParts.Count; i++)
         {
@@ -47,9 +37,6 @@ public class RandomSpawner : MonoBehaviour
             itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, terrainXPos + terrainXLength); 
             // generate random Y position in the range (terrainZPos + 100, terrainZPos + 988)
             itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength);
-            //spaceShipParts[i].transform.localScale = new Vector3(200.0f, 200.0f, 200.0f);
-			//spaceShipParts[i].transform.position = new Vector3(itemXPos, terrainYPos + 10, itemZPos);
-            //Instantiate(CollectiblePrefab, new Vector3(itemXPos, terrainYPos + 10, itemZPos), Quaternion.identity);
             GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 10, itemZPos), Quaternion.identity);
 			instantiatedClone.transform.localScale = new Vector3(200.0f, 200.0f, 200.0f);
 			instantiatedClone.tag = "Collectible";
@@ -62,7 +49,6 @@ public class RandomSpawner : MonoBehaviour
     {
         if (spaceshipPartObj.transform.childCount == 0)
         {
-            //Debug.Log(spaceshipPartObj.name);
             spaceShipParts.Add(spaceshipPartObj);
             return;
         }

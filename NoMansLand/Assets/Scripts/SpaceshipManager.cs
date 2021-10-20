@@ -164,14 +164,6 @@ namespace DefaultNamespace
 			   		Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
 			   		return;
 		   		}
-
-		        if (spaceshipPartObj.name == "engine_frt_geo")
-		        {
-			        Debug.Log("Setting original position of engine_frt_geo to be");
-			        Debug.Log(spaceshipPartObj.transform.localPosition.x);
-			        Debug.Log(spaceshipPartObj.transform.localPosition.y);
-			        Debug.Log(spaceshipPartObj.transform.localPosition.z);
-		        }
 		   		s.SetOriginalRelativePosition(spaceshipPartObj.transform.localPosition);
 		   		s.SetOriginalRotation(spaceshipPartObj.transform.eulerAngles);
 		   		return;
