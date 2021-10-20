@@ -43,9 +43,9 @@ namespace DefaultNamespace
         }
 
 		public void ReturnPieceToShip(GameObject g) {
+            g.GetComponent<Rigidbody>().isKinematic = true;
 			g.transform.localPosition = originalRelativePosition;
 			g.transform.eulerAngles = originalRotation;
-			g.GetComponent<Rigidbody>().isKinematic = true;
 		}
     }
 }

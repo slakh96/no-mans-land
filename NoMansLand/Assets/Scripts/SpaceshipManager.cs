@@ -4,10 +4,10 @@ namespace DefaultNamespace
 {
     public static class SpaceshipManager
     {
-		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 54s.
-		// E.g. CRUMBLE_TIME_MULTIPLIER == 1.0 => 1 * 54s until spaceship finishes crumbling.
-		// CRUMBLE_TIME_MULTIPLIER == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		static float CRUMBLE_TIME_MULTIPLIER = 5.0f;
+		// A multiplier to control how long between each part crumbling. There are 54 parts total.
+		// E.g. TIME_BETWEEN_CRUMBLES_SEC == 1.0f => 1 * 54s until spaceship finishes crumbling.
+		// TIME_BETWEEN_CRUMBLES_SEC == 5.0f => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
+		static float TIME_BETWEEN_CRUMBLES_SEC = 5.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -19,11 +19,15 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 30;		
+    	static float TIME_BONUS = 30;
+		
+		// The relative size of the spaceship and its parts
+		public static float SPACESHIP_SCALE = 200.0f;		
+
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(0)},
+				{"engine_frt_geo", new SpaceshipPart(1)},
                 {"engine_lft_geo", new SpaceshipPart(2)},
                 {"engine_rt_geo", new SpaceshipPart(3)},
                 {"mEngine_lft", new SpaceshipPart(4)},
@@ -84,12 +88,19 @@ namespace DefaultNamespace
 		// Gets the crumble time for an object with a particular name; returns 0 if object not found
         public static float GetCrumbleTime(string name)
         {
-        	if (!spaceshipParts.ContainsKey(name))
+	        if (name.Contains("(Clone)"))
+	        {
+				// If the item has "Clone" in it, it is a collectible part to pick up -- should not crumble until after the end of
+				// the game
+		        return TIME_BETWEEN_CRUMBLES_SEC * spaceshipParts.Count + 1;
+	        }
+
+	        if (!spaceshipParts.ContainsKey(name))
 			{
 				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
 				return 0;
 			}
-			return spaceshipParts[name].GetTimeToCrumble() * CRUMBLE_TIME_MULTIPLIER + bonusTime;
+			return spaceshipParts[name].GetTimeToCrumble() * TIME_BETWEEN_CRUMBLES_SEC + bonusTime;
         }
 		// Gets the spaceship part with name name, or returns null
 		public static SpaceshipPart GetSpaceshipPart(string name) {
