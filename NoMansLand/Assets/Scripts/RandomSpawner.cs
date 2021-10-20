@@ -29,7 +29,16 @@ public class RandomSpawner : MonoBehaviour
 
     IEnumerator CollectibleDrop()
     {
+		//Debug.Log("Before loading in spaceship");
+		//yield return new WaitForSeconds(1.5f);
         GameObject spaceship = Instantiate(Resources.Load("spaceShip1211", typeof(GameObject))) as GameObject;
+		Vector3 pos = spaceship.transform.position;
+		pos.x = 12;
+		spaceship.transform.position = pos;
+		//Debug.Log("After loading in spaceship");
+		//yield return new WaitForSeconds(1.5f);
+		
+		//GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
         getAllSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipParts.Count; i++)
         {
