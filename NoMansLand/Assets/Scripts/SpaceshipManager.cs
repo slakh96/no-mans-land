@@ -87,8 +87,8 @@ namespace DefaultNamespace
         {
         	if (!spaceshipParts.ContainsKey(name))
 			{
-				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
-				return 0;
+				//Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
+				return 1000000;
 			}
 			return spaceshipParts[name].GetTimeToCrumble() * CRUMBLE_TIME_MULTIPLIER + bonusTime;
         }

@@ -37,10 +37,10 @@ public class RandomSpawner : MonoBehaviour
             itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, terrainXPos + terrainXLength); 
             // generate random Y position in the range (terrainZPos + 100, terrainZPos + 988)
             itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength);
-
+            spaceShipParts[i].transform.localScale = new Vector3(200.0f, 200.0f, 200.0f);
             //Instantiate(CollectiblePrefab, new Vector3(itemXPos, terrainYPos + 10, itemZPos), Quaternion.identity);
             Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 10, itemZPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
             collectibleCount += 1;
         }
     }
@@ -49,6 +49,7 @@ public class RandomSpawner : MonoBehaviour
     {
         if (spaceshipPartObj.transform.childCount == 0)
         {
+            Debug.Log(spaceshipPartObj.name);
             spaceShipParts.Add(spaceshipPartObj);
             return;
         }
