@@ -87,17 +87,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""819d003b-1c19-4b85-99f3-d48c3a48a059"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""508b7bb6-6aaa-4eae-a934-09119c1f17ea"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
