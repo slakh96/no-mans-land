@@ -22,7 +22,7 @@ public class PlayerInteractions : MonoBehaviour
     // Time to wait before the material is destroyed
     private float DESTROY_DELAY = 1.0f;
     public GameObject goscreen;
-    
+    private Animator _animator;
 
     private void Awake()
     {
@@ -36,6 +36,8 @@ public class PlayerInteractions : MonoBehaviour
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
+
+        _animator = GetComponent<Animator>();
 
     }
 
@@ -96,13 +98,22 @@ public class PlayerInteractions : MonoBehaviour
     {
         Vector3 m = new Vector3(move.x, 0, move.y) * Time.deltaTime * 50f;
         transform.Translate(m, Space.World);
-        
+
         Vector3 currentPosition = transform.position;
         // Vector3 newPosition = new Vector3(move.x, 0, move.y) * 50f;
         
         Vector3 positionToLookAt = currentPosition + m;
         
         transform.LookAt(positionToLookAt);
+
+        if (m != Vector3.zero)
+        {
+            _animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            _animator.SetBool("isMoving", false);
+        }
     }
 
     private void OnCollisionExit(Collision other)
