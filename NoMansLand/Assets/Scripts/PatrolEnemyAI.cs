@@ -39,7 +39,7 @@ public class PatrolEnemyAI : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
-        agent = GetComponentInChildren<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
         patrolPoints = patrolObject.transform.GetComponentsInChildren<Transform>();
