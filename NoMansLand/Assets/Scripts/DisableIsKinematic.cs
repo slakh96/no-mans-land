@@ -7,6 +7,8 @@ public class DisableIsKinematic : MonoBehaviour
 {
 	private float elapsedTime;
 	
+	public GameObject winscreen; 
+	public GameObject goscreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +27,11 @@ public class DisableIsKinematic : MonoBehaviour
 
 		if (SpaceshipManager.SpaceshipComplete())
 		{
-			Debug.Log("GAME OVER PLAYER WINS ========================================================");
+			winscreen.SetActive(true);
 		}
 		else if (SpaceshipManager.SpaceshipDestroyed())
 		{
-			Debug.Log("GAME OVER PLAYER LOST ========================================================");
+			goscreen.SetActive(true);
 		}
 		elapsedTime += Time.deltaTime;
     }
