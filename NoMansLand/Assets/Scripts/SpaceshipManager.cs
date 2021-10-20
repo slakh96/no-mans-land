@@ -7,7 +7,7 @@ namespace DefaultNamespace
 		// A multiplier to control how long initially it takes for the ship to completely crumble, in units of 54s.
 		// E.g. CRUMBLE_TIME_MULTIPLIER == 1.0 => 1 * 54s until spaceship finishes crumbling.
 		// CRUMBLE_TIME_MULTIPLIER == 5.0 => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		static float CRUMBLE_TIME_MULTIPLIER = 5.0f;
+		static float CRUMBLE_TIME_MULTIPLIER = 10.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -24,7 +24,7 @@ namespace DefaultNamespace
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(0)},
+				{"engine_frt_geo", new SpaceshipPart(1)},
                 {"engine_lft_geo", new SpaceshipPart(2)},
                 {"engine_rt_geo", new SpaceshipPart(3)},
                 {"mEngine_lft", new SpaceshipPart(4)},
@@ -85,10 +85,15 @@ namespace DefaultNamespace
 		// Gets the crumble time for an object with a particular name; returns 0 if object not found
         public static float GetCrumbleTime(string name)
         {
-        	if (!spaceshipParts.ContainsKey(name))
+	        if (name.Contains("(Clone)"))
+	        {
+		        return 1234567890; //TODO add documentation for this case
+	        }
+
+	        if (!spaceshipParts.ContainsKey(name))
 			{
-				//Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
-				return 1000000;
+				Debug.Log("ERROR GetCrumbleTime: part with name " + name + " not found in dictionary");
+				return 0;
 			}
 			return spaceshipParts[name].GetTimeToCrumble() * CRUMBLE_TIME_MULTIPLIER + bonusTime;
         }
@@ -115,6 +120,8 @@ namespace DefaultNamespace
 				Debug.Log("ERROR RecordDropPartFromShip: Part not found! " + partName);
 				return;
 			}
+
+			Debug.Log("Dropping the following part: " + partName);
 			part.GetComponent<Rigidbody>().isKinematic = false;
 		}
 		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
@@ -127,6 +134,7 @@ namespace DefaultNamespace
 			string partName = droppedParts[droppedParts.Count - 1];
 			droppedParts.RemoveAt(droppedParts.Count - 1);
 			GameObject part = GameObject.Find(partName);
+			Debug.Log(part.tag);
 			SpaceshipManager.GetSpaceshipPart(partName).ReturnPieceToShip(part);
 			SpaceshipManager.GetSpaceshipPart(partName).SetTimeToCrumble(nextCrumbleTime);
 			nextCrumbleTime = nextCrumbleTime + 1;
@@ -135,6 +143,7 @@ namespace DefaultNamespace
 			if(droppedParts.Count == 0) {
 				gameWon = true;
 			}
+			Debug.Log("ADDING the following part: " + partName);
 			addBonusTime();
 			return partName;
 		}
@@ -155,6 +164,14 @@ namespace DefaultNamespace
 			   		Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
 			   		return;
 		   		}
+
+		        if (spaceshipPartObj.name == "engine_frt_geo")
+		        {
+			        Debug.Log("Setting original position of engine_frt_geo to be");
+			        Debug.Log(spaceshipPartObj.transform.localPosition.x);
+			        Debug.Log(spaceshipPartObj.transform.localPosition.y);
+			        Debug.Log(spaceshipPartObj.transform.localPosition.z);
+		        }
 		   		s.SetOriginalRelativePosition(spaceshipPartObj.transform.localPosition);
 		   		s.SetOriginalRotation(spaceshipPartObj.transform.eulerAngles);
 		   		return;
