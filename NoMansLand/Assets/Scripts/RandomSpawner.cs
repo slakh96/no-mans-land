@@ -27,9 +27,6 @@ public class RandomSpawner : MonoBehaviour
 
         terrainXLength = (int)terrain.terrainData.size[0];
         terrainZLength = (int)terrain.terrainData.size[2];
-
-        Debug.Log(terrain.terrainData.size);
-        Debug.Log(terrain.transform.position);
         StartCoroutine(CollectibleDrop());
     }
 
@@ -40,13 +37,13 @@ public class RandomSpawner : MonoBehaviour
         getAllSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipParts.Count; i++)
         {
-            // generate random X position in the range (terrainXPos + 100, terrainXPos + 900)
+            // generate random X position in the range (terrainXPos + 50, terrainXPos + terrainXLength - 50)
             itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, terrainXPos + terrainXLength - cushionAmount); 
-            // generate random Z position in the range (terrainZPos + 100, terrainZPos + 988)
+            // generate random Z position in the range (terrainZPos + 50, terrainZPos + terrainZLength - 50)
             itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
 
 			// Duplicate each spaceship part and spawn to a random location as a collectible
-            GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 5, itemZPos), Quaternion.identity);
+            GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
 			// Size it using the same scale as the actual ship
 			instantiatedClone.transform.localScale = new Vector3(SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE);
 			instantiatedClone.tag = "Collectible";
