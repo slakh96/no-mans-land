@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Collectible
   - Spaceship
+  - Alien
+  - GOscreen
+  - Terrain
+  - GOBackground
   layers:
   - Default
   - TransparentFX
