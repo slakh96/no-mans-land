@@ -56,11 +56,6 @@ public class CharacterControllerMovement : MonoBehaviour
     
     void Jump()
     {
-        // if (controller.isGrounded && playerVelocity.y < 0)
-        // {
-        //     playerVelocity.y = 0f;
-        // }
-        
         if (controller.isGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
