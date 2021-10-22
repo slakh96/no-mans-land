@@ -47,6 +47,7 @@ public class RandomSpawner : MonoBehaviour
 			// Size it using the same scale as the actual ship
 			instantiatedClone.transform.localScale = new Vector3(SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE);
 			instantiatedClone.tag = "Collectible";
+            instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
 			// Note: All parts must spawn before the first part falls off the ship TODO fix this later
             yield return new WaitForSeconds(0.01f);
         }
