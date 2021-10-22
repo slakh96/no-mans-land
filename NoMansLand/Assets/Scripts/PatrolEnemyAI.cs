@@ -31,7 +31,7 @@ public class PatrolEnemyAI : MonoBehaviour
     public float angle;
     public float attackRange = 50f;
     private bool playerInSightRange, playerInAttackRange;
-    private float patrolAngle = 65f;
+    private float patrolAngle = 140f;
     private float alertAngle = 360f;
     private float patrolSightRange = 200f;
     private float alertSightRange = 300f;
