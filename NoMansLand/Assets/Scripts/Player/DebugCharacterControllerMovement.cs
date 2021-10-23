@@ -13,14 +13,17 @@ public class DebugCharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = GameSettings.IS_DEBUG_MODE ? 150f : 50f;
+    
+    // [Godmode]: This line changed from original script
+    private float speed = 65f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
     // Jump
     private Vector3 playerVelocity;
-    private float jumpHeight = 5f;
-    private float gravity = -9.81F;
+    // [Godmode]: This line changed from original script
+    private float jumpHeight = 10f;
+    private float gravity = -49.81F;
     
     // Handle object
     private GameObject collectibleHoldSlot;
@@ -56,7 +59,8 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     
     void Jump()
     {
-        if (controller.isGrounded || GameSettings.IS_DEBUG_MODE)
+        //[Godmode]: This line changed to allow for infinite jump
+        if (controller.isGrounded || true)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
@@ -117,6 +121,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Collectible")
         {
+            Debug.Log("Collided with collectible");
             withinRange = true;
             currentCollectible = other.gameObject;
         }
