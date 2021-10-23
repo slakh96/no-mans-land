@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DefaultNamespace;
-public class CharacterControllerMovementDebug : MonoBehaviour
+public class DebugCharacterControllerMovement : MonoBehaviour
 {
     private CharacterController controller;
     public Transform cam;
