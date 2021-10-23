@@ -104,6 +104,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
                 Vector3.Distance(child.gameObject.transform.position, spaceship.transform.position) <= DISTANCE_LIMIT)
             {
                 SpaceshipManager.AddPartToShip();
+				FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DESTROY_DELAY);
             }
         }
