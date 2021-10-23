@@ -22,7 +22,7 @@ namespace DefaultNamespace
     	static float TIME_BONUS = 30;
 		
 		// The relative size of the spaceship and its parts
-		public static float SPACESHIP_SCALE = 436.46f;		
+		public static float SPACESHIP_SCALE = 436.46f; //TODO calculate this at runtime		
 
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  

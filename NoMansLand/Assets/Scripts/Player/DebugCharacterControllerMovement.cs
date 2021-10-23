@@ -14,7 +14,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     // Move
     private Vector3 move;
     
-    // [Godmode]: This line changed from original script
+    // [Godmode]: This 2 lines changed from original script
     private float speed = 85f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
@@ -121,7 +121,6 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Collectible")
         {
-            Debug.Log("Collided with collectible");
             withinRange = true;
             currentCollectible = other.gameObject;
         }
