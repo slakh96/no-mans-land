@@ -13,7 +13,7 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 50f;
+    private float speed = GameSettings.IS_DEBUG_MODE ? 150f : 50f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
@@ -56,7 +56,7 @@ public class CharacterControllerMovement : MonoBehaviour
     
     void Jump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded || GameSettings.IS_DEBUG_MODE)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
