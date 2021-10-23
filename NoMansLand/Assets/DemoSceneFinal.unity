@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
       propertyPath: sounds.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
       propertyPath: sounds.Array.data[6].clip
@@ -257,11 +257,27 @@ PrefabInstance:
       value: Deposit1
       objectReference: {fileID: 0}
     - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 79716fb740fc91244b26cfa05bc86230, type: 3}
+    - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: KilledByAlien1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
       propertyPath: sounds.Array.data[6].pitch
       value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
       propertyPath: sounds.Array.data[6].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917649719600936817, guid: 15c25da2140f84e4e833023c806ad526, type: 3}
+      propertyPath: sounds.Array.data[7].volume
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1296,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 739157653}
     - target: {fileID: 2999691604759610656, guid: ac7f2f4deab52e44cbf111184a22aaf2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6553763412428121174, guid: ac7f2f4deab52e44cbf111184a22aaf2, type: 3}
       propertyPath: cam
@@ -1308,7 +1324,7 @@ PrefabInstance:
       objectReference: {fileID: 739157653}
     - target: {fileID: 6553763412428121174, guid: ac7f2f4deab52e44cbf111184a22aaf2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7400529605131923094, guid: ac7f2f4deab52e44cbf111184a22aaf2, type: 3}
       propertyPath: m_Name

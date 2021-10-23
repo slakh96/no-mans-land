@@ -127,6 +127,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
         }
         if (other.collider.tag == "Alien") 
         {
+			FindObjectOfType<AudioManager>().Play("KilledByAlien1");
             Destroy(this.gameObject);
             goscreen.SetActive(true);
         }
