@@ -52,10 +52,6 @@ public class RandomSpawner : MonoBehaviour
 			// Allow cloned part to respond to gravity
             instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
 			// Set the material correctly
-			// Debug.Log(currentTexture);
-			//Material m = spaceShipParts[i].GetComponent<Renderer>().material;
-			//List<UnityEngine.Material> mats = Resources.FindObjectsOfTypeAll(typeof(UnityEngine.Material)) as UnityEngine.Material[];
-			
 			spaceShipParts[i].GetComponent<Renderer>().material.mainTexture = currentTexture;
 			// Note: All parts must spawn before the first part falls off the ship TODO fix this later
             yield return new WaitForSeconds(0.01f);

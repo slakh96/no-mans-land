@@ -125,12 +125,11 @@ namespace DefaultNamespace
 				Debug.Log("ERROR RecordDropPartFromShip: Part not found! " + partName);
 				return;
 			}
+			// Change the fallen part to rust colour so player knows it's not usable
 			foreach (Material m in Resources.FindObjectsOfTypeAll(typeof(Material)) as Material[])
         	{
-				//print(m);
-				if (m.name == "Ship material 3")
+				if (m.name == "rust_material")
 				{
-					Debug.Log("Found the rust material");
 					part.GetComponent<Renderer>().material = m;
 					break;
 				}
