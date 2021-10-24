@@ -125,6 +125,16 @@ namespace DefaultNamespace
 				Debug.Log("ERROR RecordDropPartFromShip: Part not found! " + partName);
 				return;
 			}
+			foreach (Material m in Resources.FindObjectsOfTypeAll(typeof(Material)) as Material[])
+        	{
+				//print(m);
+				if (m.name == "Ship material 3")
+				{
+					Debug.Log("Found the rust material");
+					part.GetComponent<Renderer>().material = m;
+					break;
+				}
+        	}
 			part.GetComponent<Rigidbody>().isKinematic = false;
 		}
 		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
