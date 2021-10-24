@@ -14,7 +14,7 @@ public class DisableIsKinematic : MonoBehaviour
     {
 	    elapsedTime = 0;
 	    GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
-	    SpaceshipManager.SetOriginalPartData(spaceship);
+	    SpaceshipManager.DoSpaceshipSetup(spaceship);
     }
 
     // Update is called once per frame
