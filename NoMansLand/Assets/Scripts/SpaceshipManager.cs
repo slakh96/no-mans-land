@@ -19,7 +19,10 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 30;	
+    	static float TIME_BONUS = 15;
+
+		// The rust material pointer
+		static Material rust_material;		
 
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
@@ -122,6 +125,9 @@ namespace DefaultNamespace
 				Debug.Log("ERROR RecordDropPartFromShip: Part not found! " + partName);
 				return;
 			}
+			// Change the fallen part to rust colour so player knows it's not usable
+			part.GetComponent<Renderer>().material = rust_material;
+			// Allow material to fall
 			part.GetComponent<Rigidbody>().isKinematic = false;
 		}
 		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
@@ -149,10 +155,28 @@ namespace DefaultNamespace
 		public static bool IsDropped(string partName) {
 			return droppedParts.Contains(partName);
 		}
+
+		
+		public static void DoSpaceshipSetup(GameObject spaceshipPartObj)
+		{
+			foreach (Material m in Resources.FindObjectsOfTypeAll(typeof(Material)) as Material[])
+        	{
+				if (m.name == "rust_material")
+				{
+					rust_material = m;
+					break;
+				}
+        	}
+			if (rust_material == null)
+			{
+				Debug.Log("ERROR SpaceshipManager: rust_material not found");
+			}
+			SetOriginalPartData(spaceshipPartObj);
+		}
 		
     	// A recursive function to set the original positions and rotations of the spacship parts.
 		// Must be called at the start of the game
-    	public static void SetOriginalPartData(GameObject spaceshipPartObj)
+    	static void SetOriginalPartData(GameObject spaceshipPartObj)
     	{
 	    	if (spaceshipPartObj.transform.childCount == 0)
 	    	{ 

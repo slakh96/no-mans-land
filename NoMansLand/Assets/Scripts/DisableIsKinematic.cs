@@ -19,7 +19,7 @@ public class DisableIsKinematic : MonoBehaviour
 		    Debug.Log("Spaceship is NULL; probably forgot the tag on the spaceship");
 		    return;
 	    }
-	    SpaceshipManager.SetOriginalPartData(spaceship);
+	    SpaceshipManager.DoSpaceshipSetup(spaceship);
     }
 
     // Update is called once per frame
