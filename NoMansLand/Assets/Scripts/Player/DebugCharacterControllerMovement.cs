@@ -99,6 +99,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
             Rigidbody collectibleRB = child.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = false;
             collectibleRB.AddForce(child.transform.forward * 20, ForceMode.Impulse);
+            FindObjectOfType<AudioManager>().Play("Drop1");
             
             GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
             // Check if the player was close enough to the spaceship to deposit the material
