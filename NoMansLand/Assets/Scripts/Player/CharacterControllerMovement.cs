@@ -27,7 +27,9 @@ public class CharacterControllerMovement : MonoBehaviour
     private bool canGrab = false;
     private bool withinRange = false;
     private GameObject currentCollectible;
-    
+    // Health item
+    public bool replenishHealth;
+
     // Spaceship interactions
     // How close the player needs to be before he can deposit the material successfully
     private float DISTANCE_LIMIT = 50;
@@ -68,6 +70,7 @@ public class CharacterControllerMovement : MonoBehaviour
         if (withinRange)
         {
             canGrab = true;
+
         }
         else
         {
@@ -94,6 +97,8 @@ public class CharacterControllerMovement : MonoBehaviour
             collectibleRB.isKinematic = false;
             collectibleRB.AddForce(child.transform.forward * 20, ForceMode.Impulse);
             
+            FindObjectOfType<AudioManager>().Play("Drop1");
+            
             GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
             // Check if the player was close enough to the spaceship to deposit the material
             if (spaceship != null && 
@@ -107,7 +112,7 @@ public class CharacterControllerMovement : MonoBehaviour
     
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Collectible")
+        if (other.gameObject.tag == "Collectible" || other.gameObject.tag == "HealthItem")
         {
             withinRange = false;
         }
@@ -119,6 +124,11 @@ public class CharacterControllerMovement : MonoBehaviour
         {
             withinRange = true;
             currentCollectible = other.gameObject;
+        }
+        if (other.gameObject.tag == "HealthItem")
+        {
+            replenishHealth = true;
+            Destroy(other.gameObject);
         }
         if (other.collider.tag == "Alien") 
         {
