@@ -33,6 +33,11 @@ public class RandomSpawner : MonoBehaviour
     IEnumerator CollectibleDrop()
     {
 		GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
+		if (spaceship == null)
+		{
+			Debug.Log("Spaceship is NULL; probably forgot the tag on the spaceship");
+			yield break;
+		}
 		// Populate all the spaceship parts
         getAllSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipParts.Count; i++)
@@ -47,7 +52,7 @@ public class RandomSpawner : MonoBehaviour
 			// Duplicate each spaceship part and spawn to a random location as a collectible
             GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
 			// Size it using the same scale as the actual ship
-			instantiatedClone.transform.localScale = new Vector3(SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE);
+			instantiatedClone.transform.localScale = spaceship.transform.localScale;
 			instantiatedClone.tag = "Collectible";
 			// Allow cloned part to respond to gravity
             instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;

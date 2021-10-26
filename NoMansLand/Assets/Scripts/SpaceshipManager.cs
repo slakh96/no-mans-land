@@ -19,10 +19,7 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 30;
-		
-		// The relative size of the spaceship and its parts
-		public static float SPACESHIP_SCALE = 436.46f; //TODO calculate this at runtime		
+    	static float TIME_BONUS = 30;	
 
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
