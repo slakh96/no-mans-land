@@ -30,6 +30,8 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     private bool canGrab = false;
     private bool withinRange = false;
     private GameObject currentCollectible;
+    // Health item
+    public bool replenishHealth;
     
     // Spaceship interactions
     // How close the player needs to be before he can deposit the material successfully
@@ -124,6 +126,11 @@ public class DebugCharacterControllerMovement : MonoBehaviour
         {
             withinRange = true;
             currentCollectible = other.gameObject;
+        }
+        if (other.gameObject.tag == "HealthItem")
+        {
+            replenishHealth = true;
+            Destroy(other.gameObject);
         }
         if (other.collider.tag == "Alien") 
         {
