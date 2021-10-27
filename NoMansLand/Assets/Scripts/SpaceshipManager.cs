@@ -159,17 +159,16 @@ namespace DefaultNamespace
 		
 		public static void DoSpaceshipSetup(GameObject spaceshipPartObj)
 		{
-			foreach (Material m in Resources.FindObjectsOfTypeAll(typeof(Material)) as Material[])
-        	{
-				if (m.name == "rust_material")
-				{
-					rust_material = m;
-					break;
-				}
-        	}
-			if (rust_material == null)
+		    if (rust_material == null)
 			{
-				Debug.Log("ERROR SpaceshipManager: rust_material not found");
+				var rustMaterialLoaded = Resources.Load<Material>("rust_material");
+				if (rustMaterialLoaded == null)
+				{
+					Debug.Log("ERROR SpaceshipManager: rust_material not found");
+				} else 
+				{
+					rust_material = rustMaterialLoaded;
+				}
 			}
 			SetOriginalPartData(spaceshipPartObj);
 		}
