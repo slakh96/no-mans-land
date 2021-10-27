@@ -34,7 +34,7 @@ public class CharacterControllerMovement : MonoBehaviour
     // How close the player needs to be before he can deposit the material successfully
     private float DISTANCE_LIMIT = 50;
     // Time to wait before the material is destroyed
-    private float DESTROY_DELAY = 1.0f;
+    private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
     
     // Game Over Screen
     public GameObject goscreen;
@@ -105,7 +105,8 @@ public class CharacterControllerMovement : MonoBehaviour
                 Vector3.Distance(child.gameObject.transform.position, spaceship.transform.position) <= DISTANCE_LIMIT)
             {
                 SpaceshipManager.AddPartToShip();
-                Destroy(child, DESTROY_DELAY);
+                FindObjectOfType<AudioManager>().Play("Deposit1");
+                Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
             }
         }
     }
@@ -133,6 +134,7 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.collider.tag == "Alien") 
         {
+            FindObjectOfType<AudioManager>().Play("KilledByAlien1");
             Destroy(this.gameObject);
             goscreen.SetActive(true);
         }
