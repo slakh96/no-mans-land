@@ -185,6 +185,7 @@ namespace DefaultNamespace
 			   		Debug.Log("ERROR spaceship part not found in dictionary: " + spaceshipPartObj.name);
 			   		return;
 		   		}
+				s.SetOriginalMaterial(spaceshipPartObj.GetComponent<Renderer>().material);
 		   		s.SetOriginalRelativePosition(spaceshipPartObj.transform.localPosition);
 		   		s.SetOriginalRotation(spaceshipPartObj.transform.eulerAngles);
 		   		return;
