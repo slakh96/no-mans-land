@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1917649719600936814
+--- !u!1 &7941248068579850251
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1917649719600936816}
-  - component: {fileID: 1917649719600936817}
+  - component: {fileID: 7941248068579850261}
+  - component: {fileID: 7941248068579850260}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1917649719600936816
+--- !u!4 &7941248068579850261
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917649719600936814}
+  m_GameObject: {fileID: 7941248068579850251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1917649719600936817
+--- !u!114 &7941248068579850260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917649719600936814}
+  m_GameObject: {fileID: 7941248068579850251}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f170af7fa855c4bc687226fbd1a8ac89, type: 3}
@@ -51,7 +51,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: MainTheme
-    clip: {fileID: 8300000, guid: 74a6d1cd22cc34e9585b270092596949, type: 3}
+    clip: {fileID: 8300000, guid: d1b8915cda582472eaf2fab81e70f5f1, type: 3}
     volume: 1
     pitch: 1.02
     loop: 1
@@ -75,7 +75,25 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Drop1
-    clip: {fileID: 8300000, guid: 64ed132eaf7f0475695cb84467024fac, type: 3}
+    clip: {fileID: 8300000, guid: ac87f8121fa5346e29348d2458bfc413, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: Deposit1
+    clip: {fileID: 8300000, guid: 37b66b899416ca9428e3e10437fc4f4b, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: KilledByAlien1
+    clip: {fileID: 8300000, guid: 79716fb740fc91244b26cfa05bc86230, type: 3}
+    volume: 1
+    pitch: 1.02
+    loop: 0
+    source: {fileID: 0}
+  - name: HealthPickup1
+    clip: {fileID: 8300000, guid: 9b5d3523bfdfd41079252ddcf3f7c1c0, type: 3}
     volume: 1
     pitch: 1.02
     loop: 0
