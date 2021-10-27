@@ -22,10 +22,7 @@ namespace DefaultNamespace
     	static float TIME_BONUS = 15;
 
 		// The rust material pointer
-		static Material rust_material;
-		
-		// The relative size of the spaceship and its parts
-		public static float SPACESHIP_SCALE = 436.46f; //TODO calculate this at runtime		
+		static Material rust_material;		
 
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
