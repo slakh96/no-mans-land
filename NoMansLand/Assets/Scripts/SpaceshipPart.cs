@@ -6,6 +6,7 @@ namespace DefaultNamespace
         private float timeToCrumble;
         private Vector3 originalRelativePosition;
         private Vector3 originalRotation;
+		private Material originalMaterial;
         
         public SpaceshipPart(float crumbleTime)
         {
@@ -27,6 +28,11 @@ namespace DefaultNamespace
 			originalRotation = orot;
 		}
 
+		public void SetOriginalMaterial(Material m)
+		{
+			originalMaterial = m;
+		}
+
         public Vector3 GetOriginalRotation()
         {
             return originalRotation;
@@ -43,9 +49,12 @@ namespace DefaultNamespace
         }
 
 		public void ReturnPieceToShip(GameObject g) {
+			// Ensure that the part doesn't respond to gravity and stays on the ship
             g.GetComponent<Rigidbody>().isKinematic = true;
+			// Return the part back to its original position, rotation and material
 			g.transform.localPosition = originalRelativePosition;
 			g.transform.eulerAngles = originalRotation;
+			g.GetComponent<Renderer>().material = originalMaterial;
 		}
     }
 }
