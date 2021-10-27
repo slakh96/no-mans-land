@@ -49,7 +49,9 @@ namespace DefaultNamespace
         }
 
 		public void ReturnPieceToShip(GameObject g) {
+			// Ensure that the part doesn't respond to gravity and stays on the ship
             g.GetComponent<Rigidbody>().isKinematic = true;
+			// Return the part back to its original position, rotation and material
 			g.transform.localPosition = originalRelativePosition;
 			g.transform.eulerAngles = originalRotation;
 			g.GetComponent<Renderer>().material = originalMaterial;
