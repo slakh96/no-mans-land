@@ -6,32 +6,51 @@ using UnityEngine.UI;
 
 public class OxygenMeter : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+    private CharacterControllerMovement currPlayerControls;
     [SerializeField] private Image uiFill;
     [SerializeField] private Text oxygenPercentage;
     public GameObject goscreen; 
     private bool isPlaying;
 
-    public float time = 100f;
+    public float maxTime = 400f;
+
+    public float time = 400f;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        currPlayerControls = player.GetComponent<CharacterControllerMovement>();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (currPlayerControls.replenishHealth)
+        {
+            time += 15f / 100f * maxTime;
+            if (time >= maxTime)
+            {
+                time = maxTime;
+            }
+            currPlayerControls.replenishHealth = false;
+        }
+        float currPercentage = time / maxTime * 100f;
         if (time >= 0f)
         {
             time -= Time.deltaTime;
-            uiFill.fillAmount = Mathf.InverseLerp(0, 100f, time);
-            
+            uiFill.fillAmount = Mathf.InverseLerp(0, maxTime, time);
+
             // Interval and timing changes based on how long the Oxygen Meter is. 
-            if (time <= 50f && time > 30f && !isPlaying)
+            if (currPercentage <= 40f && currPercentage > 20f && !isPlaying)
             {
                 StartCoroutine (playSound("Breathing1", 20));
             }
-            if (time <= 30f && time > 20f && !isPlaying)
+            if (currPercentage <= 20f && currPercentage > 10f && !isPlaying)
             {
                 StartCoroutine (playSound("Breathing2", 10));
             }
-            if (time <= 20f && !isPlaying)
+            if (currPercentage <= 10f && !isPlaying)
             {
                 StartCoroutine (playSound("Breathing3", 20));
             }
@@ -42,7 +61,8 @@ public class OxygenMeter : MonoBehaviour
             goscreen.SetActive(true);
             this.gameObject.SetActive(false);
         }
-        oxygenPercentage.text = Mathf.Round(time) + "%";
+        
+        oxygenPercentage.text = Mathf.Round(currPercentage) + "%";
     }
     
     IEnumerator playSound(string name, int interval)
