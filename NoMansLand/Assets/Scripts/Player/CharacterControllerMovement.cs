@@ -128,6 +128,7 @@ public class CharacterControllerMovement : MonoBehaviour
         if (other.gameObject.tag == "HealthItem")
         {
             replenishHealth = true;
+            FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
         }
         if (other.collider.tag == "Alien") 
