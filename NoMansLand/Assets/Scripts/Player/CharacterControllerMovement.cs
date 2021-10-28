@@ -82,7 +82,8 @@ public class CharacterControllerMovement : MonoBehaviour
         {
             Transform collectibleObjTransform = currentCollectible.transform;
             collectibleObjTransform.parent = collectibleHoldSlot.transform;
-            collectibleObjTransform.localPosition = Vector3.zero;
+            collectibleObjTransform.position = collectibleHoldSlot.transform.position;
+            // collectibleObjTransform.localScale =  collectibleHoldSlot.transform.localScale;
             Rigidbody collectibleRB = currentCollectible.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = true;
             // Randomize later
