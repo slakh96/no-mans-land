@@ -76,7 +76,7 @@ public class RandomSpawner : MonoBehaviour
             // generate random Z position in the range (terrainZPos + 50, terrainZPos + terrainZLength - 50)
             itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
 
-            GameObject instantiatedClone = Instantiate(HealthItem, new Vector3(itemXPos, terrainYPos + 105, itemZPos), Quaternion.identity);
+            GameObject instantiatedClone = Instantiate(HealthItem, new Vector3(itemXPos, terrainYPos + 200, itemZPos), Quaternion.identity);
 			// Size it using the same scale as the actual ship
 			instantiatedClone.tag = "HealthItem"; 
             yield return new WaitForSeconds(0.01f);
