@@ -7,6 +7,8 @@ using DefaultNamespace;
 public class RandomSpawner : MonoBehaviour
 {
     public GameObject CollectiblePrefab;
+    public GameObject HealthItem; // the health regenerate item 
+    public int HEALTH_ITEM_COUNT = 5; // number of health regenerate items spawned 
     public Terrain terrain;
     private List<GameObject> spaceShipParts = new List<GameObject>(); // A list of all the individual parts of the ship
     public int terrainXPos; // corner X position of the terrain 
@@ -28,6 +30,7 @@ public class RandomSpawner : MonoBehaviour
         terrainXLength = (int)terrain.terrainData.size[0];
         terrainZLength = (int)terrain.terrainData.size[2];
         StartCoroutine(CollectibleDrop());
+        StartCoroutine(SpawnHealthItem());
     }
 
     IEnumerator CollectibleDrop()
@@ -59,6 +62,23 @@ public class RandomSpawner : MonoBehaviour
 			// Set the material correctly
 			spaceShipParts[i].GetComponent<Renderer>().material = currentMaterial;
 			// Note: All parts must spawn before the first part falls off the ship TODO fix this later
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+    }
+
+    IEnumerator SpawnHealthItem()
+    {
+        for (int i = 0; i < HEALTH_ITEM_COUNT; i++)
+        {
+            // generate random X position in the range (terrainXPos + 50, terrainXPos + terrainXLength - 50)
+            itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, terrainXPos + terrainXLength - cushionAmount); 
+            // generate random Z position in the range (terrainZPos + 50, terrainZPos + terrainZLength - 50)
+            itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+
+            GameObject instantiatedClone = Instantiate(HealthItem, new Vector3(itemXPos, terrainYPos + 5, itemZPos), Quaternion.identity);
+			// Size it using the same scale as the actual ship
+			instantiatedClone.tag = "HealthItem"; 
             yield return new WaitForSeconds(0.01f);
         }
     }
