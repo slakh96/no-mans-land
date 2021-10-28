@@ -33,6 +33,11 @@ public class RandomSpawner : MonoBehaviour
     IEnumerator CollectibleDrop()
     {
 		GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
+		if (spaceship == null)
+		{
+			Debug.Log("Spaceship is NULL; probably forgot the tag on the spaceship");
+			yield break;
+		}
 		// Populate all the spaceship parts
         getAllSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipParts.Count; i++)
@@ -42,17 +47,17 @@ public class RandomSpawner : MonoBehaviour
             // generate random Z position in the range (terrainZPos + 50, terrainZPos + terrainZLength - 50)
             itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
 			// Get current material of original part
-			Texture currentTexture = spaceShipParts[i].GetComponent<Renderer>().material.mainTexture; 
+			Material currentMaterial = spaceShipParts[i].GetComponent<Renderer>().material; 
 
 			// Duplicate each spaceship part and spawn to a random location as a collectible
             GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
 			// Size it using the same scale as the actual ship
-			instantiatedClone.transform.localScale = new Vector3(SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE, SpaceshipManager.SPACESHIP_SCALE);
+			instantiatedClone.transform.localScale = spaceship.transform.localScale;
 			instantiatedClone.tag = "Collectible";
 			// Allow cloned part to respond to gravity
             instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
 			// Set the material correctly
-			spaceShipParts[i].GetComponent<Renderer>().material.mainTexture = currentTexture;
+			spaceShipParts[i].GetComponent<Renderer>().material = currentMaterial;
 			// Note: All parts must spawn before the first part falls off the ship TODO fix this later
             yield return new WaitForSeconds(0.01f);
         }
