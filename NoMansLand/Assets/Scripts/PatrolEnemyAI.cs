@@ -29,12 +29,12 @@ public class PatrolEnemyAI : MonoBehaviour
     public bool hasSeenPlayer;
     public float sightRange;
     public float angle;
-    public float attackRange = 50f;
+    public float attackRange = 10f;
     private bool playerInSightRange, playerInAttackRange;
     private float patrolAngle = 125f;
     private float alertAngle = 360f;
-    private float patrolSightRange = 200f;
-    private float alertSightRange = 300f;
+    private float patrolSightRange = 100f;
+    private float alertSightRange = 150f;
 
     private void Awake()
     {
