@@ -8,7 +8,7 @@ public class RandomSpawner : MonoBehaviour
 {
     public GameObject CollectiblePrefab;
     public GameObject HealthItem; // the health regenerate item 
-    public int HEALTH_ITEM_COUNT = 5; // number of health regenerate items spawned 
+    public int HEALTH_ITEM_COUNT = 10; // number of health regenerate items spawned 
     public Terrain terrain;
     private List<GameObject> spaceShipParts = new List<GameObject>(); // A list of all the individual parts of the ship
     public int terrainXPos; // corner X position of the terrain 
