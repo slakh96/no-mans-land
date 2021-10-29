@@ -4139,6 +4139,7 @@ GameObject:
   - component: {fileID: 258489865394070117}
   - component: {fileID: 258489865394070118}
   - component: {fileID: 258489865394070112}
+  - component: {fileID: 9046177890143331844}
   m_Layer: 0
   m_Name: spaceShip_current
   m_TagString: Spaceship
@@ -4196,6 +4197,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.028548602, y: 0.20489892, z: 0.039177284}
   m_Center: {x: -0.07604552, y: 0.09749356, z: 0.09758756}
+--- !u!114 &9046177890143331844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258489865394070114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2237d7147f8e49ec94b4f8585b4ac85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 5e10dc4ad8ab148e8b11806899f12c39, type: 3}
+  image: {fileID: 0}
 --- !u!1 &258489865456640369
 GameObject:
   m_ObjectHideFlags: 0
