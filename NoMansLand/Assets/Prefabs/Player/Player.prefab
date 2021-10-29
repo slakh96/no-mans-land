@@ -709,7 +709,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3259745786668305527}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.12881947
   m_Height: 0.33472368
@@ -772,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
   replenishHealth: 0
   goscreen: {fileID: 0}
 --- !u!114 &3059549187726348675

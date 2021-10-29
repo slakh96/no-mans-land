@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -112,16 +113,16 @@ public class CharacterControllerMovement : MonoBehaviour
             }
         }
     }
-    
-    private void OnCollisionExit(Collision other)
+
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Collectible" || other.gameObject.tag == "HealthItem")
         {
             withinRange = false;
         }
     }
-    
-    private void OnCollisionEnter(Collision other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Collectible")
         {
@@ -134,6 +135,10 @@ public class CharacterControllerMovement : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.collider.tag == "Alien") 
         {
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
