@@ -18,7 +18,7 @@ public class CharacterControllerMovement : MonoBehaviour
     private float turnSmoothVelocity;
     
     // Jump
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
     private float jumpHeight = 5f;
     private float gravity = -9.81F;
     
@@ -60,6 +60,7 @@ public class CharacterControllerMovement : MonoBehaviour
     {
         if (controller.isGrounded)
         {
+            animator.SetBool("isJumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
@@ -155,6 +156,11 @@ public class CharacterControllerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            if (playerVelocity.y < 0)
+            {
+                animator.SetBool("isJumping", false);
+            }
+            moveDir.y += (playerVelocity.y * 0.01f) ;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
             animator.SetBool("isMoving", true);
@@ -167,6 +173,7 @@ public class CharacterControllerMovement : MonoBehaviour
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0;
+            animator.SetBool("isJumping", false);
         }
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
