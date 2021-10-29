@@ -13,9 +13,9 @@ public class OxygenMeter : MonoBehaviour
     public GameObject goscreen; 
     private bool isPlaying;
 
-    public float maxTime = 400f;
+    public float maxTime = 200f;
 
-    public float time = 400f;
+    public float time = 200f;
 
     private void Start()
     {
