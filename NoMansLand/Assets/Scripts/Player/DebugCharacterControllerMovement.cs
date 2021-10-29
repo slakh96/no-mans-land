@@ -64,6 +64,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
         //[Godmode]: This line changed to allow for infinite jump
         if (controller.isGrounded || true)
         {
+            animator.SetBool("isJumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
@@ -112,15 +113,15 @@ public class DebugCharacterControllerMovement : MonoBehaviour
         }
     }
     
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Collectible")
         {
             withinRange = false;
         }
     }
-    
-    private void OnCollisionEnter(Collision other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Collectible")
         {
@@ -132,6 +133,10 @@ public class DebugCharacterControllerMovement : MonoBehaviour
             replenishHealth = true;
             Destroy(other.gameObject);
         }
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.collider.tag == "Alien") 
         {
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
@@ -154,6 +159,11 @@ public class DebugCharacterControllerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            if (playerVelocity.y < 0)
+            {
+                animator.SetBool("isJumping", false);
+            }
+            moveDir.y += (playerVelocity.y * 0.01f) ;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
             animator.SetBool("isMoving", true);
@@ -166,6 +176,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0;
+            animator.SetBool("isJumping", false);
         }
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);

@@ -19,7 +19,7 @@ public class CharacterControllerMovement : MonoBehaviour
     private float turnSmoothVelocity;
     
     // Jump
-    public Vector3 playerVelocity;
+    private Vector3 playerVelocity;
     private float jumpHeight = 5f;
     private float gravity = -9.81F;
     
