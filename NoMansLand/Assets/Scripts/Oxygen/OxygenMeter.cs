@@ -6,21 +6,30 @@ using UnityEngine.UI;
 
 public class OxygenMeter : MonoBehaviour
 {
+    public Slider slider;
+    public Image sliderFill;
     private GameObject player;
     private CharacterControllerMovement currPlayerControls;
-    [SerializeField] private Image uiFill;
-    [SerializeField] private Text oxygenPercentage;
     public GameObject goscreen; 
     private bool isPlaying;
 
     public float maxTime = 200f;
 
-    public float time = 200f;
+    private float time;
+    private float currPercentage;
 
     private void Start()
     {
+        slider.maxValue = maxTime;
+        slider.value = maxTime;
+        time = maxTime;
         player = GameObject.FindWithTag("Player");
         currPlayerControls = player.GetComponent<CharacterControllerMovement>();
+    }
+    
+    private void setHealth(int health)
+    {
+        slider.value = health;
     }
 
     // Update is called once per frame
@@ -35,11 +44,10 @@ public class OxygenMeter : MonoBehaviour
             }
             currPlayerControls.replenishHealth = false;
         }
-        float currPercentage = time / maxTime * 100f;
+        currPercentage = slider.value / maxTime * 100f;
         if (time >= 0f)
         {
             time -= Time.deltaTime;
-            uiFill.fillAmount = Mathf.InverseLerp(0, maxTime, time);
 
             // Interval and timing changes based on how long the Oxygen Meter is. 
             if (currPercentage <= 40f && currPercentage > 20f && !isPlaying)
@@ -61,8 +69,10 @@ public class OxygenMeter : MonoBehaviour
             goscreen.SetActive(true);
             this.gameObject.SetActive(false);
         }
-        
-        oxygenPercentage.text = Mathf.Round(currPercentage) + "%";
+        Color currentColor = Color.Lerp(Color.red, Color.green, slider.value / maxTime);
+        currentColor.a = 0.5f;
+        sliderFill.color = currentColor;
+        setHealth(Mathf.RoundToInt(time));
     }
     
     IEnumerator playSound(string name, int interval)
