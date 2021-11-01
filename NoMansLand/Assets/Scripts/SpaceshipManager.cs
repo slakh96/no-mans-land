@@ -7,7 +7,7 @@ namespace DefaultNamespace
 		// A multiplier to control how long between each part crumbling. There are 54 parts total.
 		// E.g. TIME_BETWEEN_CRUMBLES_SEC == 1.0f => 1 * 54s until spaceship finishes crumbling.
 		// TIME_BETWEEN_CRUMBLES_SEC == 5.0f => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		static float TIME_BETWEEN_CRUMBLES_SEC = 1.0f;
+		static float TIME_BETWEEN_CRUMBLES_SEC = 5.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -19,7 +19,7 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 25;
+    	static float TIME_BONUS = 20;
 
 		// The rust material pointer
 		static Material rust_material;		
@@ -27,9 +27,9 @@ namespace DefaultNamespace
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(1)},
-                {"engine_lft_geo", new SpaceshipPart(2)},
-                {"engine_rt_geo", new SpaceshipPart(3)},
+				{"engine_frt_geo", new SpaceshipPart(0)},
+                {"engine_lft_geo", new SpaceshipPart(0)},
+                {"engine_rt_geo", new SpaceshipPart(0)},
                 {"mEngine_lft", new SpaceshipPart(4)},
                 {"mEngine_rt", new SpaceshipPart(5)},
                 {"tank_lft_geo", new SpaceshipPart(6)},
@@ -119,14 +119,12 @@ namespace DefaultNamespace
 		// DropPartFromShip adds the dropped part to the list and makes it drop
 		public static void DropPartFromShip(string partName)
 		{
-			// Nasty fix but it works; can make it nicer if we have time
 			if (partName.Contains("(Clone)"))
 			{
 				// If the item has "Clone" in it, it is a collectible part to pick up -- should not be crumbling
 				Debug.Log("WARNING SpaceshipManager: Attempting to drop a clone part from the ship");
 				return;
 			}
-			Debug.Log("Adding to dropped parts " + partName);
 			droppedParts.Add(partName);
 			GameObject part = GameObject.Find(partName);
 			if (part == null)
@@ -147,10 +145,7 @@ namespace DefaultNamespace
 				return "";
 			}
 			string partName = droppedParts[droppedParts.Count - 1];
-			Debug.Log("Before removing from dropped parts the number of dropped parts is " + droppedParts.Count);
 			droppedParts.RemoveAt(droppedParts.Count - 1);
-			Debug.Log("After removing from dropped parts the number of dropped parts is " + droppedParts.Count);
-			Debug.Log("Spaceship parts count is " + spaceshipParts.Count);
 			GameObject part = GameObject.Find(partName);
 			SpaceshipManager.GetSpaceshipPart(partName).ReturnPieceToShip(part);
 			SpaceshipManager.GetSpaceshipPart(partName).SetTimeToCrumble(nextCrumbleTime);
@@ -216,13 +211,6 @@ namespace DefaultNamespace
 		public static bool SpaceshipDestroyed()
 		{
 			bool output = droppedParts.Count == spaceshipParts.Count;
-			if (output)
-			{
-				Debug.Log("Dropped parts count is " + droppedParts.Count);
-				Debug.Log("Spaceship parts count is " + spaceshipParts.Count);
-				Debug.Log("Spaceship says that it is destroyed!");
-			}
-
 			return output;
 		}
     }
