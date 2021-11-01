@@ -136,7 +136,6 @@ namespace DefaultNamespace
 			part.GetComponent<Renderer>().material = rust_material;
 			// Allow material to fall
 			part.GetComponent<Rigidbody>().isKinematic = false;
-			GetSpaceshipHealth();
 		}
 		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
 		// automatically selects the most recently dropped part to add back to the ship
