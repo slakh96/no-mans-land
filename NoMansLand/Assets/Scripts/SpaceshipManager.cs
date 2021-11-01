@@ -136,6 +136,7 @@ namespace DefaultNamespace
 			part.GetComponent<Renderer>().material = rust_material;
 			// Allow material to fall
 			part.GetComponent<Rigidbody>().isKinematic = false;
+			GetSpaceshipHealth();
 		}
 		// AddPartToShip records that a part was added to the ship, adds the part back to the ship and returns the name
 		// automatically selects the most recently dropped part to add back to the ship
@@ -212,6 +213,13 @@ namespace DefaultNamespace
 		{
 			bool output = droppedParts.Count == spaceshipParts.Count;
 			return output;
+		}
+		
+		// Returns the current number of pieces remaining on the ship divided by the spaceship's total number of parts
+		public static float GetSpaceshipHealth()
+		{
+			float health = 1 - ((float)droppedParts.Count / spaceshipParts.Count);
+			return health;
 		}
     }
 }
