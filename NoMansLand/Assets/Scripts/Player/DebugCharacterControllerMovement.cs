@@ -15,7 +15,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     private Vector3 move;
     
     // [Godmode]: This 2 lines changed from original script
-    private float speed = 85f;
+    private float speed = 135f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
@@ -23,7 +23,7 @@ public class DebugCharacterControllerMovement : MonoBehaviour
     private Vector3 playerVelocity;
     // [Godmode]: This line changed from original script
     private float jumpHeight = 10f;
-    private float gravity = -49.81F;
+    private float gravity = -69.81F;
     
     // Handle object
     private GameObject collectibleHoldSlot;

@@ -19,7 +19,7 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 15;
+    	static float TIME_BONUS = 20;
 
 		// The rust material pointer
 		static Material rust_material;		
@@ -27,9 +27,9 @@ namespace DefaultNamespace
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(1)},
-                {"engine_lft_geo", new SpaceshipPart(2)},
-                {"engine_rt_geo", new SpaceshipPart(3)},
+				{"engine_frt_geo", new SpaceshipPart(0)},
+                {"engine_lft_geo", new SpaceshipPart(0)},
+                {"engine_rt_geo", new SpaceshipPart(0)},
                 {"mEngine_lft", new SpaceshipPart(4)},
                 {"mEngine_rt", new SpaceshipPart(5)},
                 {"tank_lft_geo", new SpaceshipPart(6)},
@@ -92,7 +92,7 @@ namespace DefaultNamespace
 	        {
 				// If the item has "Clone" in it, it is a collectible part to pick up -- should not crumble until after the end of
 				// the game
-		        return TIME_BETWEEN_CRUMBLES_SEC * spaceshipParts.Count + 1;
+		        return TIME_BETWEEN_CRUMBLES_SEC * nextCrumbleTime + bonusTime + 100;
 	        }
 
 	        if (!spaceshipParts.ContainsKey(name))
@@ -117,7 +117,14 @@ namespace DefaultNamespace
 			bonusTime += TIME_BONUS;
 		}
 		// DropPartFromShip adds the dropped part to the list and makes it drop
-		public static void DropPartFromShip(string partName) {
+		public static void DropPartFromShip(string partName)
+		{
+			if (partName.Contains("(Clone)"))
+			{
+				// If the item has "Clone" in it, it is a collectible part to pick up -- should not be crumbling
+				Debug.Log("WARNING SpaceshipManager: Attempting to drop a clone part from the ship");
+				return;
+			}
 			droppedParts.Add(partName);
 			GameObject part = GameObject.Find(partName);
 			if (part == null)
@@ -203,7 +210,15 @@ namespace DefaultNamespace
 		// Returns whether all the parts have fallen off the spaceship, thus the game is lost
 		public static bool SpaceshipDestroyed()
 		{
-			return droppedParts.Count == spaceshipParts.Count;
+			bool output = droppedParts.Count == spaceshipParts.Count;
+			return output;
+		}
+		
+		// Returns the current number of pieces remaining on the ship divided by the spaceship's total number of parts
+		public static float GetSpaceshipHealth()
+		{
+			float health = 1 - ((float)droppedParts.Count / spaceshipParts.Count);
+			return health;
 		}
     }
 }

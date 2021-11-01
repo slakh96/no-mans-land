@@ -13,14 +13,14 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 50f;
+    private float speed = 85f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
     // Jump
     private Vector3 playerVelocity;
     private float jumpHeight = 5f;
-    private float gravity = -9.81F;
+    private float gravity = -39.81F;
     
     // Handle object
     private GameObject collectibleHoldSlot;
