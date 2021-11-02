@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +61,7 @@ public class CharacterControllerMovement : MonoBehaviour
     {
         if (controller.isGrounded)
         {
+            animator.SetBool("isJumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
@@ -112,7 +114,7 @@ public class CharacterControllerMovement : MonoBehaviour
         }
     }
     
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Collectible" || other.gameObject.tag == "HealthItem")
         {
@@ -120,7 +122,7 @@ public class CharacterControllerMovement : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Collectible")
         {
@@ -133,6 +135,10 @@ public class CharacterControllerMovement : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.collider.tag == "Alien") 
         {
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
@@ -155,6 +161,12 @@ public class CharacterControllerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            if (playerVelocity.y < 0)
+            {
+                animator.SetBool("isJumping", false);
+            }
+            moveDir.y += (playerVelocity.y * 0.01f) ;
+            
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
             animator.SetBool("isMoving", true);
@@ -167,6 +179,7 @@ public class CharacterControllerMovement : MonoBehaviour
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0;
+            animator.SetBool("isJumping", false);
         }
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
