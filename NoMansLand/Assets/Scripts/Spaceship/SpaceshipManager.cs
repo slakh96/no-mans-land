@@ -7,7 +7,7 @@ namespace DefaultNamespace
 		// A multiplier to control how long between each part crumbling. There are 54 parts total.
 		// E.g. TIME_BETWEEN_CRUMBLES_SEC == 1.0f => 1 * 54s until spaceship finishes crumbling.
 		// TIME_BETWEEN_CRUMBLES_SEC == 5.0f => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		static float TIME_BETWEEN_CRUMBLES_SEC = 5.0f;
+		public static float TIME_BETWEEN_CRUMBLES_SEC = 5.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -25,7 +25,7 @@ namespace DefaultNamespace
 		static Material rust_material;		
 
 		// A mapping from spaceship part name to spacship part object
-		static Dictionary<string, SpaceshipPart> spaceshipParts =  
+		public static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
 				{"engine_frt_geo", new SpaceshipPart(0)},
                 {"engine_lft_geo", new SpaceshipPart(0)},
