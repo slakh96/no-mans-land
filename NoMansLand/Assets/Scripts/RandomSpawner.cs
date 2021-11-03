@@ -6,7 +6,7 @@ using DefaultNamespace;
 
 public class RandomSpawner : MonoBehaviour
 {
-    public GameObject CollectiblePrefab;
+	public GameObject sampleSizeObj;
     public GameObject HealthItem; // the health regenerate item 
     public int HEALTH_ITEM_COUNT = 10; // number of health regenerate items spawned 
     public Terrain terrain;
@@ -19,7 +19,7 @@ public class RandomSpawner : MonoBehaviour
     public int itemXPos; // x position of item 
     public int itemZPos; // z position of item 
     public const int cushionAmount = 50; // to ensure spawning does not happen at the edges (at the borders)
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,8 +54,8 @@ public class RandomSpawner : MonoBehaviour
 
 			// Duplicate each spaceship part and spawn to a random location as a collectible
             GameObject instantiatedClone = Instantiate(spaceShipParts[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
-			// Size it using the same scale as the actual ship
-			instantiatedClone.transform.localScale = spaceship.transform.localScale;
+			// Resize clone to target size picked by us.
+			instantiatedClone.transform.localScale = resizeObjToTarget(sampleSizeObj, instantiatedClone);
 			instantiatedClone.tag = "Collectible";
 			// Allow cloned part to respond to gravity
             instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
@@ -95,6 +95,21 @@ public class RandomSpawner : MonoBehaviour
         {
             getAllSpaceshipParts(spaceshipPartObj.transform.GetChild(i).gameObject);
         }
+    }
+    
+    // Resize go to target size.
+    private Vector3 resizeObjToTarget(GameObject target, GameObject go)
+    {
+	    Vector3 refSize = target.GetComponent<Renderer>().bounds.size;
+		    float resizeX = refSize.x / go.GetComponent<Renderer>().bounds.size.x;
+		    float resizeY = refSize.y / go.GetComponent<Renderer>().bounds.size.y;
+		    float resizeZ = refSize.z / go.GetComponent<Renderer>().bounds.size.z;
+ 
+		    resizeX *= go.transform.localScale.x;
+		    resizeY *= go.transform.localScale.y;
+		    resizeZ *= go.transform.localScale.z;
+
+		    return new Vector3(resizeX, resizeY, resizeZ);
     }
     
 }
