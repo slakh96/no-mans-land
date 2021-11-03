@@ -27,9 +27,9 @@ namespace DefaultNamespace
 		// A mapping from spaceship part name to spacship part object
 		static Dictionary<string, SpaceshipPart> spaceshipParts =  
             new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(0)},
-                {"engine_lft_geo", new SpaceshipPart(0)},
-                {"engine_rt_geo", new SpaceshipPart(0)},
+				{"engine_frt_geo", new SpaceshipPart(0.5f)},
+                {"engine_lft_geo", new SpaceshipPart(0.5f)},
+                {"engine_rt_geo", new SpaceshipPart(0.5f)},
                 {"mEngine_lft", new SpaceshipPart(4)},
                 {"mEngine_rt", new SpaceshipPart(5)},
                 {"tank_lft_geo", new SpaceshipPart(6)},
