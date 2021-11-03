@@ -85,7 +85,8 @@ public class CharacterControllerMovement : MonoBehaviour
             Transform collectibleObjTransform = currentCollectible.transform;
             collectibleObjTransform.parent = collectibleHoldSlot.transform;
             collectibleObjTransform.position = collectibleHoldSlot.transform.position;
-            // collectibleObjTransform.localScale =  collectibleHoldSlot.transform.localScale;
+            collectibleObjTransform.localPosition = Vector3.zero;
+            collectibleObjTransform.localRotation = Quaternion.identity;
             Rigidbody collectibleRB = currentCollectible.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = true;
             // Randomize later
@@ -98,7 +99,7 @@ public class CharacterControllerMovement : MonoBehaviour
             child.transform.parent = null;
             Rigidbody collectibleRB = child.GetComponent<Rigidbody>();
             collectibleRB.isKinematic = false;
-            collectibleRB.AddForce(child.transform.forward * 20, ForceMode.Impulse);
+            collectibleRB.AddForce(child.transform.forward * 10, ForceMode.Impulse);
             
             FindObjectOfType<AudioManager>().Play("Drop1");
             
