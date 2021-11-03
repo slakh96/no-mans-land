@@ -12,7 +12,7 @@ public class PatrolEnemyAI : MonoBehaviour
     private float playerAcceleration = 100f;
     private float playerSpeed = 45f;
 
-    private float detectedSpeed = 100f;
+    private float detectedSpeed = 90f;
 
     //Patroling
     public GameObject patrolObject;
@@ -33,8 +33,8 @@ public class PatrolEnemyAI : MonoBehaviour
     private bool playerInSightRange, playerInAttackRange;
     private float patrolAngle = 125f;
     private float alertAngle = 360f;
-    private float patrolSightRange = 100f;
-    private float alertSightRange = 150f;
+    private float patrolSightRange = 1100f;
+    private float alertSightRange = 140f;
 
     private void Awake()
     {
