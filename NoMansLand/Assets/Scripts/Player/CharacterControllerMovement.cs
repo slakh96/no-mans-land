@@ -135,19 +135,14 @@ public class CharacterControllerMovement : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
         }
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.collider.tag == "Alien") 
+        if (other.gameObject.tag == "Alien") 
         {
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
             Destroy(this.gameObject);
             goscreen.SetActive(true);
         }
     }
-
-
+    
     // Update is called once per frame
     void Update()
     {
