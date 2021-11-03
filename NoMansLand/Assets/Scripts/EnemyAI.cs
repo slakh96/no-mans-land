@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     private float playerAcceleration = 100f;
     private float playerSpeed = 45f;
 
-    private float detectedSpeed = 100f;
+    private float detectedSpeed = 90f;
 
     //Patroling
     private Vector3 walkPoint;
@@ -30,8 +30,8 @@ public class EnemyAI : MonoBehaviour
     private bool playerInSightRange, playerInAttackRange;
     private float patrolAngle = 105f;
     private float alertAngle = 360f;
-    private float patrolSightRange = 90f;
-    private float alertSightRange = 140f;
+    private float patrolSightRange = 50f;
+    private float alertSightRange = 100f;
     public bool hasSeenPlayer;
 
     private void Awake()
