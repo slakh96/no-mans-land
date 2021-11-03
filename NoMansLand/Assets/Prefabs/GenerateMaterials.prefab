@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2392667189852821271
+--- !u!1 &8866050936169382025
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2392667189852821265}
-  - component: {fileID: 2392667189852821264}
+  - component: {fileID: 8866050936169382031}
+  - component: {fileID: 8866050936169382030}
   m_Layer: 0
   m_Name: GenerateMaterials
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2392667189852821265
+--- !u!4 &8866050936169382031
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2392667189852821271}
+  m_GameObject: {fileID: 8866050936169382025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 640.87054, y: 694.9772, z: 978.0715}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,20 +31,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2392667189852821264
+--- !u!114 &8866050936169382030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2392667189852821271}
+  m_GameObject: {fileID: 8866050936169382025}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f8b1c277ee64782a8eb97d79f2097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectiblePrefab: {fileID: 8121162034570843088, guid: 351bff06de6f5424cbb92ef1b4410dae, type: 3}
-  terrain: {fileID: 7933708387519748148, guid: a69540c79b0c4480ab9c09047e1c1692, type: 3}
+  sampleSizeObj: {fileID: 9181082161388858463, guid: 3a090ad7180bd44fe9fc6fb7f563b84b, type: 3}
+  HealthItem: {fileID: 4418483320195090748, guid: b2af71d18027248ecbe29a7d08273c45, type: 3}
+  HEALTH_ITEM_COUNT: 10
+  terrain: {fileID: 0}
   terrainXPos: 0
   terrainYPos: 0
   terrainZPos: 0
@@ -52,4 +54,3 @@ MonoBehaviour:
   terrainZLength: 988
   itemXPos: 0
   itemZPos: 0
-  collectibleCount: 0
