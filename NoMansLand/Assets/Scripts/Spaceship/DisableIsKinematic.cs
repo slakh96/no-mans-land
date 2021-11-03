@@ -9,6 +9,8 @@ public class DisableIsKinematic : MonoBehaviour
 	
 	public GameObject winscreen; 
 	public GameObject goscreen;
+	public GameObject healthBars;
+	public GameObject compass;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +35,14 @@ public class DisableIsKinematic : MonoBehaviour
 		if (SpaceshipManager.SpaceshipComplete())
 		{
 			winscreen.SetActive(true);
+			healthBars.SetActive(false);
+			compass.SetActive(false);
 		}
 		else if (SpaceshipManager.SpaceshipDestroyed())
 		{
 			goscreen.SetActive(true);
+			healthBars.SetActive(false);
+			compass.SetActive(false);
 		}
 		elapsedTime += Time.deltaTime;
     }

@@ -10,13 +10,17 @@ public class OxygenMeter : MonoBehaviour
     public Image sliderFill;
     private GameObject player;
     private CharacterControllerMovement currPlayerControls;
-    public GameObject goscreen; 
     private bool isPlaying;
 
     public float maxTime = 200f;
 
     private float time;
     private float currPercentage;
+    
+    // Gameover 
+    public GameObject goscreen;
+    public GameObject healthbars;
+    public GameObject compass;
 
     private void Start()
     {
@@ -67,7 +71,8 @@ public class OxygenMeter : MonoBehaviour
         {
             Destroy(player);
             goscreen.SetActive(true);
-            this.gameObject.SetActive(false);
+            compass.SetActive(false);
+            healthbars.SetActive(false);
         }
         Color currentColor = Color.Lerp(Color.red, Color.green, slider.value / maxTime);
         currentColor.a = 0.5f;

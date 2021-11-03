@@ -39,6 +39,8 @@ public class CharacterControllerMovement : MonoBehaviour
     
     // Game Over Screen
     public GameObject goscreen;
+    public GameObject healthbars;
+    public GameObject compass;
     
     // Start is called before the first frame update
     void Awake()
@@ -141,6 +143,8 @@ public class CharacterControllerMovement : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
             Destroy(this.gameObject);
             goscreen.SetActive(true);
+            healthbars.SetActive(false);
+            compass.SetActive(false);
         }
     }
     
