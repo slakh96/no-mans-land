@@ -33,7 +33,7 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Spaceship interactions
     // How close the player needs to be before he can deposit the material successfully
-    private float DISTANCE_LIMIT = 50;
+    private float DISTANCE_LIMIT = 80;
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
     
