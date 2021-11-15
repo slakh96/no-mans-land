@@ -48,10 +48,18 @@ public class OxygenMeter : MonoBehaviour
             }
             currPlayerControls.replenishHealth = false;
         }
+        
         currPercentage = slider.value / maxTime * 100f;
         if (time >= 0f)
         {
-            time -= Time.deltaTime;
+            if (currPlayerControls.decreaseHealth)
+            {
+                time -= Time.deltaTime * 10f;
+            }
+            else
+            {
+                time -= Time.deltaTime;
+            }
 
             // Interval and timing changes based on how long the Oxygen Meter is. 
             if (currPercentage <= 40f && currPercentage > 20f && !isPlaying)
