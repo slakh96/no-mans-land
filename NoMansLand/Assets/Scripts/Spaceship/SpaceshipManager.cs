@@ -7,7 +7,7 @@ namespace DefaultNamespace
 		// A multiplier to control how long between each part crumbling. There are 54 parts total.
 		// E.g. TIME_BETWEEN_CRUMBLES_SEC == 1.0f => 1 * 54s until spaceship finishes crumbling.
 		// TIME_BETWEEN_CRUMBLES_SEC == 5.0f => 5 * 54s = 270s = 4min30s until it finishes crumbling. 
-		public static float TIME_BETWEEN_CRUMBLES_SEC = 5.0f;
+		public static float TIME_BETWEEN_CRUMBLES_SEC = 4.0f;
 
 		// A listing of all the parts that have dropped off the ship so far
 		static List<string> droppedParts = new List<string>();
@@ -19,7 +19,7 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 20;
+    	static float TIME_BONUS = 0;
 
 		// The rust material pointer
 		static Material rust_material;		
@@ -30,35 +30,35 @@ namespace DefaultNamespace
 				{"engine_frt_geo", new SpaceshipPart(0.5f)},
                 {"engine_lft_geo", new SpaceshipPart(0.5f)},
                 {"engine_rt_geo", new SpaceshipPart(0.5f)},
-                {"mEngine_lft", new SpaceshipPart(4)},
-                {"mEngine_rt", new SpaceshipPart(5)},
-                {"tank_lft_geo", new SpaceshipPart(6)},
-                {"tank_rt_geo", new SpaceshipPart(7)},
-                {"elevon_lft_geo", new SpaceshipPart(8)},
-                {"wingFlap_lft_geo", new SpaceshipPart(9)},
-                {"elevon_rt_geo", new SpaceshipPart(10)},
-                {"wingFlap_rt", new SpaceshipPart(11)},
-				{"mainSpaceShuttleBody_geo", new SpaceshipPart(12)},
-                {"pCube5", new SpaceshipPart(13)},
-                {"pCube4", new SpaceshipPart(14)},
-                {"pCylinder9", new SpaceshipPart(15)},
-                {"pCylinder10", new SpaceshipPart(16)},
-                {"pCylinder11", new SpaceshipPart(17)},
-                {"pCylinder12", new SpaceshipPart(18)},
-                {"pCube5 1", new SpaceshipPart(19)},
-                {"pCube4 1", new SpaceshipPart(20)},
-                {"pCylinder9 1", new SpaceshipPart(21)},
-                {"pCylinder10 1", new SpaceshipPart(22)},
-                {"pCylinder13", new SpaceshipPart(23)},
-                {"pCylinder14", new SpaceshipPart(24)},
-                {"polySurface17", new SpaceshipPart(25)},
-                {"polySurface2", new SpaceshipPart(26)},
-                {"polySurface4", new SpaceshipPart(27)},
-                {"polySurface6", new SpaceshipPart(28)},
-                {"polySurface8", new SpaceshipPart(29)},
-                {"polySurface10", new SpaceshipPart(30)},
-                {"polySurface12", new SpaceshipPart(31)},
-                {"polySurface14", new SpaceshipPart(32)},
+                {"mEngine_lft", new SpaceshipPart(2)},
+                {"mEngine_rt", new SpaceshipPart(3)},
+                {"tank_lft_geo", new SpaceshipPart(4)},
+                {"tank_rt_geo", new SpaceshipPart(5)},
+                {"elevon_lft_geo", new SpaceshipPart(6)},
+                {"wingFlap_lft_geo", new SpaceshipPart(7)},
+                {"elevon_rt_geo", new SpaceshipPart(8)},
+                {"wingFlap_rt", new SpaceshipPart(9)},
+				{"mainSpaceShuttleBody_geo", new SpaceshipPart(10)},
+                {"pCube5", new SpaceshipPart(11)},
+                {"pCube4", new SpaceshipPart(12)},
+                {"pCylinder9", new SpaceshipPart(13)},
+                {"pCylinder10", new SpaceshipPart(14)},
+                {"pCylinder11", new SpaceshipPart(15)},
+                {"pCylinder12", new SpaceshipPart(16)},
+                {"pCube5 1", new SpaceshipPart(17)},
+                {"pCube4 1", new SpaceshipPart(18)},
+                {"pCylinder9 1", new SpaceshipPart(19)},
+                {"pCylinder10 1", new SpaceshipPart(20)},
+                {"pCylinder13", new SpaceshipPart(21)},
+                {"pCylinder14", new SpaceshipPart(22)},
+                {"polySurface17", new SpaceshipPart(23)},
+                {"polySurface2", new SpaceshipPart(24)},
+                {"polySurface4", new SpaceshipPart(25)},
+                {"polySurface6", new SpaceshipPart(26)},
+                {"polySurface8", new SpaceshipPart(27)},
+                {"polySurface10", new SpaceshipPart(28)},
+                {"polySurface12", new SpaceshipPart(29)},
+                {"polySurface14", new SpaceshipPart(30)},
                 {"polySurface16", new SpaceshipPart(33)},
                 {"polySurface15", new SpaceshipPart(34)},
                 {"polySurface2 1", new SpaceshipPart(35)},
@@ -112,10 +112,17 @@ namespace DefaultNamespace
 			return spaceshipParts[name];
 		}
 		// Adds additional time to wait before the next part falls off of the spaceship
-		public static void addBonusTime()
+		static void addExtraTime()
 		{
 			bonusTime += TIME_BONUS;
 		}
+
+		// Increases the bonus time that the player gets when he drops off a part
+		public static void IncreaseDropoffBonus()
+		{
+			TIME_BONUS += 10;
+		}
+
 		// DropPartFromShip adds the dropped part to the list and makes it drop
 		public static void DropPartFromShip(string partName)
 		{
@@ -155,7 +162,7 @@ namespace DefaultNamespace
 			if(droppedParts.Count == 0) {
 				gameWon = true;
 			}
-			addBonusTime();
+			addExtraTime();
 			return partName;
 		}
 		// IsDropped returns whether or not the part has already been dropped

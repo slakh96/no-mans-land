@@ -11,6 +11,8 @@ public class DisableIsKinematic : MonoBehaviour
 	public GameObject goscreen;
 	public GameObject healthBars;
 	public GameObject compass;
+
+	private int numBonuses = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,13 @@ public class DisableIsKinematic : MonoBehaviour
 			goscreen.SetActive(true);
 			healthBars.SetActive(false);
 			compass.SetActive(false);
+		}
+
+		//Over time, give the player more of a bonus as they will have to scavenge further for pieces
+		if (elapsedTime > (20 * numBonuses) && gameObject.name == "polySurface18 1")
+		{
+			SpaceshipManager.IncreaseDropoffBonus();
+			numBonuses += 1;
 		}
 		elapsedTime += Time.deltaTime;
     }
