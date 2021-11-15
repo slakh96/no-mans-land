@@ -19,7 +19,7 @@ namespace DefaultNamespace
 		static bool gameWon = false;
 		
 		// Time bonus earned when the player deposits a material
-    	static float TIME_BONUS = 0;
+    	static float curDropoffTimeBonus = 0;
 
 		// The rust material pointer
 		static Material rust_material;		
@@ -114,13 +114,13 @@ namespace DefaultNamespace
 		// Adds additional time to wait before the next part falls off of the spaceship
 		static void addExtraTime()
 		{
-			bonusTime += TIME_BONUS;
+			bonusTime += curDropoffTimeBonus;
 		}
 
 		// Increases the bonus time that the player gets when he drops off a part
 		public static void IncreaseDropoffBonus()
 		{
-			TIME_BONUS += 10;
+			curDropoffTimeBonus += 10;
 		}
 
 		// DropPartFromShip adds the dropped part to the list and makes it drop

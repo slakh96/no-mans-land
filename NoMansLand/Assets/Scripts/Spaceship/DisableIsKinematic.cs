@@ -49,6 +49,7 @@ public class DisableIsKinematic : MonoBehaviour
 		}
 
 		//Over time, give the player more of a bonus as they will have to scavenge further for pieces
+		// Check for one arbitrary name to prevent this if block from getting executed for every part that has disableIsKinematic
 		if (elapsedTime > (20 * numBonuses) && gameObject.name == "polySurface18 1")
 		{
 			SpaceshipManager.IncreaseDropoffBonus();
