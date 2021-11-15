@@ -12,7 +12,7 @@ public class OxygenMeter : MonoBehaviour
     private CharacterControllerMovement currPlayerControls;
     private bool isPlaying;
 
-    public float maxTime = 200f;
+    public float maxTime = 150f;
 
     private float time;
     private float currPercentage;
