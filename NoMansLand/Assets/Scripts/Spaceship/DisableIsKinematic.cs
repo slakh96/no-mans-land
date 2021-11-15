@@ -11,7 +11,8 @@ public class DisableIsKinematic : MonoBehaviour
 	public GameObject goscreen;
 	public GameObject healthBars;
 	public GameObject compass;
-
+	
+	// The number of time bonuses given so far
 	private int numBonuses = 0;
     // Start is called before the first frame update
     void Start()

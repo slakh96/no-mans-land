@@ -13,7 +13,7 @@ namespace DefaultNamespace
 		static List<string> droppedParts = new List<string>();
 		
 		// The crumble time to set the next added part of the ship to
-		static int nextCrumbleTime = 55;
+		static int nextCrumbleTime = 53;
 		
 		// A boolean showing if the game is won
 		static bool gameWon = false;
@@ -59,28 +59,28 @@ namespace DefaultNamespace
                 {"polySurface10", new SpaceshipPart(28)},
                 {"polySurface12", new SpaceshipPart(29)},
                 {"polySurface14", new SpaceshipPart(30)},
-                {"polySurface16", new SpaceshipPart(33)},
-                {"polySurface15", new SpaceshipPart(34)},
-                {"polySurface2 1", new SpaceshipPart(35)},
-                {"polySurface4 1", new SpaceshipPart(36)},
-                {"polySurface6 1", new SpaceshipPart(37)},
-                {"polySurface8 1", new SpaceshipPart(38)},
-                {"polySurface10 1", new SpaceshipPart(39)},
-                {"polySurface12 1", new SpaceshipPart(40)},
-                {"polySurface14 1", new SpaceshipPart(41)},
-                {"polySurface16 1", new SpaceshipPart(42)},
-                {"polySurface15 1", new SpaceshipPart(43)},
-                {"polySurface18", new SpaceshipPart(44)},
-                {"polySurface2 2", new SpaceshipPart(45)},
-                {"polySurface4 2", new SpaceshipPart(46)},
-                {"polySurface6 2", new SpaceshipPart(47)},
-                {"polySurface8 2", new SpaceshipPart(48)},
-                {"polySurface10 2", new SpaceshipPart(49)},
-                {"polySurface12 2", new SpaceshipPart(50)},
-                {"polySurface14 2", new SpaceshipPart(51)},
-                {"polySurface16 2", new SpaceshipPart(52)},
-                {"polySurface15 2", new SpaceshipPart(53)},
-                {"polySurface18 1", new SpaceshipPart(54)}
+                {"polySurface16", new SpaceshipPart(31)},
+                {"polySurface15", new SpaceshipPart(32)},
+                {"polySurface2 1", new SpaceshipPart(33)},
+                {"polySurface4 1", new SpaceshipPart(34)},
+                {"polySurface6 1", new SpaceshipPart(35)},
+                {"polySurface8 1", new SpaceshipPart(36)},
+                {"polySurface10 1", new SpaceshipPart(37)},
+                {"polySurface12 1", new SpaceshipPart(38)},
+                {"polySurface14 1", new SpaceshipPart(39)},
+                {"polySurface16 1", new SpaceshipPart(40)},
+                {"polySurface15 1", new SpaceshipPart(41)},
+                {"polySurface18", new SpaceshipPart(42)},
+                {"polySurface2 2", new SpaceshipPart(43)},
+                {"polySurface4 2", new SpaceshipPart(44)},
+                {"polySurface6 2", new SpaceshipPart(45)},
+                {"polySurface8 2", new SpaceshipPart(46)},
+                {"polySurface10 2", new SpaceshipPart(47)},
+                {"polySurface12 2", new SpaceshipPart(48)},
+                {"polySurface14 2", new SpaceshipPart(49)},
+                {"polySurface16 2", new SpaceshipPart(50)},
+                {"polySurface15 2", new SpaceshipPart(51)},
+                {"polySurface18 1", new SpaceshipPart(52)}
 		};
 		// A constant to add additional time until the next part falls off of the spaceship
         static float bonusTime = 0;
