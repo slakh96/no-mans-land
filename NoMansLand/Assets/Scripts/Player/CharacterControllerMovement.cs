@@ -141,10 +141,11 @@ public class CharacterControllerMovement : MonoBehaviour
         if (other.gameObject.tag == "Alien") 
         {
             FindObjectOfType<AudioManager>().Play("KilledByAlien1");
-            Destroy(this.gameObject);
-            goscreen.SetActive(true);
-            healthbars.SetActive(false);
-            compass.SetActive(false);
+            MainMenuScript.ToGameOver();
+            // Destroy(this.gameObject);
+            // goscreen.SetActive(true);
+            // healthbars.SetActive(false);
+            // compass.SetActive(false);
         }
     }
     
