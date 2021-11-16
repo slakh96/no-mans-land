@@ -37,11 +37,6 @@ public class CharacterControllerMovement : MonoBehaviour
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
     
-    // Game Over Screen
-    public GameObject goscreen;
-    public GameObject healthbars;
-    public GameObject compass;
-    
     // Start is called before the first frame update
     void Awake()
     {
