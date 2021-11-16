@@ -35,16 +35,10 @@ public class DisableIsKinematic : MonoBehaviour
 		if (SpaceshipManager.SpaceshipComplete())
 		{
 			MainMenuScript.ToWinScreen();
-			// winscreen.SetActive(true);
-			// healthBars.SetActive(false);
-			// compass.SetActive(false);
 		}
 		else if (SpaceshipManager.SpaceshipDestroyed())
 		{
 			MainMenuScript.ToGameOver();
-			// goscreen.SetActive(true);
-			// healthBars.SetActive(false);
-			// compass.SetActive(false);
 		}
 		elapsedTime += Time.deltaTime;
     }

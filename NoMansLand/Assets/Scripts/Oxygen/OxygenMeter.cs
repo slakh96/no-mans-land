@@ -71,9 +71,6 @@ public class OxygenMeter : MonoBehaviour
         {
             Destroy(player);
             MainMenuScript.ToGameOver();
-            // goscreen.SetActive(true);
-            // compass.SetActive(false);
-            // healthbars.SetActive(false);
         }
         Color currentColor = Color.Lerp(Color.red, Color.green, slider.value / maxTime);
         currentColor.a = 0.5f;
