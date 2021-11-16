@@ -54,7 +54,7 @@ public class OxygenMeter : MonoBehaviour
         {
             if (currPlayerControls.decreaseHealth)
             {
-                time -= Time.deltaTime * 10f;
+                time -= Time.deltaTime * 3f;
             }
             else
             {
