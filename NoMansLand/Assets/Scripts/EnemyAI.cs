@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
     private float patrolSightRange = 100f;
     private float alertSightRange = 120f;
     public bool hasSeenPlayer;
+    private bool isPlaying;
 
     private void Awake()
     {
@@ -128,6 +129,10 @@ public class EnemyAI : MonoBehaviour
         angle = alertAngle;
         sightRange = alertSightRange;
         agent.SetDestination(player.position);
+        if (!isPlaying)
+        {
+            StartCoroutine (playSound("AlienChasing1", 20));
+        }
         agent.speed = detectedSpeed;
     }
 
@@ -152,5 +157,15 @@ public class EnemyAI : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+    
+    IEnumerator playSound(string name, int interval)
+    {
+        isPlaying = true;
+        Sound s = FindObjectOfType<AudioManager>().Find(name);
+        s.source.Play();
+        yield return new WaitForSeconds (interval);
+        s.source.Stop();
+        isPlaying = false;
     }
 }
