@@ -135,10 +135,19 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Alien") 
         {
-            FindObjectOfType<AudioManager>().Play("KilledByAlien1");
-            Destroy(this.gameObject);
-            MainMenuScript.ToGameOver();
+            StartCoroutine(PlayerDied(0.5f));
+            //FindObjectOfType<AudioManager>().Play("KilledByAlien1");
+            //MainMenuScript.ToGameOver();
+            //Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator PlayerDied(float time)
+    {
+        FindObjectOfType<AudioManager>().Play("KilledByAlien1");
+        yield return new WaitForSeconds(time);
+        MainMenuScript.ToGameOver();
+        // Code to execute after the delay
     }
     
     // Update is called once per frame
