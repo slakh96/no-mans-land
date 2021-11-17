@@ -6,10 +6,10 @@ public class AlienIndicator : MonoBehaviour
 {
     public static GameObject AlienIndicatorObject; 
 
-    public static void SetAlienIndicatorActive() 
+    public static void SetAlienIndicatorActive(bool active) 
     {
         AlienIndicatorObject = GameObject.FindGameObjectWithTag("AlienIndicator");
         Debug.Log(AlienIndicatorObject.transform.GetChild(0).gameObject);
-        AlienIndicatorObject.transform.GetChild(0).gameObject.SetActive(true);
+        AlienIndicatorObject.transform.GetChild(0).gameObject.SetActive(active);
     }
 }
