@@ -22,66 +22,12 @@ namespace DefaultNamespace
     	static float TIME_BONUS = 20;
 
 		// The rust material pointer
-		static Material rust_material;		
+		static Material rust_material;
+
+		static bool isStarting = false;
 
 		// A mapping from spaceship part name to spacship part object
-		public static Dictionary<string, SpaceshipPart> spaceshipParts =  
-            new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(0.5f)},
-                {"engine_lft_geo", new SpaceshipPart(0.5f)},
-                {"engine_rt_geo", new SpaceshipPart(0.5f)},
-                {"mEngine_lft", new SpaceshipPart(4)},
-                {"mEngine_rt", new SpaceshipPart(5)},
-                {"tank_lft_geo", new SpaceshipPart(6)},
-                {"tank_rt_geo", new SpaceshipPart(7)},
-                {"elevon_lft_geo", new SpaceshipPart(8)},
-                {"wingFlap_lft_geo", new SpaceshipPart(9)},
-                {"elevon_rt_geo", new SpaceshipPart(10)},
-                {"wingFlap_rt", new SpaceshipPart(11)},
-				{"mainSpaceShuttleBody_geo", new SpaceshipPart(12)},
-                {"pCube5", new SpaceshipPart(13)},
-                {"pCube4", new SpaceshipPart(14)},
-                {"pCylinder9", new SpaceshipPart(15)},
-                {"pCylinder10", new SpaceshipPart(16)},
-                {"pCylinder11", new SpaceshipPart(17)},
-                {"pCylinder12", new SpaceshipPart(18)},
-                {"pCube5 1", new SpaceshipPart(19)},
-                {"pCube4 1", new SpaceshipPart(20)},
-                {"pCylinder9 1", new SpaceshipPart(21)},
-                {"pCylinder10 1", new SpaceshipPart(22)},
-                {"pCylinder13", new SpaceshipPart(23)},
-                {"pCylinder14", new SpaceshipPart(24)},
-                {"polySurface17", new SpaceshipPart(25)},
-                {"polySurface2", new SpaceshipPart(26)},
-                {"polySurface4", new SpaceshipPart(27)},
-                {"polySurface6", new SpaceshipPart(28)},
-                {"polySurface8", new SpaceshipPart(29)},
-                {"polySurface10", new SpaceshipPart(30)},
-                {"polySurface12", new SpaceshipPart(31)},
-                {"polySurface14", new SpaceshipPart(32)},
-                {"polySurface16", new SpaceshipPart(33)},
-                {"polySurface15", new SpaceshipPart(34)},
-                {"polySurface2 1", new SpaceshipPart(35)},
-                {"polySurface4 1", new SpaceshipPart(36)},
-                {"polySurface6 1", new SpaceshipPart(37)},
-                {"polySurface8 1", new SpaceshipPart(38)},
-                {"polySurface10 1", new SpaceshipPart(39)},
-                {"polySurface12 1", new SpaceshipPart(40)},
-                {"polySurface14 1", new SpaceshipPart(41)},
-                {"polySurface16 1", new SpaceshipPart(42)},
-                {"polySurface15 1", new SpaceshipPart(43)},
-                {"polySurface18", new SpaceshipPart(44)},
-                {"polySurface2 2", new SpaceshipPart(45)},
-                {"polySurface4 2", new SpaceshipPart(46)},
-                {"polySurface6 2", new SpaceshipPart(47)},
-                {"polySurface8 2", new SpaceshipPart(48)},
-                {"polySurface10 2", new SpaceshipPart(49)},
-                {"polySurface12 2", new SpaceshipPart(50)},
-                {"polySurface14 2", new SpaceshipPart(51)},
-                {"polySurface16 2", new SpaceshipPart(52)},
-                {"polySurface15 2", new SpaceshipPart(53)},
-                {"polySurface18 1", new SpaceshipPart(54)}
-		};
+		public static Dictionary<string, SpaceshipPart> spaceshipParts;
 		// A constant to add additional time until the next part falls off of the spaceship
         static float bonusTime = 0;
 		
@@ -152,7 +98,8 @@ namespace DefaultNamespace
 			nextCrumbleTime = nextCrumbleTime + 1;
 			
 			// Check if the game has been won, has the player added the final part
-			if(droppedParts.Count == 0) {
+			if(droppedParts.Count == 0)
+			{
 				gameWon = true;
 			}
 			addBonusTime();
@@ -166,6 +113,66 @@ namespace DefaultNamespace
 		
 		public static void DoSpaceshipSetup(GameObject spaceshipPartObj)
 		{
+			Debug.Log("Is starting is now false");
+			isStarting = false;
+			gameWon = false;
+			bonusTime = 0;
+			spaceshipParts = new Dictionary<string, SpaceshipPart>(){
+				{"engine_frt_geo", new SpaceshipPart(0.5f)},
+                {"engine_lft_geo", new SpaceshipPart(0.5f)},
+                {"engine_rt_geo", new SpaceshipPart(0.5f)},
+                {"mEngine_lft", new SpaceshipPart(4)},
+                {"mEngine_rt", new SpaceshipPart(5)},
+                {"tank_lft_geo", new SpaceshipPart(6)},
+                {"tank_rt_geo", new SpaceshipPart(7)},
+                {"elevon_lft_geo", new SpaceshipPart(8)},
+                {"wingFlap_lft_geo", new SpaceshipPart(9)},
+                {"elevon_rt_geo", new SpaceshipPart(10)},
+                {"wingFlap_rt", new SpaceshipPart(11)},
+				{"mainSpaceShuttleBody_geo", new SpaceshipPart(12)},
+                {"pCube5", new SpaceshipPart(13)},
+                {"pCube4", new SpaceshipPart(14)},
+                {"pCylinder9", new SpaceshipPart(15)},
+                {"pCylinder10", new SpaceshipPart(16)},
+                {"pCylinder11", new SpaceshipPart(17)},
+                {"pCylinder12", new SpaceshipPart(18)},
+                {"pCube5 1", new SpaceshipPart(19)},
+                {"pCube4 1", new SpaceshipPart(20)},
+                {"pCylinder9 1", new SpaceshipPart(21)},
+                {"pCylinder10 1", new SpaceshipPart(22)},
+                {"pCylinder13", new SpaceshipPart(23)},
+                {"pCylinder14", new SpaceshipPart(24)},
+                {"polySurface17", new SpaceshipPart(25)},
+                {"polySurface2", new SpaceshipPart(26)},
+                {"polySurface4", new SpaceshipPart(27)},
+                {"polySurface6", new SpaceshipPart(28)},
+                {"polySurface8", new SpaceshipPart(29)},
+                {"polySurface10", new SpaceshipPart(30)},
+                {"polySurface12", new SpaceshipPart(31)},
+                {"polySurface14", new SpaceshipPart(32)},
+                {"polySurface16", new SpaceshipPart(33)},
+                {"polySurface15", new SpaceshipPart(34)},
+                {"polySurface2 1", new SpaceshipPart(35)},
+                {"polySurface4 1", new SpaceshipPart(36)},
+                {"polySurface6 1", new SpaceshipPart(37)},
+                {"polySurface8 1", new SpaceshipPart(38)},
+                {"polySurface10 1", new SpaceshipPart(39)},
+                {"polySurface12 1", new SpaceshipPart(40)},
+                {"polySurface14 1", new SpaceshipPart(41)},
+                {"polySurface16 1", new SpaceshipPart(42)},
+                {"polySurface15 1", new SpaceshipPart(43)},
+                {"polySurface18", new SpaceshipPart(44)},
+                {"polySurface2 2", new SpaceshipPart(45)},
+                {"polySurface4 2", new SpaceshipPart(46)},
+                {"polySurface6 2", new SpaceshipPart(47)},
+                {"polySurface8 2", new SpaceshipPart(48)},
+                {"polySurface10 2", new SpaceshipPart(49)},
+                {"polySurface12 2", new SpaceshipPart(50)},
+                {"polySurface14 2", new SpaceshipPart(51)},
+                {"polySurface16 2", new SpaceshipPart(52)},
+                {"polySurface15 2", new SpaceshipPart(53)},
+                {"polySurface18 1", new SpaceshipPart(54)}
+		};
 		    if (rust_material == null)
 			{
 				var rustMaterialLoaded = Resources.Load<Material>("rust_material");
@@ -203,7 +210,7 @@ namespace DefaultNamespace
 	    	}
     	}
 		// Returns whether all the parts are on the spaceship, thus the game is won
-		public static bool SpaceshipComplete() 
+		public static bool SpaceshipComplete()
 		{
 			return gameWon;
 		}
@@ -219,6 +226,16 @@ namespace DefaultNamespace
 		{
 			float health = 1 - ((float)droppedParts.Count / spaceshipParts.Count);
 			return health;
+		}
+
+		public static void SetIsStartingTrue()
+		{
+			isStarting = true;
+		}
+
+		public static bool GetIsStarting()
+		{
+			return isStarting;
 		}
     }
 }
