@@ -14,14 +14,20 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 85f;
+    private float speed = 80f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
+    // Speed constants
+    private float sprintSpeed = 110f;
+    private float normalSpeed = 80f;
+    public bool decreaseHealth;
+    
     // Jump
     private Vector3 playerVelocity;
-    private float jumpHeight = 5f;
+    private float jumpHeight = 4f;
     private float gravity = -39.81F;
+    private float jumpScale = 0.01f;
     
     // Handle object
     private GameObject collectibleHoldSlot;
@@ -49,6 +55,7 @@ public class CharacterControllerMovement : MonoBehaviour
         controls.Gameplay.Move.canceled += ctx => move = Vector3.zero;
         
         controls.Gameplay.Jump.performed += ctx => Jump();
+        controls.Gameplay.Sprint.performed += ctx => Sprint();
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
@@ -60,6 +67,24 @@ public class CharacterControllerMovement : MonoBehaviour
         {
             animator.SetBool("isJumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        }
+    }
+    
+    void Sprint()
+    {
+        if (speed < sprintSpeed)
+        {
+            speed = sprintSpeed;
+            jumpScale = 0.1f;
+            jumpHeight = 2f;
+            decreaseHealth = true;
+        }
+        else
+        {
+            speed = normalSpeed;
+            jumpScale = 0.01f;
+            jumpHeight = 6f;
+            decreaseHealth = false;
         }
     }
     
@@ -163,7 +188,7 @@ public class CharacterControllerMovement : MonoBehaviour
             {
                 animator.SetBool("isJumping", false);
             }
-            moveDir.y += (playerVelocity.y * 0.01f) ;
+            moveDir.y += (playerVelocity.y * jumpScale) ;
             
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
