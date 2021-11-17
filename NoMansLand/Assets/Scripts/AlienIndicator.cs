@@ -6,10 +6,34 @@ public class AlienIndicator : MonoBehaviour
 {
     public static GameObject AlienIndicatorObject; 
 
-    public static void SetAlienIndicatorActive(bool active) 
+    static Dictionary<string, bool> seenStatus = new Dictionary<string, bool>();
+
+    public static void AddToSeenStatus(string alien, bool seen) 
     {
-        AlienIndicatorObject = GameObject.FindGameObjectWithTag("AlienIndicator");
-        Debug.Log(AlienIndicatorObject.transform.GetChild(0).gameObject);
-        AlienIndicatorObject.transform.GetChild(0).gameObject.SetActive(active);
+        seenStatus[alien] = seen; 
+    }
+
+    public static void ActivateAlienIndicator()
+    {
+        AlienIndicatorObject = GameObject.FindGameObjectWithTag("AlienIndicator").transform.GetChild(0).gameObject;
+        if(checkIfAnyTrue()) 
+        {
+            AlienIndicatorObject.SetActive(true);
+        }
+        else {
+            AlienIndicatorObject.SetActive(false);
+        }
+    }
+
+    public static bool checkIfAnyTrue() 
+    {
+        foreach(KeyValuePair<string, bool> entry in seenStatus)
+        {
+            if(entry.Value == true) 
+            {
+                return true; 
+            }
+        }
+        return false; 
     }
 }

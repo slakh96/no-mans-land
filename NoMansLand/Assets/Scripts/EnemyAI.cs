@@ -48,13 +48,14 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = CheckPlayerInSightRange();
         hasSeenPlayer = playerInSightRange;
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        Debug.Log(hasSeenPlayer);
-        AlienIndicator.SetAlienIndicatorActive(hasSeenPlayer);
+
+        AlienIndicator.AddToSeenStatus(this.gameObject.name, hasSeenPlayer);
+        AlienIndicator.ActivateAlienIndicator();
+        
         if (!playerInSightRange && !playerInAttackRange) { 
             Patrol();
         }
         if (hasSeenPlayer) { 
-            //AlienIndicator.SetAlienIndicatorActive();
             ChasePlayer();
         }
         if (playerInAttackRange) AttackPlayer();
