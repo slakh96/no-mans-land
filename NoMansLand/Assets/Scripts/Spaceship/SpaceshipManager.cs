@@ -224,6 +224,10 @@ namespace DefaultNamespace
 		// Returns the current number of pieces remaining on the ship divided by the spaceship's total number of parts
 		public static float GetSpaceshipHealth()
 		{
+			if(spaceshipParts == null) 
+			{
+				return 1; 
+			}
 			float health = 1 - ((float)droppedParts.Count / spaceshipParts.Count);
 			return health;
 		}
