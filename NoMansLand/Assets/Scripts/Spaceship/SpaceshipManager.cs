@@ -113,10 +113,10 @@ namespace DefaultNamespace
 		
 		public static void DoSpaceshipSetup(GameObject spaceshipPartObj)
 		{
-			Debug.Log("Is starting is now false");
 			isStarting = false;
 			gameWon = false;
 			bonusTime = 0;
+			droppedParts = new List<string>();
 			spaceshipParts = new Dictionary<string, SpaceshipPart>(){
 				{"engine_frt_geo", new SpaceshipPart(0.5f)},
                 {"engine_lft_geo", new SpaceshipPart(0.5f)},
@@ -217,7 +217,7 @@ namespace DefaultNamespace
 		// Returns whether all the parts have fallen off the spaceship, thus the game is lost
 		public static bool SpaceshipDestroyed()
 		{
-			bool output = droppedParts.Count == spaceshipParts.Count;
+			bool output = droppedParts.Count == spaceshipParts.Count - 1;
 			return output;
 		}
 		
