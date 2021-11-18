@@ -50,7 +50,17 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Collectible hold slot
 - Props such as rocks
 ### Sultan
-
+- Creating alien types - randomized lurker, patrol type, scream type
+- Created movement engines for the aliens
+- Created attack and awareness engines for aliens with three states - patrol, chase, and attack
+- Created NavMeshSurface for smooth traversal of the aliens
+- Added stealth features to the player, through raycasts
+- Added alien model and texture from the art team modellers
+- Added field of view to the aliens, for viewing within a given angle
+- Added Editor UI files for adding a viewable angle to the aliens
+- Adding sounds for aliens
+- Adding fog effect for the general atmosphere
+- Working on alien animations
 ## What the plan for the upcoming weeks is.
 - Alien radar
 - Dodge mechanic
