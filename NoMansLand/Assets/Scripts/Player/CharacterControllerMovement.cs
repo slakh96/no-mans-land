@@ -90,11 +90,9 @@ public class CharacterControllerMovement : MonoBehaviour
     
     void HandleObject()
     {
-
         if (withinRange)
         {
             canGrab = true;
-
         }
         else
         {
@@ -133,6 +131,7 @@ public class CharacterControllerMovement : MonoBehaviour
                 SpaceshipManager.AddPartToShip();
                 FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
+                withinRange = false;
             }
         }
     }

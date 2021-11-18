@@ -14,7 +14,7 @@ public class DisableIsKinematic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-	    if (SpaceshipManager.GetIsStarting() && gameObject.name == "polySurface18 1")
+	    if (SpaceshipManager.GetIsStarting())
 	    {
 		    elapsedTime = 0;
 		    GameObject spaceship = GameObject.FindGameObjectWithTag("Spaceship");
