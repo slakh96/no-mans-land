@@ -27,6 +27,20 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Algorithm for randomly spawning Spaceship Parts, Health Items, and Aliens 
 - Alien Indicator feature: Used to indicate if player has been scene by Alien(s) 
 ### Gazi
+- Controller support
+- Cinemachine support: third person camera 
+- Input system support and Astronaut main movement: walk and jump
+- Astronaut main interactions: picking up items and dropping
+- Animation controller for player, state machines for walking, jumping and running
+- Audio support: audioManager for main sounds like overworld, oxygen, picking up and dropping
+- Terrain modelling and texture
+- Astronaut and alien textures
+- Adding oxygen meter bar, UI, and corresponding logic
+- Adding spaceship bar, UI, and corresponding logic
+- Adding spaceship compass navigator UI and corresponding logic
+- Adding health item, textures, and replenishing health item logic
+- Adding player sprint movement, and decreasing oxygen when sprinting
+
 ### Shahzil
 - Spaceship Model and textures
 - Rusty spaceship parts
