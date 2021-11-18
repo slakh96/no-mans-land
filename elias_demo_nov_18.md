@@ -23,7 +23,7 @@ You do need to have an up to date playable build for me to try. During the meeti
 ### Gazi
 - Controller support
 - Cinemachine support: third person camera 
-- Input system support and Astronaut main movement: walk, run and jump
+- Input system support and Astronaut main movement: walk and jump
 - Astronaut main interactions: picking up items and dropping
 - Animation controller for player, state machines for walking, jumping and running
 - Audio support: audioManager for main sounds like overworld, oxygen, picking up and dropping
@@ -33,6 +33,7 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Adding spaceship bar, UI, and corresponding logic
 - Adding spaceship compass navigator UI and corresponding logic
 - Adding health item, textures, and replenishing health item logic
+- Adding player sprint movement, and decreasing oxygen when sprinting
 
 ### Shahzil
 - Spaceship Model and textures
