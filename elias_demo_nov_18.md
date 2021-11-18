@@ -19,6 +19,7 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Add and update menus
 - Alien indicator
 ## What each person has accomplished up until now.
+### Abhi
 ### Gazi
 ### Shahzil
 - Spaceship Model and textures
@@ -29,7 +30,6 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Alien and spaceship sound effects
 - Collectible hold slot
 - Props such as rocks
-### Abhi
 ### Sultan
 
 ## What the plan for the upcoming weeks is.
