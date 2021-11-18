@@ -40,7 +40,6 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Adding spaceship compass navigator UI and corresponding logic
 - Adding health item, textures, and replenishing health item logic
 - Adding player sprint movement, and decreasing oxygen when sprinting
-
 ### Shahzil
 - Spaceship Model and textures
 - Rusty spaceship parts
