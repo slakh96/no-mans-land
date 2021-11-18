@@ -20,6 +20,12 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Alien indicator
 ## What each person has accomplished up until now.
 ### Abhi
+- Character Movement with Physics (for Keyboard)
+- Game Over & Win Screens 
+- Game Over & Win Scenes 
+- Main Menu 
+- Algorithm for randomly spawning Spaceship Parts, Health Items, and Aliens 
+- Alien Indicator feature: Used to indicate if player has been scene by Alien(s) 
 ### Gazi
 ### Shahzil
 - Spaceship Model and textures
