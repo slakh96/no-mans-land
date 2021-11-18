@@ -41,14 +41,18 @@ You do need to have an up to date playable build for me to try. During the meeti
 - Adding health item, textures, and replenishing health item logic
 - Adding player sprint movement, and decreasing oxygen when sprinting
 ### Shahzil
-- Spaceship Model and textures
+- Spaceship Model
+- Spaceship textures
 - Rusty spaceship parts
-- Spaceship crumbling mechanic
-- Material spawning, material deposit
+- Spaceship crumbling mechanics
+- Material spawning
+- Material deposit
+- Spaceship regeneration
 - Win conditions
 - Alien and spaceship sound effects
 - Collectible hold slot
 - Props such as rocks
+- Working on player sounds
 ### Sultan
 - Creating alien types - randomized lurker, patrol type, scream type
 - Created movement engines for the aliens
