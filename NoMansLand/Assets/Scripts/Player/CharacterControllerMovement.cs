@@ -14,13 +14,13 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 80f;
+    private float speed = 70f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
     // Speed constants
     private float sprintSpeed = 110f;
-    private float normalSpeed = 80f;
+    private float normalSpeed = 70f;
     public bool decreaseHealth;
     
     // Jump
@@ -60,7 +60,8 @@ public class CharacterControllerMovement : MonoBehaviour
         controls.Gameplay.Move.canceled += ctx => move = Vector3.zero;
         
         controls.Gameplay.Jump.performed += ctx => Jump();
-        controls.Gameplay.Sprint.performed += ctx => Sprint();
+        controls.Gameplay.Sprint.performed += ctx => Sprint(true);
+        controls.Gameplay.Sprint.canceled += ctx => Sprint(false);
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
@@ -75,9 +76,9 @@ public class CharacterControllerMovement : MonoBehaviour
         }
     }
     
-    void Sprint()
+    void Sprint(bool isSprint)
     {
-        if (speed < sprintSpeed)
+        if (isSprint)
         {
             speed = sprintSpeed;
             jumpScale = 0.1f;
