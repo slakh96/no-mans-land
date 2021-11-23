@@ -14,13 +14,13 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 70f;
+    private float speed = 80f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
     // Speed constants
     private float sprintSpeed = 110f;
-    private float normalSpeed = 70f;
+    private float normalSpeed = 80f;
     public bool decreaseHealth;
     
     // Jump

@@ -11,6 +11,9 @@ public class DisableIsKinematic : MonoBehaviour
 	public GameObject goscreen;
 	public GameObject healthBars;
 	public GameObject compass;
+	
+	// The number of time bonuses given so far
+	private int numBonuses = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,14 @@ public class DisableIsKinematic : MonoBehaviour
 		else if (SpaceshipManager.SpaceshipDestroyed())
 		{
 			MainMenuScript.ToGameOver();
+		}
+
+		//Over time, give the player more of a bonus as they will have to scavenge further for pieces
+		// Check for one arbitrary name to prevent this if block from getting executed for every part that has disableIsKinematic
+		if (elapsedTime > (30 * numBonuses) && gameObject.name == "engine_lft_geo")
+		{
+			SpaceshipManager.IncreaseDropoffBonus();
+			numBonuses += 1;
 		}
 		elapsedTime += Time.deltaTime;
     }

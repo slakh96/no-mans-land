@@ -8,7 +8,7 @@ public class RandomSpawner : MonoBehaviour
 {
 	public GameObject sampleSizeObj;
     public GameObject HealthItem; // the health regenerate item 
-    public int HEALTH_ITEM_COUNT = 10; // number of health regenerate items spawned 
+    public int HEALTH_ITEM_COUNT = 15; // number of health regenerate items spawned 
     public Terrain terrain;
     private List<GameObject> allSpaceShipParts = new List<GameObject>(); // A list of all the individual parts of the ship
     private List<GameObject> spaceShipPartsToSpawn = new List<GameObject>();
@@ -56,7 +56,7 @@ public class RandomSpawner : MonoBehaviour
 			Material currentMaterial = spaceShipPartsToSpawn[i].GetComponent<Renderer>().material; 
 
 			// Duplicate each spaceship part and spawn to a random location as a collectible
-            GameObject instantiatedClone = Instantiate(spaceShipPartsToSpawn[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
+            GameObject instantiatedClone = Instantiate(spaceShipPartsToSpawn[i], new Vector3(itemXPos, terrainYPos + 25, itemZPos), Quaternion.identity);
 			// Resize clone to target size picked by us.
 			instantiatedClone.transform.localScale = resizeObjToTarget(sampleSizeObj, instantiatedClone);
 			instantiatedClone.tag = "Collectible";

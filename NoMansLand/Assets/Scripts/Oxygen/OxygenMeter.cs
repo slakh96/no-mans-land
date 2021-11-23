@@ -41,7 +41,7 @@ public class OxygenMeter : MonoBehaviour
     {
         if (currPlayerControls.replenishHealth)
         {
-            time += 15f / 100f * maxTime;
+            time += 25f / 100f * maxTime;
             if (time >= maxTime)
             {
                 time = maxTime;
