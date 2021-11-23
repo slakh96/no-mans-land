@@ -43,11 +43,6 @@ public class CharacterControllerMovement : MonoBehaviour
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
     
-    // Game Over Screen
-    public GameObject goscreen;
-    public GameObject healthbars;
-    public GameObject compass;
-    
     // Start is called before the first frame update
     void Awake()
     {
@@ -95,11 +90,9 @@ public class CharacterControllerMovement : MonoBehaviour
     
     void HandleObject()
     {
-
         if (withinRange)
         {
             canGrab = true;
-
         }
         else
         {
@@ -138,6 +131,7 @@ public class CharacterControllerMovement : MonoBehaviour
                 SpaceshipManager.AddPartToShip();
                 FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
+                withinRange = false;
             }
         }
     }
@@ -165,12 +159,15 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Alien") 
         {
-            FindObjectOfType<AudioManager>().Play("KilledByAlien1");
-            Destroy(this.gameObject);
-            goscreen.SetActive(true);
-            healthbars.SetActive(false);
-            compass.SetActive(false);
+            StartCoroutine(PlayerDied(0.5f));
         }
+    }
+
+    IEnumerator PlayerDied(float time)
+    {
+        FindObjectOfType<AudioManager>().Play("KilledByAlien1");
+        yield return new WaitForSeconds(time);
+        MainMenuScript.ToGameOver();
     }
     
     // Update is called once per frame

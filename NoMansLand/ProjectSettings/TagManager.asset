@@ -10,6 +10,7 @@ TagManager:
   - GOscreen
   - Terrain
   - GOBackground
+  - AlienIndicator
   - HealthItem
   layers:
   - Default
