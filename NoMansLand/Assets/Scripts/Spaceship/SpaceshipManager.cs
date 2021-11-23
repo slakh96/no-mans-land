@@ -67,7 +67,10 @@ namespace DefaultNamespace
 		// Increases the bonus time that the player gets when he drops off a part
 		public static void IncreaseDropoffBonus()
 		{
-			curDropoffTimeBonus += 10;
+			if (curDropoffTimeBonus < 50)
+			{
+				curDropoffTimeBonus += 10;
+			}
 		}
 
 		// DropPartFromShip adds the dropped part to the list and makes it drop
@@ -124,6 +127,7 @@ namespace DefaultNamespace
 			isStarting = false;
 			gameWon = false;
 			bonusTime = 0;
+			curDropoffTimeBonus = 0;
 			droppedParts = new List<string>();
 			spaceshipParts = new Dictionary<string, SpaceshipPart>(){
 				{"engine_frt_geo", new SpaceshipPart(0.5f)},

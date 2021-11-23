@@ -56,7 +56,7 @@ public class RandomSpawner : MonoBehaviour
 			Material currentMaterial = spaceShipPartsToSpawn[i].GetComponent<Renderer>().material; 
 
 			// Duplicate each spaceship part and spawn to a random location as a collectible
-            GameObject instantiatedClone = Instantiate(spaceShipPartsToSpawn[i], new Vector3(itemXPos, terrainYPos + 3, itemZPos), Quaternion.identity);
+            GameObject instantiatedClone = Instantiate(spaceShipPartsToSpawn[i], new Vector3(itemXPos, terrainYPos + 25, itemZPos), Quaternion.identity);
 			// Resize clone to target size picked by us.
 			instantiatedClone.transform.localScale = resizeObjToTarget(sampleSizeObj, instantiatedClone);
 			instantiatedClone.tag = "Collectible";
