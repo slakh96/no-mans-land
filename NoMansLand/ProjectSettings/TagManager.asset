@@ -10,6 +10,8 @@ TagManager:
   - GOscreen
   - Terrain
   - GOBackground
+  - AlienIndicator
+  - HealthItem
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - WhatIsGround
   - WhatIsPlayer
   - WhatIsObstruction
-  - 
+  - Glow
   - 
   - 
   - 

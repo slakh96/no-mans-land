@@ -1,21 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using DefaultNamespace;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public void StartGame() 
+    private const int MAIN_MENU_SCENE = 0; 
+    private const int GAME_SCENE = 1; 
+    private const int GAME_OVER_SCENE = 2; 
+    private const int WIN_SCENE = 3; 
+    public static void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SpaceshipManager.SetIsStartingTrue();
+        SceneManager.LoadScene(GAME_SCENE);
     }
 
-    public void ToMainMenu() 
+    public static void ToMainMenu() 
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
     }
 
-    public void QuitGame() 
+    public static void ToGameOver() 
+    {
+        SceneManager.LoadScene(GAME_OVER_SCENE);
+    }
+
+    public static void ToWinScreen() 
+    {
+        SceneManager.LoadScene(WIN_SCENE);
+    }
+
+    public static void QuitGame() 
     {
         Application.Quit(); 
     }

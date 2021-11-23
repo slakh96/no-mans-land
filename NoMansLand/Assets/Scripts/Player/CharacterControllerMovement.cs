@@ -14,14 +14,20 @@ public class CharacterControllerMovement : MonoBehaviour
 
     // Move
     private Vector3 move;
-    private float speed = 85f;
+    private float speed = 70f;
     private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
+    // Speed constants
+    private float sprintSpeed = 110f;
+    private float normalSpeed = 70f;
+    public bool decreaseHealth;
+    
     // Jump
     private Vector3 playerVelocity;
-    private float jumpHeight = 5f;
+    private float jumpHeight = 4f;
     private float gravity = -39.81F;
+    private float jumpScale = 0.01f;
     
     // Handle object
     private GameObject collectibleHoldSlot;
@@ -37,11 +43,6 @@ public class CharacterControllerMovement : MonoBehaviour
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
     
-    // Game Over Screen
-    public GameObject goscreen;
-    public GameObject healthbars;
-    public GameObject compass;
-    
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,6 +55,8 @@ public class CharacterControllerMovement : MonoBehaviour
         controls.Gameplay.Move.canceled += ctx => move = Vector3.zero;
         
         controls.Gameplay.Jump.performed += ctx => Jump();
+        controls.Gameplay.Sprint.performed += ctx => Sprint(true);
+        controls.Gameplay.Sprint.canceled += ctx => Sprint(false);
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
@@ -68,13 +71,29 @@ public class CharacterControllerMovement : MonoBehaviour
         }
     }
     
+    void Sprint(bool isSprint)
+    {
+        if (isSprint)
+        {
+            speed = sprintSpeed;
+            jumpScale = 0.1f;
+            jumpHeight = 2f;
+            decreaseHealth = true;
+        }
+        else
+        {
+            speed = normalSpeed;
+            jumpScale = 0.01f;
+            jumpHeight = 6f;
+            decreaseHealth = false;
+        }
+    }
+    
     void HandleObject()
     {
-
         if (withinRange)
         {
             canGrab = true;
-
         }
         else
         {
@@ -113,6 +132,7 @@ public class CharacterControllerMovement : MonoBehaviour
                 SpaceshipManager.AddPartToShip();
                 FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
+                withinRange = false;
             }
         }
     }
@@ -140,12 +160,15 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Alien") 
         {
-            FindObjectOfType<AudioManager>().Play("KilledByAlien1");
-            Destroy(this.gameObject);
-            goscreen.SetActive(true);
-            healthbars.SetActive(false);
-            compass.SetActive(false);
+            StartCoroutine(PlayerDied(0.5f));
         }
+    }
+
+    IEnumerator PlayerDied(float time)
+    {
+        FindObjectOfType<AudioManager>().Play("KilledByAlien1");
+        yield return new WaitForSeconds(time);
+        MainMenuScript.ToGameOver();
     }
     
     // Update is called once per frame
@@ -165,7 +188,7 @@ public class CharacterControllerMovement : MonoBehaviour
             {
                 animator.SetBool("isJumping", false);
             }
-            moveDir.y += (playerVelocity.y * 0.01f) ;
+            moveDir.y += (playerVelocity.y * jumpScale) ;
             
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 

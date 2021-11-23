@@ -12,7 +12,7 @@ public class OxygenMeter : MonoBehaviour
     private CharacterControllerMovement currPlayerControls;
     private bool isPlaying;
 
-    public float maxTime = 200f;
+    public float maxTime = 150f;
 
     private float time;
     private float currPercentage;
@@ -48,10 +48,18 @@ public class OxygenMeter : MonoBehaviour
             }
             currPlayerControls.replenishHealth = false;
         }
+        
         currPercentage = slider.value / maxTime * 100f;
         if (time >= 0f)
         {
-            time -= Time.deltaTime;
+            if (currPlayerControls.decreaseHealth)
+            {
+                time -= Time.deltaTime * 3f;
+            }
+            else
+            {
+                time -= Time.deltaTime;
+            }
 
             // Interval and timing changes based on how long the Oxygen Meter is. 
             if (currPercentage <= 40f && currPercentage > 20f && !isPlaying)
@@ -70,9 +78,7 @@ public class OxygenMeter : MonoBehaviour
         else
         {
             Destroy(player);
-            goscreen.SetActive(true);
-            compass.SetActive(false);
-            healthbars.SetActive(false);
+            MainMenuScript.ToGameOver();
         }
         Color currentColor = Color.Lerp(Color.red, Color.green, slider.value / maxTime);
         currentColor.a = 0.5f;

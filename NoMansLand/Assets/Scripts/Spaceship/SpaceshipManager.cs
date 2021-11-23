@@ -22,66 +22,13 @@ namespace DefaultNamespace
     	static float curDropoffTimeBonus = 0;
 
 		// The rust material pointer
-		static Material rust_material;		
+		static Material rust_material;
+
+		static bool isStarting = false;
 
 		// A mapping from spaceship part name to spacship part object
-		public static Dictionary<string, SpaceshipPart> spaceshipParts =  
-            new Dictionary<string, SpaceshipPart>(){
-				{"engine_frt_geo", new SpaceshipPart(0.5f)},
-                {"engine_lft_geo", new SpaceshipPart(0.5f)},
-                {"engine_rt_geo", new SpaceshipPart(0.5f)},
-                {"mEngine_lft", new SpaceshipPart(2)},
-                {"mEngine_rt", new SpaceshipPart(3)},
-                {"tank_lft_geo", new SpaceshipPart(4)},
-                {"tank_rt_geo", new SpaceshipPart(5)},
-                {"elevon_lft_geo", new SpaceshipPart(6)},
-                {"wingFlap_lft_geo", new SpaceshipPart(7)},
-                {"elevon_rt_geo", new SpaceshipPart(8)},
-                {"wingFlap_rt", new SpaceshipPart(9)},
-				{"mainSpaceShuttleBody_geo", new SpaceshipPart(10)},
-                {"pCube5", new SpaceshipPart(11)},
-                {"pCube4", new SpaceshipPart(12)},
-                {"pCylinder9", new SpaceshipPart(13)},
-                {"pCylinder10", new SpaceshipPart(14)},
-                {"pCylinder11", new SpaceshipPart(15)},
-                {"pCylinder12", new SpaceshipPart(16)},
-                {"pCube5 1", new SpaceshipPart(17)},
-                {"pCube4 1", new SpaceshipPart(18)},
-                {"pCylinder9 1", new SpaceshipPart(19)},
-                {"pCylinder10 1", new SpaceshipPart(20)},
-                {"pCylinder13", new SpaceshipPart(21)},
-                {"pCylinder14", new SpaceshipPart(22)},
-                {"polySurface17", new SpaceshipPart(23)},
-                {"polySurface2", new SpaceshipPart(24)},
-                {"polySurface4", new SpaceshipPart(25)},
-                {"polySurface6", new SpaceshipPart(26)},
-                {"polySurface8", new SpaceshipPart(27)},
-                {"polySurface10", new SpaceshipPart(28)},
-                {"polySurface12", new SpaceshipPart(29)},
-                {"polySurface14", new SpaceshipPart(30)},
-                {"polySurface16", new SpaceshipPart(31)},
-                {"polySurface15", new SpaceshipPart(32)},
-                {"polySurface2 1", new SpaceshipPart(33)},
-                {"polySurface4 1", new SpaceshipPart(34)},
-                {"polySurface6 1", new SpaceshipPart(35)},
-                {"polySurface8 1", new SpaceshipPart(36)},
-                {"polySurface10 1", new SpaceshipPart(37)},
-                {"polySurface12 1", new SpaceshipPart(38)},
-                {"polySurface14 1", new SpaceshipPart(39)},
-                {"polySurface16 1", new SpaceshipPart(40)},
-                {"polySurface15 1", new SpaceshipPart(41)},
-                {"polySurface18", new SpaceshipPart(42)},
-                {"polySurface2 2", new SpaceshipPart(43)},
-                {"polySurface4 2", new SpaceshipPart(44)},
-                {"polySurface6 2", new SpaceshipPart(45)},
-                {"polySurface8 2", new SpaceshipPart(46)},
-                {"polySurface10 2", new SpaceshipPart(47)},
-                {"polySurface12 2", new SpaceshipPart(48)},
-                {"polySurface14 2", new SpaceshipPart(49)},
-                {"polySurface16 2", new SpaceshipPart(50)},
-                {"polySurface15 2", new SpaceshipPart(51)},
-                {"polySurface18 1", new SpaceshipPart(52)}
-		};
+		public static Dictionary<string, SpaceshipPart> spaceshipParts;
+
 		// A constant to add additional time until the next part falls off of the spaceship
         static float bonusTime = 0;
 		
@@ -159,7 +106,8 @@ namespace DefaultNamespace
 			nextCrumbleTime = nextCrumbleTime + 1;
 			
 			// Check if the game has been won, has the player added the final part
-			if(droppedParts.Count == 0) {
+			if(droppedParts.Count == 0)
+			{
 				gameWon = true;
 			}
 			addExtraTime();
@@ -173,6 +121,66 @@ namespace DefaultNamespace
 		
 		public static void DoSpaceshipSetup(GameObject spaceshipPartObj)
 		{
+			isStarting = false;
+			gameWon = false;
+			bonusTime = 0;
+			droppedParts = new List<string>();
+			spaceshipParts = new Dictionary<string, SpaceshipPart>(){
+				{"engine_frt_geo", new SpaceshipPart(0.5f)},
+                {"engine_lft_geo", new SpaceshipPart(0.5f)},
+                {"engine_rt_geo", new SpaceshipPart(0.5f)},
+                {"mEngine_lft", new SpaceshipPart(2)},
+                {"mEngine_rt", new SpaceshipPart(3)},
+                {"tank_lft_geo", new SpaceshipPart(4)},
+                {"tank_rt_geo", new SpaceshipPart(5)},
+                {"elevon_lft_geo", new SpaceshipPart(6)},
+                {"wingFlap_lft_geo", new SpaceshipPart(7)},
+                {"elevon_rt_geo", new SpaceshipPart(8)},
+                {"wingFlap_rt", new SpaceshipPart(9)},
+				{"mainSpaceShuttleBody_geo", new SpaceshipPart(10)},
+                {"pCube5", new SpaceshipPart(11)},
+                {"pCube4", new SpaceshipPart(12)},
+                {"pCylinder9", new SpaceshipPart(13)},
+                {"pCylinder10", new SpaceshipPart(14)},
+                {"pCylinder11", new SpaceshipPart(15)},
+                {"pCylinder12", new SpaceshipPart(16)},
+                {"pCube5 1", new SpaceshipPart(17)},
+                {"pCube4 1", new SpaceshipPart(18)},
+                {"pCylinder9 1", new SpaceshipPart(19)},
+                {"pCylinder10 1", new SpaceshipPart(20)},
+                {"pCylinder13", new SpaceshipPart(21)},
+                {"pCylinder14", new SpaceshipPart(22)},
+                {"polySurface17", new SpaceshipPart(23)},
+                {"polySurface2", new SpaceshipPart(24)},
+                {"polySurface4", new SpaceshipPart(25)},
+                {"polySurface6", new SpaceshipPart(26)},
+                {"polySurface8", new SpaceshipPart(27)},
+                {"polySurface10", new SpaceshipPart(28)},
+                {"polySurface12", new SpaceshipPart(29)},
+                {"polySurface14", new SpaceshipPart(30)},
+                {"polySurface16", new SpaceshipPart(31)},
+                {"polySurface15", new SpaceshipPart(32)},
+                {"polySurface2 1", new SpaceshipPart(33)},
+                {"polySurface4 1", new SpaceshipPart(34)},
+                {"polySurface6 1", new SpaceshipPart(35)},
+                {"polySurface8 1", new SpaceshipPart(36)},
+                {"polySurface10 1", new SpaceshipPart(37)},
+                {"polySurface12 1", new SpaceshipPart(38)},
+                {"polySurface14 1", new SpaceshipPart(39)},
+                {"polySurface16 1", new SpaceshipPart(40)},
+                {"polySurface15 1", new SpaceshipPart(41)},
+                {"polySurface18", new SpaceshipPart(42)},
+                {"polySurface2 2", new SpaceshipPart(43)},
+                {"polySurface4 2", new SpaceshipPart(44)},
+                {"polySurface6 2", new SpaceshipPart(45)},
+                {"polySurface8 2", new SpaceshipPart(46)},
+                {"polySurface10 2", new SpaceshipPart(47)},
+                {"polySurface12 2", new SpaceshipPart(48)},
+                {"polySurface14 2", new SpaceshipPart(49)},
+                {"polySurface16 2", new SpaceshipPart(50)},
+                {"polySurface15 2", new SpaceshipPart(51)},
+                {"polySurface18 1", new SpaceshipPart(52)}
+		};
 		    if (rust_material == null)
 			{
 				var rustMaterialLoaded = Resources.Load<Material>("rust_material");
@@ -210,22 +218,36 @@ namespace DefaultNamespace
 	    	}
     	}
 		// Returns whether all the parts are on the spaceship, thus the game is won
-		public static bool SpaceshipComplete() 
+		public static bool SpaceshipComplete()
 		{
 			return gameWon;
 		}
 		// Returns whether all the parts have fallen off the spaceship, thus the game is lost
 		public static bool SpaceshipDestroyed()
 		{
-			bool output = droppedParts.Count == spaceshipParts.Count;
+			bool output = droppedParts.Count == spaceshipParts.Count - 1;
 			return output;
 		}
 		
 		// Returns the current number of pieces remaining on the ship divided by the spaceship's total number of parts
 		public static float GetSpaceshipHealth()
 		{
+			if(spaceshipParts == null) 
+			{
+				return 1; 
+			}
 			float health = 1 - ((float)droppedParts.Count / spaceshipParts.Count);
 			return health;
+		}
+
+		public static void SetIsStartingTrue()
+		{
+			isStarting = true;
+		}
+
+		public static bool GetIsStarting()
+		{
+			return isStarting;
 		}
     }
 }

@@ -19,8 +19,6 @@ public class MovePhysics : MonoBehaviour
 
     private const float ScaleMovement = 0.7f;
 
-    public GameObject goscreen;
-
     private const float ScaleJump = 0.5f;
     // Start is called before the first frame update
     void Start()
@@ -42,7 +40,7 @@ public class MovePhysics : MonoBehaviour
         if (other.collider.tag == "Alien") 
         {
             Destroy(this.gameObject);
-            goscreen.SetActive(true);
+            MainMenuScript.ToGameOver();
         }
     }
 
