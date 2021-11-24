@@ -34,8 +34,7 @@ public class RandomSpawner : MonoBehaviour
         terrainZLength = (int)terrain.terrainData.size[2];
         spaceshipX = (int)GameObject.FindGameObjectWithTag("Spaceship").gameObject.transform.position[0];
         spaceshipZ = (int)GameObject.FindGameObjectWithTag("Spaceship").gameObject.transform.position[2];
-        Debug.Log(spaceshipX);
-        Debug.Log(spaceshipZ);
+
         StartCoroutine(CollectibleDrop());
         StartCoroutine(SpawnHealthItem());
     }
