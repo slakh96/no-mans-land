@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AlienIndicator : MonoBehaviour
 {
-    public static GameObject AlienIndicatorObject; 
+    public static GameObject AlienIndicatorObjectDefault;
+    public static GameObject AlienIndicatorObjectSeen; 
 
     static Dictionary<string, bool> seenStatus = new Dictionary<string, bool>();
 
@@ -15,13 +16,16 @@ public class AlienIndicator : MonoBehaviour
 
     public static void ActivateAlienIndicator()
     {
-        AlienIndicatorObject = GameObject.FindGameObjectWithTag("AlienIndicator").transform.GetChild(0).gameObject;
+        AlienIndicatorObjectDefault = GameObject.FindGameObjectWithTag("AlienIndicator").transform.GetChild(0).gameObject;
+        AlienIndicatorObjectSeen = GameObject.FindGameObjectWithTag("AlienIndicator").transform.GetChild(1).gameObject;
         if(checkIfAnyTrue()) 
         {
-            AlienIndicatorObject.SetActive(true);
+            AlienIndicatorObjectDefault.SetActive(false);
+            AlienIndicatorObjectSeen.SetActive(true);
         }
         else {
-            AlienIndicatorObject.SetActive(false);
+            AlienIndicatorObjectDefault.SetActive(true);
+            AlienIndicatorObjectSeen.SetActive(false);
         }
     }
 
