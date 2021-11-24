@@ -8,21 +8,21 @@ public class RandomSpawner : MonoBehaviour
 {
 	public GameObject sampleSizeObj;
     public GameObject HealthItem; // the health regenerate item 
-    public int HEALTH_ITEM_COUNT = 15; // number of health regenerate items spawned 
+    private int HEALTH_ITEM_COUNT = 15; // number of health regenerate items spawned 
     public Terrain terrain;
     private List<GameObject> allSpaceShipParts = new List<GameObject>(); // A list of all the individual parts of the ship
     private List<GameObject> spaceShipPartsToSpawn = new List<GameObject>();
-    public int terrainXPos; // corner X position of the terrain 
-    public int terrainYPos; // corner Y position of the terrain 
-    public int terrainZPos; // corner Z position of the terrain 
-    public int terrainXLength; // length of terrain in X axis 
-    public int terrainZLength; // length of terrain in Z axis 
-    public int itemXPos; // x position of item 
-    public int itemZPos; // z position of item 
-    public const int cushionAmount = 70; // to ensure spawning does not happen at the edges (at the borders)
+    private int terrainXPos; // corner X position of the terrain 
+    private int terrainYPos; // corner Y position of the terrain 
+    private int terrainZPos; // corner Z position of the terrain 
+    private int terrainXLength; // length of terrain in X axis 
+    private int terrainZLength; // length of terrain in Z axis 
+    private int itemXPos; // x position of item 
+    private int itemZPos; // z position of item 
+    private const int cushionAmount = 150; // to ensure spawning does not happen at the edges (at the borders)
     private GameObject sampleObj;
-    public int spaceshipX; 
-    public int spaceshipZ; 
+    private int spaceshipX; 
+    private int spaceshipZ; 
     // Start is called before the first frame update
     void Start()
     {
@@ -61,15 +61,34 @@ public class RandomSpawner : MonoBehaviour
             {
                 // Generate an X position in Area 1 
                 itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, spaceshipX - cushionAmount); 
-                // Generate a Z position in Area 1 
-                itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, spaceshipZ - cushionAmount);
+                
+                if(i%4 == 0)
+                {
+                    // Generate a Z position in Area 1 
+                    itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, spaceshipZ - cushionAmount);
+                } 
+                else 
+                {
+                    // Generate a Z position in Area 2
+                    itemZPos = UnityEngine.Random.Range(spaceshipZ + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+                }
             } 
             else 
             {
                 // Generate an X position in Area 2 
                 itemXPos = UnityEngine.Random.Range(spaceshipX + cushionAmount, terrainXPos + terrainXLength - cushionAmount); 
-                // Generate a Z position in Area 2 
-                itemZPos = UnityEngine.Random.Range(spaceshipZ + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+
+                if(i%4 == 1)
+                {
+                    // Generate a Z position in Area 1 
+                    itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, spaceshipZ - cushionAmount);
+                } 
+                else 
+                {
+                    // Generate a Z position in Area 2 
+                    itemZPos = UnityEngine.Random.Range(spaceshipZ + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+                }
+
             }
 
 			// Get current material of original part
