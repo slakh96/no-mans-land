@@ -8,20 +8,21 @@ public class RandomSpawner : MonoBehaviour
 {
 	public GameObject sampleSizeObj;
     public GameObject HealthItem; // the health regenerate item 
-    public int HEALTH_ITEM_COUNT = 15; // number of health regenerate items spawned 
+    private int HEALTH_ITEM_COUNT = 15; // number of health regenerate items spawned 
     public Terrain terrain;
     private List<GameObject> allSpaceShipParts = new List<GameObject>(); // A list of all the individual parts of the ship
     private List<GameObject> spaceShipPartsToSpawn = new List<GameObject>();
-    public int terrainXPos; // corner X position of the terrain 
-    public int terrainYPos; // corner Y position of the terrain 
-    public int terrainZPos; // corner Z position of the terrain 
-    public int terrainXLength; // length of terrain in X axis 
-    public int terrainZLength; // length of terrain in Z axis 
-    public int itemXPos; // x position of item 
-    public int itemZPos; // z position of item 
-    public const int cushionAmount = 50; // to ensure spawning does not happen at the edges (at the borders)
-
+    private int terrainXPos; // corner X position of the terrain 
+    private int terrainYPos; // corner Y position of the terrain 
+    private int terrainZPos; // corner Z position of the terrain 
+    private int terrainXLength; // length of terrain in X axis 
+    private int terrainZLength; // length of terrain in Z axis 
+    private int itemXPos; // x position of item 
+    private int itemZPos; // z position of item 
+    private const int cushionAmount = 150; // to ensure spawning does not happen at the edges (at the borders)
     private GameObject sampleObj;
+    private int spaceshipX; 
+    private int spaceshipZ; 
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,9 @@ public class RandomSpawner : MonoBehaviour
 
         terrainXLength = (int)terrain.terrainData.size[0];
         terrainZLength = (int)terrain.terrainData.size[2];
+        spaceshipX = (int)GameObject.FindGameObjectWithTag("Spaceship").gameObject.transform.position[0];
+        spaceshipZ = (int)GameObject.FindGameObjectWithTag("Spaceship").gameObject.transform.position[2];
+
         StartCoroutine(CollectibleDrop());
         StartCoroutine(SpawnHealthItem());
     }
@@ -48,10 +52,45 @@ public class RandomSpawner : MonoBehaviour
         getRelevantSpaceshipParts(spaceship);
         for (int i = 0; i < spaceShipPartsToSpawn.Count; i++)
         {
-            // generate random X position in the range (terrainXPos + 50, terrainXPos + terrainXLength - 50)
-            itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, terrainXPos + terrainXLength - cushionAmount); 
-            // generate random Z position in the range (terrainZPos + 50, terrainZPos + terrainZLength - 50)
-            itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+            // Basically: the "spawnable" region has been split into two areas  
+            // Area 1: edge of map (+ cushion amount) up until spaceship (- cushion amount)
+            // Area 2: spaceship ( + cushion amount) up until other edge of map 
+            // As a result, spaceship +/- cushion amount has been excluded from spawning items 
+            // We will spawn in these two areas equally 
+            if(i%2 == 0) 
+            {
+                // Generate an X position in Area 1 
+                itemXPos = UnityEngine.Random.Range(terrainXPos + cushionAmount, spaceshipX - cushionAmount); 
+                
+                if(i%4 == 0)
+                {
+                    // Generate a Z position in Area 1 
+                    itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, spaceshipZ - cushionAmount);
+                } 
+                else 
+                {
+                    // Generate a Z position in Area 2
+                    itemZPos = UnityEngine.Random.Range(spaceshipZ + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+                }
+            } 
+            else 
+            {
+                // Generate an X position in Area 2 
+                itemXPos = UnityEngine.Random.Range(spaceshipX + cushionAmount, terrainXPos + terrainXLength - cushionAmount); 
+
+                if(i%4 == 1)
+                {
+                    // Generate a Z position in Area 1 
+                    itemZPos = UnityEngine.Random.Range(terrainZPos + cushionAmount, spaceshipZ - cushionAmount);
+                } 
+                else 
+                {
+                    // Generate a Z position in Area 2 
+                    itemZPos = UnityEngine.Random.Range(spaceshipZ + cushionAmount, terrainZPos + terrainZLength - cushionAmount);
+                }
+
+            }
+
 			// Get current material of original part
 			Material currentMaterial = spaceShipPartsToSpawn[i].GetComponent<Renderer>().material; 
 
@@ -145,3 +184,4 @@ public class RandomSpawner : MonoBehaviour
     }
     
 }
+  
