@@ -16,6 +16,11 @@ public class MainMenuScript : MonoBehaviour
         SpaceshipManager.SetIsStartingTrue();
         SceneManager.LoadScene(TUTORIAL_SCENE);
     }
+    public static void StartMainGame() 
+    {
+        SpaceshipManager.SetIsStartingTrue();
+        SceneManager.LoadScene(GAME_SCENE);
+    }
 
     public static void ToMainMenu() 
     {

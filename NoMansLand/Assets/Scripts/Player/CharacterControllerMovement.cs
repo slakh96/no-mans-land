@@ -45,6 +45,7 @@ public class CharacterControllerMovement : MonoBehaviour
     public bool isTutorialLevel; 
     public bool pickupSuccessful = false;
     public bool dropoffSuccessful = false; 
+    public bool healthPickupSuccessful = false; 
     
     // Start is called before the first frame update
     void Awake()
@@ -166,6 +167,10 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "HealthItem")
         {
+            if(isTutorialLevel) 
+            {
+                healthPickupSuccessful = true; 
+            }
             replenishHealth = true;
             FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
