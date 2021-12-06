@@ -42,6 +42,9 @@ public class CharacterControllerMovement : MonoBehaviour
     private float DISTANCE_LIMIT = 50;
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
+    public bool isTutorialLevel; 
+    public bool pickupSuccessful = false;
+    public bool dropoffSuccessful = false; 
     
     // Start is called before the first frame update
     void Awake()
@@ -100,7 +103,6 @@ public class CharacterControllerMovement : MonoBehaviour
             canGrab = false;
         }
         
-        
         if (canGrab && collectibleHoldSlot.transform.childCount == 0)
         {
             Transform collectibleObjTransform = currentCollectible.transform;
@@ -113,6 +115,11 @@ public class CharacterControllerMovement : MonoBehaviour
             // Randomize later
             FindObjectOfType<AudioManager>().Play("Pickup1");
             canGrab = false;
+
+            if(isTutorialLevel) 
+            {
+                pickupSuccessful = true;
+            }
         }
         else if (collectibleHoldSlot.transform.childCount > 0)
         {
@@ -133,6 +140,11 @@ public class CharacterControllerMovement : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
                 withinRange = false;
+
+                if(isTutorialLevel) 
+                {
+                    dropoffSuccessful = true;
+                }
             }
         }
     }
