@@ -10,7 +10,6 @@ public class MessageDisplayer : MonoBehaviour
     public GameObject healthItem; 
     public GameObject player;
     public GameObject sampleSizeObj;
-    private bool hasPickedUp = false; 
 
     // Start is called before the first frame update
     private string[] TextToDisplay = new string[]{"hello.", "welcome to no mans land",
@@ -63,7 +62,6 @@ public class MessageDisplayer : MonoBehaviour
       yield return new WaitUntil(CheckIfPickedUpItem);
  
       Debug.Log("Finish");
-      hasPickedUp = true;
       int i = 6; 
       while (i <= 7) 
       {
