@@ -9,6 +9,7 @@ public class MessageDisplayer : MonoBehaviour
     public GameObject spaceshipPart; 
     public GameObject player;
     public GameObject sampleSizeObj;
+    private bool hasPickedUp = false; 
 
     // Start is called before the first frame update
     private string[] TextToDisplay = new string[]{"hello.", "welcome to no mans land",
@@ -26,7 +27,8 @@ public class MessageDisplayer : MonoBehaviour
 
     IEnumerator DisplayText(int i)
     {
-        while(i < TextToDisplay.Length)
+        bool display = true;
+        while(i < 7)
         {
             if(i == 6) 
             {
@@ -36,19 +38,45 @@ public class MessageDisplayer : MonoBehaviour
 			    instantiatedClone.tag = "Collectible";
 			    // Allow cloned part to respond to gravity
                 instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
-
-                CharacterControllerMovement s = player.GetComponent<CharacterControllerMovement>();
-                while(!s.pickupSuccessful) 
-                {
-                    Debug.Log("Didn't pick up yet!");
-                }
-            }
+                display = false; 
+                StartCoroutine(StartPickupWait());
+                // while(!s.pickupSuccessful) 
+                // {
+                //     Debug.Log("Didn't pick up yet!");
+                // }
+                // Debug.Log("Picked up!");
+            } 
             Debug.Log(i);
             yield return new WaitForSeconds(4f);
             tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
             i = i + 1;
         }
     }
+
+    IEnumerator StartPickupWait() {
+      Debug.Log("Start");
+ 
+      yield return new WaitUntil(CheckIfPlayerPickedUpItem);
+ 
+      Debug.Log("Finish");
+      hasPickedUp = true;
+      int i = 6; 
+      while (i < TextToDisplay.Length) 
+      {
+          tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
+          i = i + 1;
+      }
+      
+   }
+
+    //Returns false while the player still hasn't picked up the item, and true when they have 
+   bool CheckIfPlayerPickedUpItem() {
+      CharacterControllerMovement s = player.GetComponent<CharacterControllerMovement>();
+      while (s.pickupSuccessful == false) {
+          return false; 
+      }
+      return true; 
+   }
 
     private Vector3 resizeObjToTarget(GameObject target, GameObject go)
     {
