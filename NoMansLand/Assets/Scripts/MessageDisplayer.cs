@@ -23,7 +23,7 @@ public class MessageDisplayer : MonoBehaviour
     void Start()
     {
         Debug.Log(player.transform.position);
-        int i = 3;
+        int i = 0;
         StartCoroutine(DisplayText(i));
         i++;
     }
@@ -51,8 +51,7 @@ public class MessageDisplayer : MonoBehaviour
             } 
             Debug.Log(i);
             yield return new WaitForSeconds(4f);
-            tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
-            i = i + 1;
+            tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
         }
     }
 
@@ -65,8 +64,7 @@ public class MessageDisplayer : MonoBehaviour
       int i = 6; 
       while (i <= 7) 
       {
-          tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
-          i = i + 1;
+          tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
       }
 
       yield return new WaitUntil(checkIfDeposited);
@@ -74,8 +72,7 @@ public class MessageDisplayer : MonoBehaviour
       i = 8;
       while (i < 12) 
       {
-          tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
-          i = i + 1;
+          tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
       }
       // Now instantiate the health item 
       GameObject instantiatedHealthItem = Instantiate(healthItem, new Vector3(player.transform.position[0] - 5, player.transform.position[1] + 65, player.transform.position[2]), Quaternion.identity);
@@ -83,9 +80,8 @@ public class MessageDisplayer : MonoBehaviour
       i = 12;
       while (i < TextToDisplay.Length) 
       {
-        tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i];
+        tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
         yield return new WaitForSeconds(4);
-        i = i + 1;
       }
       yield return new WaitForSeconds(2);
       // Now Load Main Scene
