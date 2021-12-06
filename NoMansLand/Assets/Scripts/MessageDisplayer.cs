@@ -87,9 +87,9 @@ public class MessageDisplayer : MonoBehaviour
         yield return new WaitForSeconds(4);
         i = i + 1;
       }
-      yield return new WaitForSeconds(3);
+      yield return new WaitForSeconds(2);
       // Now Load Main Scene
-      MainMenuScript.StartMainGame();
+      MainMenuScript.StartGame();
    }
 
    bool checkIfPickedUpHealthItem() {
