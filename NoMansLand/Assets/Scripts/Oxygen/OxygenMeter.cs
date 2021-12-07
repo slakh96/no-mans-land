@@ -82,6 +82,25 @@ public class OxygenMeter : MonoBehaviour
         }
         Color currentColor = Color.Lerp(Color.red, Color.green, slider.value / maxTime);
         currentColor.a = 0.5f;
+        if (currPercentage <= 25f)
+        {
+            if ((int) time % 4 == 0)
+            {
+                currentColor.a = 0.99f;
+            }
+            else if ((int) time % 4 == 1)
+            {
+                currentColor.a = 0.5f;
+            }
+            else if ((int) time % 4 == 2)
+            {
+                currentColor.a = 0.99f;
+            }
+            else if ((int) time % 4 == 3)
+            {
+                currentColor.a = 0.5f;
+            }
+        }
         sliderFill.color = currentColor;
         setHealth(Mathf.RoundToInt(time));
     }
