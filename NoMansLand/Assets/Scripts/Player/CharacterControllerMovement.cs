@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 using DefaultNamespace;
 public class CharacterControllerMovement : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class CharacterControllerMovement : MonoBehaviour
     private bool canGrab = false;
     private bool withinRange = false;
     private GameObject currentCollectible;
+    public GameObject spaceship; 
+    public GameObject distanceDisplay; 
     // Health item
     public bool replenishHealth;
 
@@ -64,6 +67,17 @@ public class CharacterControllerMovement : MonoBehaviour
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
+    }
+
+    void CalculateDistance() 
+    {
+        Vector3 spaceshipPosition = spaceship.transform.position;
+        spaceshipPosition.y = 0;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        playerPosition.y = 0;
+
+        int distInt = Convert.ToInt32(Vector3.Distance(spaceshipPosition, playerPosition)); 
+        distanceDisplay.GetComponent<Text>().text = distInt < 120 ? "" : "Distance: " + distInt + " m";
     }
     
     void Jump()
@@ -191,6 +205,7 @@ public class CharacterControllerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateDistance();
         Vector3 m = new Vector3(move.x, 0, move.y).normalized;
 
         if (m.magnitude >= 0.1f)
