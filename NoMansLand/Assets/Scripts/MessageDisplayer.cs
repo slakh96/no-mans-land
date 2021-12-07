@@ -11,7 +11,7 @@ public class MessageDisplayer : MonoBehaviour
     public GameObject player;
     public GameObject sampleSizeObj;
 
-    // Start is called before the first frame update
+    // These are the instructions to display during tutorial 
     private string[] TextToDisplay = new string[]{"hello.", "welcome to no mans land",
      "let's teach you to play!", "your task is to collect spaceship parts & repair the ship", 
      "you will find parts scattered around the map", "press Square to pick up an item", "here's an item. pick it up.",
@@ -21,6 +21,7 @@ public class MessageDisplayer : MonoBehaviour
      "The compass at the top shows the way to the ship", "the distance to ship is shown below the compass", "avoid the aliens around the map", "you're ready to play!", "let's start the game!"
      };  
 
+     // Start is called before the first frame update
     void Start()
     {
         Debug.Log(player.transform.position);
