@@ -340,7 +340,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: ff0965a5cf4a7c24d898ffedcb319599, type: 3}
     m_FontSize: 55
     m_FontStyle: 3
     m_BestFit: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start Tutorial
+  m_Text: Tutorial
 --- !u!222 &820185462
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -451,6 +451,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1816807581239001415, guid: 0ea98b937ba749d4e8cefbb6e4fc01bd, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ff0965a5cf4a7c24d898ffedcb319599, type: 3}
     - target: {fileID: 1816807581982406845, guid: 0ea98b937ba749d4e8cefbb6e4fc01bd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -280
@@ -555,6 +559,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: Start Game
       objectReference: {fileID: 0}
+    - target: {fileID: 1816807583089213060, guid: 0ea98b937ba749d4e8cefbb6e4fc01bd, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ff0965a5cf4a7c24d898ffedcb319599, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ea98b937ba749d4e8cefbb6e4fc01bd, type: 3}
 --- !u!1 &1414565818
