@@ -71,9 +71,13 @@ public class CharacterControllerMovement : MonoBehaviour
 
     void CalculateDistance() 
     {
-        float dist = Vector3.Distance(spaceship.transform.position, this.gameObject.transform.position);
-        float distRounded = (float)Math.Round(dist * 100f) / 100f;
-        distanceDisplay.GetComponent<Text>().text = "Dist: " + distRounded + " m";
+        Vector3 spaceshipPosition = spaceship.transform.position;
+        spaceshipPosition.y = 0;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        playerPosition.y = 0;
+
+        int distInt = Convert.ToInt32(Vector3.Distance(spaceshipPosition, playerPosition)); 
+        distanceDisplay.GetComponent<Text>().text = distInt < 120 ? "" : distInt + " m";
     }
     
     void Jump()
