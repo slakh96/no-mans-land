@@ -17,7 +17,7 @@ public class MessageDisplayer : MonoBehaviour
      "you will find parts scattered around the map", "press Square to pick up an item", "here's an item. pick it up.",
      "good! now drop it off at the ship", "congrats! you're a natural!", "you will also find health items around the map", 
      "collect them to replenish your oxygen", "here's a health item, collect it", "good job!", 
-     "the alien indicator will turn red if aliens are nearby", "you're ready to play!", "let's start the game!"
+     "the alien indicator will turn red if aliens are nearby", "press X to jump and R1 to sprint", "you're ready to play!", "let's start the game!"
      }; 
 
     void Start()
@@ -30,64 +30,62 @@ public class MessageDisplayer : MonoBehaviour
 
     IEnumerator DisplayText(int i)
     {
-        bool display = true;
         while(i < 7)
         {
             if(i == 6) 
             {
-                Debug.Log("Spawned");
-                GameObject instantiatedClone = Instantiate(spaceshipPart, new Vector3(player.transform.position[0] - 5, player.transform.position[1] + 85, player.transform.position[2]), Quaternion.identity);
-                instantiatedClone.transform.localScale = resizeObjToTarget(sampleSizeObj, instantiatedClone);
-			    instantiatedClone.tag = "Collectible";
-			    // Allow cloned part to respond to gravity
-                instantiatedClone.GetComponent<Rigidbody>().isKinematic = false;
-                display = false; 
-                StartCoroutine(StartPickupWait());
-                // while(!s.pickupSuccessful) 
-                // {
-                //     Debug.Log("Didn't pick up yet!");
-                // }
-                // Debug.Log("Picked up!");
+                GameObject samplePart = Instantiate(spaceshipPart, new Vector3(player.transform.position[0] - 5, player.transform.position[1] + 85, player.transform.position[2]), Quaternion.identity);
+                samplePart.transform.localScale = resizeObjToTarget(sampleSizeObj, samplePart);
+			    samplePart.tag = "Collectible";
+			    // Allow insantiated part to respond to gravity
+                samplePart.GetComponent<Rigidbody>().isKinematic = false;
+                StartCoroutine(StartTutorialProcedure());
             } 
-            Debug.Log(i);
+            // Wait for 4 seconds 
             yield return new WaitForSeconds(4f);
+            // Display next instruction on screen
             tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
         }
     }
 
-    IEnumerator StartPickupWait() {
-      Debug.Log("Start");
- 
-      yield return new WaitUntil(CheckIfPickedUpItem);
- 
-      Debug.Log("Finish");
+    IEnumerator StartTutorialProcedure() {
+      yield return new WaitUntil(checkIfPickedUpItem);
+
       int i = 6; 
       while (i <= 7) 
       {
+          // Display the next instruction on screen 
           tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
       }
-
+    
+      // Halt until player has deposited the item to the spaceship 
       yield return new WaitUntil(checkIfDeposited);
-      Debug.Log("Dropped off!");
       i = 8;
       while (i < 12) 
       {
+          // Display the next instruction on screen 
           tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
       }
+
       // Now instantiate the health item 
       GameObject instantiatedHealthItem = Instantiate(healthItem, new Vector3(player.transform.position[0] - 5, player.transform.position[1] + 65, player.transform.position[2]), Quaternion.identity);
+      // Halt until the player has picked up the instantiated health item 
       yield return new WaitUntil(checkIfPickedUpHealthItem);
       i = 12;
       while (i < TextToDisplay.Length) 
       {
+        // Display the next instruction on screen 
         tutorialCanvas.GetComponent<Text>().text = TextToDisplay[i++];
+        // Wait for 4 seconds 
         yield return new WaitForSeconds(4);
       }
+      // Wait for 2 seconds 
       yield return new WaitForSeconds(2);
-      // Now Load Main Scene
+      // Now Redirect user to Main Game Scene 
       MainMenuScript.StartGame();
    }
 
+   // This helper function will determine when the player has picked up the health item 
    bool checkIfPickedUpHealthItem() {
       CharacterControllerMovement s = player.GetComponent<CharacterControllerMovement>();
       while (s.healthPickupSuccessful == false) {
@@ -96,6 +94,7 @@ public class MessageDisplayer : MonoBehaviour
       return true; 
    }
 
+   // This helper function will determine when the player has deposited the spaceship part 
    bool checkIfDeposited() {
       CharacterControllerMovement s = player.GetComponent<CharacterControllerMovement>();
       while (s.dropoffSuccessful == false) {
@@ -104,8 +103,8 @@ public class MessageDisplayer : MonoBehaviour
       return true; 
    }
 
-    //Returns false while the player still hasn't picked up the item, and true when they have 
-   bool CheckIfPickedUpItem() {
+    // This helper function will determine if the player has picked up the sample item 
+   bool checkIfPickedUpItem() {
       CharacterControllerMovement s = player.GetComponent<CharacterControllerMovement>();
       while (s.pickupSuccessful == false) {
           return false; 
