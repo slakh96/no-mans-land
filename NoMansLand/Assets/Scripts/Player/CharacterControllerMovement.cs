@@ -77,7 +77,7 @@ public class CharacterControllerMovement : MonoBehaviour
         playerPosition.y = 0;
 
         int distInt = Convert.ToInt32(Vector3.Distance(spaceshipPosition, playerPosition)); 
-        distanceDisplay.GetComponent<Text>().text = distInt < 120 ? "" : distInt + " m";
+        distanceDisplay.GetComponent<Text>().text = distInt < 120 ? "" : "Distance: " + distInt + " m";
     }
     
     void Jump()
