@@ -17,7 +17,7 @@ public class MessageDisplayer : MonoBehaviour
      "you will find parts scattered around the map", "press Square to pick up an item", "here's an item. pick it up.",
      "good! now drop it off at the ship", "congrats! you're a natural!", "you will also find health items around the map", 
      "collect them to replenish your oxygen", "here's a health item, collect it", "good job!", 
-     "the alien indicator will turn red if aliens are nearby", "press X to jump and R1 to sprint", "you're ready to play!", "let's start the game!"
+     "the alien indicator will turn red if aliens are nearby", "press X to jump and L1 to sprint", "you're ready to play!", "let's start the game!"
      }; 
 
     void Start()
