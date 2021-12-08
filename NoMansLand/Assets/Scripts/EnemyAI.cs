@@ -9,10 +9,13 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer, whatIsObstruction;
 
-    private float playerAcceleration = 100f;
-    private float playerSpeed = 45f;
+    private float playerAcceleration = 200f;
+    private float playerSpeed = 100f;
 
-    private float detectedSpeed = 80f;
+    private float detectedSpeed = 150f;
+    
+    //Animator
+    private Animator anim;
 
     //Patroling
     private Vector3 walkPoint;
@@ -41,6 +44,7 @@ public class EnemyAI : MonoBehaviour
         agent.acceleration = playerAcceleration;
         agent.speed = playerSpeed;
         sightRange = patrolSightRange;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -51,14 +55,20 @@ public class EnemyAI : MonoBehaviour
 
         AlienIndicator.AddToSeenStatus(this.gameObject.name, hasSeenPlayer);
         AlienIndicator.ActivateAlienIndicator();
-        
-        if (!playerInSightRange && !playerInAttackRange) { 
+        anim.SetInteger("alienState", 0);
+
+
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            anim.SetInteger("alienState", 1);
             Patrol();
         }
-        if (hasSeenPlayer) { 
+        else if (hasSeenPlayer)
+        {
+            anim.SetInteger("alienState", 2);
             ChasePlayer();
         }
-        if (playerInAttackRange) AttackPlayer();
+        else if (playerInAttackRange) AttackPlayer();
     }
 
     private void Patrol()
