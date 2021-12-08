@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 using DefaultNamespace;
 public class CharacterControllerMovement : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class CharacterControllerMovement : MonoBehaviour
     private bool canGrab = false;
     private bool withinRange = false;
     private GameObject currentCollectible;
+    public GameObject spaceship; 
+    public GameObject distanceDisplay; 
     // Health item
     public bool replenishHealth;
 
@@ -42,6 +45,10 @@ public class CharacterControllerMovement : MonoBehaviour
     private float DISTANCE_LIMIT = 50;
     // Time to wait before the material is destroyed
     private float DEPOSITED_ITEM_DESTROY_DELAY = 0f;
+    public bool isTutorialLevel; 
+    public bool pickupSuccessful = false;
+    public bool dropoffSuccessful = false; 
+    public bool healthPickupSuccessful = false; 
     
     // Start is called before the first frame update
     void Awake()
@@ -60,6 +67,17 @@ public class CharacterControllerMovement : MonoBehaviour
         
         collectibleHoldSlot = GameObject.Find("CollectibleHolder");
         controls.Gameplay.HandleObject.performed += ctx => HandleObject();
+    }
+
+    void CalculateDistance() 
+    {
+        Vector3 spaceshipPosition = spaceship.transform.position;
+        spaceshipPosition.y = 0;
+        Vector3 playerPosition = this.gameObject.transform.position;
+        playerPosition.y = 0;
+
+        int distInt = Convert.ToInt32(Vector3.Distance(spaceshipPosition, playerPosition)); 
+        distanceDisplay.GetComponent<Text>().text = distInt < 120 ? "" : "Distance: " + distInt + " m";
     }
     
     void Jump()
@@ -100,7 +118,6 @@ public class CharacterControllerMovement : MonoBehaviour
             canGrab = false;
         }
         
-        
         if (canGrab && collectibleHoldSlot.transform.childCount == 0)
         {
             Transform collectibleObjTransform = currentCollectible.transform;
@@ -113,6 +130,11 @@ public class CharacterControllerMovement : MonoBehaviour
             // Randomize later
             FindObjectOfType<AudioManager>().Play("Pickup1");
             canGrab = false;
+
+            if(isTutorialLevel) 
+            {
+                pickupSuccessful = true;
+            }
         }
         else if (collectibleHoldSlot.transform.childCount > 0)
         {
@@ -133,6 +155,11 @@ public class CharacterControllerMovement : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Deposit1");
                 Destroy(child, DEPOSITED_ITEM_DESTROY_DELAY);
                 withinRange = false;
+
+                if(isTutorialLevel) 
+                {
+                    dropoffSuccessful = true;
+                }
             }
         }
     }
@@ -154,6 +181,10 @@ public class CharacterControllerMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "HealthItem")
         {
+            if(isTutorialLevel) 
+            {
+                healthPickupSuccessful = true; 
+            }
             replenishHealth = true;
             FindObjectOfType<AudioManager>().Play("HealthPickup1");
             Destroy(other.gameObject);
@@ -174,6 +205,7 @@ public class CharacterControllerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateDistance();
         Vector3 m = new Vector3(move.x, 0, move.y).normalized;
 
         if (m.magnitude >= 0.1f)
